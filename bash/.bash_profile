@@ -1,0 +1,128 @@
+# Displays current Git branch, if there is one
+parse-git-branch() {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1] /'
+}
+
+# Add `~/bin` to the `$PATH`
+export PATH="$HOME/bin:$PATH"
+
+# https://code.visualstudio.com/docs/setup/mac
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+
+# Get older version of Node installed via `brew` working
+export PATH="/usr/local/opt/node@10/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/node@10/lib"
+export CPPFLAGS="-I/usr/local/opt/node@10/include"
+
+# Case-insensitive globbing (used in pathname expansion)
+shopt -s nocaseglob;
+
+# Append to the Bash history file, rather than overwriting it
+shopt -s histappend;
+
+# Omit duplicates from bash history and commands that begin with a space
+export HISTCONTROL='ignoreboth'
+
+# Save multi-line commands as one command
+shopt -s cmdhist
+
+# Huge history. Doesn't appear to slow things down, so why not?
+HISTSIZE=50000
+HISTFILESIZE=1000
+
+# Avoid duplicate entries
+HISTCONTROL="erasedups:ignoreboth"
+
+# Don't record some commands
+export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
+
+# Autocorrect typos in path names when using `cd`
+shopt -s cdspell;
+
+# Colorize 'grep'
+alias grep='grep --color=auto'
+
+# Perform file completion in a case insensitive fashion
+bind 'set completion-ignore-case on'
+
+# Treat hyphens and underscores as equivalent
+bind 'set completion-map-case on'
+
+# Display matches for ambiguous patterns at first tab press
+bind 'set show-all-if-ambiguous on'
+
+# Immediately add a trailing slash when autocompleting symlinks to directories
+bind 'set mark-symlinked-directories on'
+
+# Enable some Bash 4 features when possible:
+for option in autocd globstar; do
+	shopt -s "$option" 2> /dev/null;
+done;
+
+# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
+[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
+
+# Add tab completion for `defaults read|write NSGlobalDomain`
+complete -W "NSGlobalDomain" defaults;
+
+# Automatically trim long paths in the prompt (requires Bash 4.x)
+PROMPT_DIRTRIM=2
+
+# Autocorrect typos in path names when using `cd`
+shopt -s cdspell 2> /dev/null
+
+# Prepend cd to directory names automatically
+shopt -s autocd 2> /dev/null
+
+# Use standard ISO 8601 timestamp
+# %F equivalent to %Y-%m-%d
+# %T equivalent to %H:%M:%S (24-hours format)
+HISTTIMEFORMAT='%F %T '
+
+# Make VS Code the default editor
+export EDITOR='code'
+
+# https://stackoverflow.com/a/35338119/1171790
+export PATH=/usr/local/mysql/bin:$PATH
+
+# Prefer US English and use UTF-8
+export LANG='en_US.UTF-8'
+export LC_ALL='en_US.UTF-8'
+
+# Add `killall` tab completion for common apps
+complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
+
+# Add variables
+source $HOME/.dotfiles/bash/variables.sh
+
+# Add aliases
+source $HOME/.dotfiles/bash/aliases.sh
+
+# Add functions
+source $HOME/.dotfiles/bash/functions.sh
+
+# Add company aliases and functions (if the files exist)
+if [ -f "$HOME/.dotfiles-$company/bash/aliases.sh" ]; then
+  source $HOME/.dotfiles-$company/bash/aliases.sh
+fi
+if [ -f "$HOME/.dotfiles-$company/bash/functions.sh" ]; then
+  source $HOME/.dotfiles-$company/bash/functions.sh
+fi
+
+# Use PHP XDebug
+export XDEBUG_CONFIG='idekey=VSCODE'
+
+# Colorize git branch and current directory in the command prompt
+export PS1="\[$(tput bold)\]\[\033[31m\]→ \[\033[0m\]\[\033[105m\]\$(parse-git-branch)\[\033[0m\]\[$(tput bold)\]\[\033[36m\] \W\[\033[0m\] \[\033[2m\]$\[\033[0m\] "
+
+# Colors to differentiate various file types with `ls`
+export LS_COLORS="no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.ogg=01;35:*.mp3=01;35:*.wav=01;35:"
+
+# Don't prompt for merge_msg in Git.
+export GIT_MERGE_AUTOEDIT=no
+
+# Change the title of the Bash terminal to show the User@Hostname connection.
+PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}\007"'
+
+# Show a random quote at Bash startup.
+echo $(gshuf -n 1 "$HOME/.dotfiles/bash/quotes.txt")
