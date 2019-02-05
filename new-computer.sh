@@ -38,12 +38,11 @@ cd ~
 # Make a "personal" `bin` folder
 if ! [ -d $HOME/bin ]; then
   mkdir $HOME/bin
+  chmod -R +x $HOME/bin
 fi
 
 # Show hidden folders
 defaults write com.apple.finder AppleShowAllFiles YES
-
-# Restart Finder for changes to take effect
 killall Finder
 
 # Symlink Bash files
@@ -66,8 +65,6 @@ command -v brew >/dev/null 2>&1 || { echo >&2 "This script requires that Homebre
 
 # Install Hyper
 brew cask install hyper
-# read -n 1 -s -r -p "Drag Hyper to the Applications folder, then press any key to continue..."
-# echo
 link $HOME/.dotfiles/hyper/.hyper.js $HOME/.hyper.js
 
 # Install Chrome
@@ -102,6 +99,7 @@ BREWPACKAGES=(
   gifsicle
   youtube-dl
   ffmpeg
+  wget
 )
 
 # Install standard `brew` packages
