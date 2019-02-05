@@ -14,18 +14,15 @@ alias restartmysql='brew services restart mysql'
 
 # Change directories to handy OS X places
 alias desk='cd ~/Desktop'
-
 # Dropbox directory. : )
 alias d='cd ~/Dropbox'
-
 # Sites folder
 alias s='cd ~/Dropbox/Sites'
-
 # Change directory to your dotfiles directory.
 alias dot='cd ~/.dotfiles'
 
 # Open your notes in code editor.
-alias notes='cd ~/Dropbox/Notes'
+alias notes='cd ~/Dropbox/Notes && code .'
 
 # Quickly clear the Terminal window
 alias c='clear'

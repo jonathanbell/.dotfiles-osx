@@ -79,6 +79,9 @@ brew cask install visual-studio-code
 # Install Node 10
 brew install node@10
 
+# Cloudinary CLI
+npm -g install cloudinary-cli
+
 # Standard `brew` packages
 BREWPACKAGES=(
   # `gshuf`, `shuf` and other utils

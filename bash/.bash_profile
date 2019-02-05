@@ -3,9 +3,10 @@ parse-git-branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1] /'
 }
 
-# Add `~/bin` to the `$PATH`
+# Add `~/bin` to your `$PATH`
 export PATH="$HOME/bin:$PATH"
 
+# Add `code` to path
 # https://code.visualstudio.com/docs/setup/mac
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
@@ -54,14 +55,6 @@ bind 'set show-all-if-ambiguous on'
 # Immediately add a trailing slash when autocompleting symlinks to directories
 bind 'set mark-symlinked-directories on'
 
-# Enable some Bash 4 features when possible:
-for option in autocd globstar; do
-	shopt -s "$option" 2> /dev/null;
-done;
-
-# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
-[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
-
 # Add tab completion for `defaults read|write NSGlobalDomain`
 complete -W "NSGlobalDomain" defaults;
 
@@ -79,12 +72,6 @@ shopt -s autocd 2> /dev/null
 # %T equivalent to %H:%M:%S (24-hours format)
 HISTTIMEFORMAT='%F %T '
 
-# Make VS Code the default editor
-export EDITOR='code'
-
-# https://stackoverflow.com/a/35338119/1171790
-export PATH=/usr/local/mysql/bin:$PATH
-
 # Prefer US English and use UTF-8
 export LANG='en_US.UTF-8'
 export LC_ALL='en_US.UTF-8'
@@ -92,7 +79,25 @@ export LC_ALL='en_US.UTF-8'
 # Add `killall` tab completion for common apps
 complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
 
-# Add variables
+# Enable some Bash 4 features when possible:
+for option in autocd globstar; do
+	shopt -s "$option" 2> /dev/null;
+done;
+
+# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
+[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
+
+# Make VS Code the default editor
+export EDITOR='code'
+
+# Use PHP XDebug
+export XDEBUG_CONFIG='idekey=VSCODE'
+
+# For MySQL
+# https://stackoverflow.com/a/35338119/1171790
+export PATH=/usr/local/mysql/bin:$PATH
+
+# Add variables, first!
 source $HOME/.dotfiles/bash/variables.sh
 
 # Add aliases
@@ -109,9 +114,6 @@ if [ -f "$HOME/.dotfiles-$company/bash/functions.sh" ]; then
   source $HOME/.dotfiles-$company/bash/functions.sh
 fi
 
-# Use PHP XDebug
-export XDEBUG_CONFIG='idekey=VSCODE'
-
 # Colorize git branch and current directory in the command prompt
 export PS1="\[$(tput bold)\]\[\033[31m\]→ \[\033[0m\]\[\033[105m\]\$(parse-git-branch)\[\033[0m\]\[$(tput bold)\]\[\033[36m\] \W\[\033[0m\] \[\033[2m\]$\[\033[0m\] "
 
@@ -124,5 +126,5 @@ export GIT_MERGE_AUTOEDIT=no
 # Change the title of the Bash terminal to show the User@Hostname connection.
 PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}\007"'
 
-# Show a random quote at Bash startup.
+# Show a random quote at Bash startup. : )
 echo $(gshuf -n 1 "$HOME/.dotfiles/bash/quotes.txt")

@@ -76,7 +76,7 @@ trim-video() {
     echo 'Begining to trim video...'
     ffmpeg -i $1 -ss $2 -c copy -t $3 trimmed_$1
     echo 'Complete. Video trimmed.'
-    open chrome trimmed_$1
+    open trimmed_$1
   fi
 }
 
@@ -88,7 +88,7 @@ webmify() {
   else
     ffmpeg -i "$1" -vcodec libvpx -acodec libvorbis -isync -copyts -aq 80 -threads 3 -qmax 30 -y "$1.webm"
     ffmpeg -ss 00:00:15 -i "$1.webm" -vframes 1 -q:v 2 "$1.jpg"
-    open chrome $1.webm
+    open $1.webm
   fi
 }
 
@@ -140,7 +140,7 @@ gifify() {
     else
       ffmpeg -i "$1" -pix_fmt rgb24 -r 10 -f gif -vf scale=400:-1 - | gifsicle --optimize=3 --delay=7 > "$1.gif"
     fi
-    open chrome $1.gif
+    open $1.gif
   else
     echo 'Ops. Please enter a filename.'
     echo 'Usage: gifify <input_movie.mov> [ --better | --best | --tumblr ]'
@@ -157,6 +157,6 @@ static() {
     aws s3 cp $1 s3://static-jonathanbell-ca --acl public-read --cache-control max-age=7776000
     printf "https://s3-us-west-2.amazonaws.com/static-jonathanbell-ca/$1" > /dev/clipboard
     echo "File available at: https://s3-us-west-2.amazonaws.com/static-jonathanbell-ca/$1 (copied to clipboard)"
-    open chrome https://s3-us-west-2.amazonaws.com/static-jonathanbell-ca/$1
+    open https://s3-us-west-2.amazonaws.com/static-jonathanbell-ca/$1
   fi
 }
