@@ -111,11 +111,11 @@ source $HOME/.dotfiles/bash/aliases.sh
 source $HOME/.dotfiles/bash/functions.sh
 
 # Add company aliases and functions (if the files exist)
-if [ -f "$HOME/.dotfiles-$company/bash/aliases.sh" ]; then
-  source $HOME/.dotfiles-$company/bash/aliases.sh
-fi
 if [ -f "$HOME/.dotfiles-$company/bash/functions.sh" ]; then
   source $HOME/.dotfiles-$company/bash/functions.sh
+fi
+if [ -f "$HOME/.dotfiles-$company/bash/aliases.sh" ]; then
+  source $HOME/.dotfiles-$company/bash/aliases.sh
 fi
 
 # Colorize git branch and current directory in the command prompt

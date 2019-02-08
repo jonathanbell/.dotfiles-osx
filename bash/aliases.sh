@@ -39,6 +39,8 @@ alias correctsshpermissions="sudo chmod 700 ~/.ssh && sudo chmod -R 600 $(dirnam
 
 # Pretty print Git's history
 alias gitlog='git log --graph --oneline --all --decorate'
+# Work in progress commit
+alias wip='git add . && git commit -am "WIP"'
 
 # List all globally installed NPM packages
 alias globalnpmpackages='npm list -g --depth 0'
