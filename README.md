@@ -1,19 +1,16 @@
 # Mac OS X .dotfiles
 
-<!-- TOC depthFrom:2 insertAnchor:true orderedList:false -->
+<!-- TOC depthFrom:2 orderedList:false -->
 
-- [Mac OS X .dotfiles](#mac-os-x-dotfiles)
-  - [Setup a Mac with Mojave](#setup-a-mac-with-mojave)
-    - [Optional: Extra stuff](#optional-extra-stuff)
-      - [Cloudinary](#cloudinary)
+- [Setup a Mac with Mojave](#setup-a-mac-with-mojave)
+  - [Optional: Extra stuff to do](#optional-extra-stuff-to-do)
+    - [Cloudinary](#cloudinary)
 
 <!-- /TOC -->
 
 These are my installation and configuration files for the Mac OS X operating system. Fork if you wish but keep in mind that a lot of these settings are personalized to me (so you will most likely want to change them before using the scripts). Review the code, and remove things you don't want or need. Do not blindly use these settings.
 
 Inspired by: <https://dotfiles.github.io/> and <https://github.com/jayharris/dotfiles-windows>
-
-<a id="markdown-setup-a-mac-with-mojave" name="setup-a-mac-with-mojave"></a>
 
 ## Setup a Mac with Mojave
 
@@ -38,13 +35,9 @@ This will:
 
 ---
 
-<a id="markdown-optional-extra-stuff" name="optional-extra-stuff"></a>
+### Optional: Extra stuff to do
 
-### Optional: Extra stuff
-
-Additional configurations:
-
-<a id="markdown-cloudinary" name="cloudinary"></a>
+1. Setup VS Code by [syncing your settings](https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync) from the cloud.
 
 #### Cloudinary
 

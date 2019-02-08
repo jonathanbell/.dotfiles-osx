@@ -4,9 +4,6 @@
 git config --global user.name "Jonathan Bell"
 git config --global user.email "jonathanbell.ca@gmail.com"
 
-# Default editor
-git config --global core.editor "code --wait"
-
 # Fetch all branches:
 # https://team.benevity.org/pages/viewpage.action?pageId=37562785#SettingupaDrupal8&BonfireEnvironment-Donotchangethisdocumentlightly!
 git config --global remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
@@ -36,3 +33,13 @@ git config --global push.default current
 # Accept the auto-generated merge message.
 # https://git-scm.com/docs/merge-options#merge-options---no-edit
 git config --global core.mergeoptions --no-edit
+
+# Default editor
+git config --global core.editor "code --wait"
+
+# Config VS Code to be the diff and merge tools
+# https://stackoverflow.com/questions/44549733/how-to-use-visual-studio-code-as-default-editor-for-git-mergetool
+git config --global merge.tool vscode
+git config --global mergetool.vscode.cmd "code --wait $MERGED"
+git config --global diff.tool vscode
+git config --global difftool.vscode.cmd "code --wait --diff $LOCAL $REMOTE"

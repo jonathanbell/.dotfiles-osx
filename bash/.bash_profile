@@ -3,6 +3,10 @@ parse-git-branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1] /'
 }
 
+# Add git completion
+# https://medium.com/fusionqa/autocomplete-git-commands-and-branch-names-in-terminal-on-mac-os-x-4e0beac0388a
+. ~/.dotfiles/git/git-completion.bash
+
 # Add `~/bin` to your `$PATH`
 export PATH="$HOME/bin:$PATH"
 
