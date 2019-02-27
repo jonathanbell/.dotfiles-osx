@@ -116,6 +116,9 @@ brew cask install font-source-code-pro
 # Install Sequel Pro
 brew cask install sequel-pro
 
+# Install Postman
+brew cask install postman
+
 brew cleanup
 
 # Enable PHP & Apache (pre-installed on Mac OS X):

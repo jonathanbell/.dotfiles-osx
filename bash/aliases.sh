@@ -21,6 +21,11 @@ alias s='cd ~/Dropbox/Sites'
 # Change directory to your dotfiles directory.
 alias dot='cd ~/.dotfiles'
 
+# Mount Buckups drive
+alias mountbuckups='sudo mount -wt msdos /dev/disk2s1 /mnt/Buckups'
+alias unmountbuckups='sudo diskutil unmount /dev/disk2s1'
+alias mountbuckupsreadable='unmountbuckups && mountbuckups'
+
 # Open your notes in code editor.
 alias notes='cd ~/Dropbox/Notes && code .'
 
