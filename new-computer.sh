@@ -63,15 +63,14 @@ correctsshpermissions
 # Check that `brew` was installed.
 command -v brew >/dev/null 2>&1 || { echo >&2 "This script requires that Homebrew be installed. Aborting..."; exit 1; }
 
-# Install Hyper
-brew cask install hyper
-link $HOME/.dotfiles/hyper/.hyper.js $HOME/.hyper.js
-
 # Install Chrome
 brew cask install google-chrome
 
 # Install VS Code
 brew cask install visual-studio-code
+
+# Install PHPStorm
+brew cask install phpstorm
 
 # Install Node 10
 brew install node@10
@@ -97,6 +96,7 @@ BREWPACKAGES=(
   # Git
   git
   gifsicle
+  php@7.3
   youtube-dl
   ffmpeg
   wget
@@ -121,17 +121,19 @@ brew cask install postman
 
 brew cleanup
 
-# Enable PHP & Apache (pre-installed on Mac OS X):
+# Start PHP at login
+brew services start php
+
+# About `sed`:
 # https://askubuntu.com/questions/20414/find-and-replace-text-within-a-file-using-commands
-sudo sed -i '.orig' "s/#LoadModule php7_module libexec\/apache2\/libphp7.so/LoadModule php7_module libexec\/apache2\/libphp7.so/g" /etc/apache2/httpd.conf
+
+# Enable PHP (from Homebrew) & Apache (pre-installed on Mac OS X):
+sudo sed -i '.orig' "s/#LoadModule php7_module libexec\/apache2\/libphp7.so/LoadModule php7_module \/usr\/local\/opt\/php\/lib\/httpd\/modules\/libphp7.so/g" /etc/apache2/httpd.conf
 # Mod ReWrite
 sudo sed -i '' "s/#LoadModule rewrite_module libexec\/apache2\/mod_rewrite.so/LoadModule rewrite_module libexec\/apache2\/mod_rewrite.so/g" /etc/apache2/httpd.conf
 sudo sed -i '' "s/#LoadModule include_module libexec\/apache2\/mod_include.so/LoadModule include_module libexec\/apache2\/mod_include.so/g" /etc/apache2/httpd.conf
 # php.ini
 sudo sed -i '' "s/#LoadModule include_module libexec\/apache2\/mod_include.so/LoadModule include_module libexec\/apache2\/mod_include.so/g" /etc/apache2/httpd.conf
-# Other Apache modules
-sudo sed -i '' "s/#LoadModule authz_core_module libexec\/apache2\/mod_authz_core.so/LoadModule authz_core_module libexec\/apache2\/mod_authz_core.so/g" /etc/apache2/httpd.conf
-sudo sed -i '' "s/#LoadModule authz_host_module libexec\/apache2\/mod_authz_host.so/LoadModule authz_host_module libexec\/apache2\/mod_authz_host.so/g" /etc/apache2/httpd.conf
 # SSL
 sudo sed -i '' "s/#LoadModule socache_shmcb_module libexec\/apache2\/mod_socache_shmcb.so/LoadModule socache_shmcb_module libexec\/apache2\/mod_socache_shmcb.so/g" /etc/apache2/httpd.conf
 sudo sed -i '' "s/#LoadModule ssl_module libexec\/apache2\/mod_ssl.so/LoadModule ssl_module libexec\/apache2\/mod_ssl.so/g" /etc/apache2/httpd.conf
@@ -148,6 +150,9 @@ sudo sed -i '' "s/DirectoryIndex index.html/DirectoryIndex index.html index.php/
 sudo sed -i '' "s/#ServerName www.example.com:80/ServerName localhost:80/g" /etc/apache2/httpd.conf
 # Vhosts
 sudo sed -i '' "s/#Include \/private\/etc\/apache2\/extra\/httpd-vhosts.conf/Include \/private\/etc\/apache2\/extra\/httpd-vhosts.conf/g" /etc/apache2/httpd.conf
+# Other Apache modules
+sudo sed -i '' "s/#LoadModule authz_core_module libexec\/apache2\/mod_authz_core.so/LoadModule authz_core_module libexec\/apache2\/mod_authz_core.so/g" /etc/apache2/httpd.conf
+sudo sed -i '' "s/#LoadModule authz_host_module libexec\/apache2\/mod_authz_host.so/LoadModule authz_host_module libexec\/apache2\/mod_authz_host.so/g" /etc/apache2/httpd.conf
 
 # Make Sites directory
 mkdir $HOME/Sites
@@ -170,8 +175,6 @@ pecl install yaml
 # Restart Apache
 sudo apachectl restart
 
-open "http://localhost"
-
 # Install MySQL
 brew install mysql
 brew services start mysql
@@ -189,3 +192,6 @@ if [ -f "$HOME/.dotfiles-$company/new-computer-$company.sh" ]; then
   chmod +x $HOME/.dotfiles-$company/new-computer-$company.sh
   ~/.dotfiles-$company/new-computer-$company.sh
 fi
+
+# Let's see if Apache is working
+open "https://localhost"

@@ -9,6 +9,9 @@ alias accesslog='sudo tail /private/var/log/apache2/access_log'
 alias errorlog='sudo tail /private/var/log/apache2/error_log'
 alias configvhosts='sudo nano /private/etc/apache2/extra/httpd-vhosts.conf'
 
+# PHP
+alias configphp='sudo nano /usr/local/etc/php/7.3/php.ini'
+
 # MySQL
 alias restartmysql='brew services restart mysql'
 
@@ -44,6 +47,7 @@ alias correctsshpermissions="sudo chmod 700 ~/.ssh && sudo chmod -R 600 $(dirnam
 
 # Pretty print Git's history
 alias gitlog='git log --graph --oneline --all --decorate'
+
 # Work in progress commit
 alias wip='git add . && git commit -am "WIP"'
 

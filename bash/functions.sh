@@ -24,6 +24,24 @@ link() {
   echo "Symlinked $1 to $2"
 }
 
+# View log for specific Git branch
+gitbranchlog() {
+  echo 'hi'
+  git log --graph --abbrev-commit --decorate  --first-parent $(git branch | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1 /')
+}
+
+# Who is listening?
+# https://stackoverflow.com/a/30029855/1171790
+listening() {
+  if [ $# -eq 0 ]; then
+    sudo lsof -iTCP -sTCP:LISTEN -n -P
+  elif [ $# -eq 1 ]; then
+    sudo lsof -iTCP -sTCP:LISTEN -n -P | grep -i --color $1
+  else
+    echo "Usage: listening [pattern]"
+  fi
+}
+
 # Downloads mp3 audio file from YouTube video.
 yt-getaudio() {
   if [ $# -eq 0 ]; then
