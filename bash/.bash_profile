@@ -117,6 +117,10 @@ fi
 if [ -f "$HOME/.dotfiles-$company/bash/aliases.sh" ]; then
   source $HOME/.dotfiles-$company/bash/aliases.sh
 fi
+# And even a company's own `.bash_profile`
+if [ -f "$HOME/.dotfiles-$company/bash/.bash_profile" ]; then
+  source $HOME/.dotfiles-$company/bash/.bash_profile
+fi
 
 # Colorize git branch and current directory in the command prompt
 export PS1="\[$(tput bold)\]\[\033[31m\]→ \[\033[0m\]\[\033[105m\]\$(parse-git-branch)\[\033[0m\]\[$(tput bold)\]\[\033[36m\] \W\[\033[0m\] \[\033[2m\]$\[\033[0m\] "

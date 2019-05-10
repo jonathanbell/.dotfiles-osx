@@ -96,7 +96,6 @@ BREWPACKAGES=(
   # Git
   git
   gifsicle
-  php@7.3
   youtube-dl
   ffmpeg
   wget
@@ -121,17 +120,12 @@ brew cask install postman
 
 brew cleanup
 
-# Start PHP at login
-brew services start php
-
+# Edit the main Apache file to suit our needs.
 # About `sed`:
 # https://askubuntu.com/questions/20414/find-and-replace-text-within-a-file-using-commands
 
-# Enable PHP (from Homebrew) & Apache (pre-installed on Mac OS X):
-sudo sed -i '.orig' "s/#LoadModule php7_module libexec\/apache2\/libphp7.so/LoadModule php7_module \/usr\/local\/opt\/php\/lib\/httpd\/modules\/libphp7.so/g" /etc/apache2/httpd.conf
 # Mod ReWrite
 sudo sed -i '' "s/#LoadModule rewrite_module libexec\/apache2\/mod_rewrite.so/LoadModule rewrite_module libexec\/apache2\/mod_rewrite.so/g" /etc/apache2/httpd.conf
-sudo sed -i '' "s/#LoadModule include_module libexec\/apache2\/mod_include.so/LoadModule include_module libexec\/apache2\/mod_include.so/g" /etc/apache2/httpd.conf
 # php.ini
 sudo sed -i '' "s/#LoadModule include_module libexec\/apache2\/mod_include.so/LoadModule include_module libexec\/apache2\/mod_include.so/g" /etc/apache2/httpd.conf
 # SSL
@@ -145,9 +139,9 @@ sudo openssl req -new -x509 -days 365 -nodes -out server.crt -keyout server.key
 cd -
 # Ports
 sudo sed -i '' "s/Listen 8080/#Listen 8080/g" /etc/apache2/httpd.conf
-sudo sed -i '' "s/Listen 80/Listen 127.0.0.1:80/g" /etc/apache2/httpd.conf
+sudo sed -i '' "s/Listen 80/Listen 127.0.0.1:443/g" /etc/apache2/httpd.conf # Listen over SSL only
 sudo sed -i '' "s/DirectoryIndex index.html/DirectoryIndex index.html index.php/g" /etc/apache2/httpd.conf
-sudo sed -i '' "s/#ServerName www.example.com:80/ServerName localhost:80/g" /etc/apache2/httpd.conf
+sudo sed -i '' "s/#ServerName www.example.com:80/ServerName localhost/g" /etc/apache2/httpd.conf
 # Vhosts
 sudo sed -i '' "s/#Include \/private\/etc\/apache2\/extra\/httpd-vhosts.conf/Include \/private\/etc\/apache2\/extra\/httpd-vhosts.conf/g" /etc/apache2/httpd.conf
 # Other Apache modules
