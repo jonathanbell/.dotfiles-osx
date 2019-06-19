@@ -101,7 +101,7 @@ chmod -R 775 $HOME/Sites/
 
 echo
 echo 'Apache main site is configured. You can check it out at https://localhost however, you now may want to configure VirtualHosts in order to use seperate sites on the same system.'
-echo 'See: https://getgrav.org/blog/macos-mojave-apache-ssl'
+echo 'See: https://getgrav.org/blog/macos-mojave-apache-ssl and https://raw.githubusercontent.com/jonathanbell/.dotfiles-osx/master/apache/httpd-vhosts.conf.example'
 echo 'To edit your hosts file and your VirtualHosts use the command:'
 echo 'sudo nano /etc/hosts && sudo nano /usr/local/etc/httpd/extra/httpd-vhosts.conf'
 echo
