@@ -2,12 +2,12 @@
 alias hosts='sudo nano /etc/hosts'
 
 # Config Apache
-alias configapache='sudo nano /etc/apache2/httpd.conf && restartapache'
-alias restartapache='sudo apachectl restart'
-alias testapache='apachectl configtest'
-alias accesslog='sudo tail /private/var/log/apache2/access_log'
-alias errorlog='sudo tail /private/var/log/apache2/error_log'
-alias configvhosts='sudo nano /private/etc/apache2/extra/httpd-vhosts.conf'
+alias configapache='sudo nano /usr/local/etc/httpd/httpd.conf && restartapache'
+alias restartapache='sudo apachectl -k restart'
+alias testapache='sudo apachectl configtest'
+alias accesslog='tail -f /usr/local/var/log/httpd/access_log'
+alias errorlog='tail -f /usr/local/var/log/httpd/error_log'
+alias configvhosts='sudo nano /usr/local/etc/httpd/extra/httpd-vhosts.conf'
 
 # PHP
 alias configphp='sudo nano /usr/local/etc/php/7.3/php.ini'

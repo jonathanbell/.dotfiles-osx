@@ -61,7 +61,10 @@ correctsshpermissions
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 # Check that `brew` was installed.
-command -v brew >/dev/null 2>&1 || { echo >&2 "This script requires that Homebrew be installed. Aborting..."; exit 1; }
+command -v brew >/dev/null 2>&1 || {
+  echo >&2 "This script requires that Homebrew is installed. Aborting...";
+  exit 1;
+}
 
 # Install Chrome
 brew cask install google-chrome
@@ -120,48 +123,9 @@ brew cask install postman
 
 brew cleanup
 
-# Edit the main Apache file to suit our needs.
-# About `sed`:
-# https://askubuntu.com/questions/20414/find-and-replace-text-within-a-file-using-commands
-
-# Mod ReWrite
-sudo sed -i '' "s/#LoadModule rewrite_module libexec\/apache2\/mod_rewrite.so/LoadModule rewrite_module libexec\/apache2\/mod_rewrite.so/g" /etc/apache2/httpd.conf
-# php.ini
-sudo sed -i '' "s/#LoadModule include_module libexec\/apache2\/mod_include.so/LoadModule include_module libexec\/apache2\/mod_include.so/g" /etc/apache2/httpd.conf
-# SSL
-sudo sed -i '' "s/#LoadModule socache_shmcb_module libexec\/apache2\/mod_socache_shmcb.so/LoadModule socache_shmcb_module libexec\/apache2\/mod_socache_shmcb.so/g" /etc/apache2/httpd.conf
-sudo sed -i '' "s/#LoadModule ssl_module libexec\/apache2\/mod_ssl.so/LoadModule ssl_module libexec\/apache2\/mod_ssl.so/g" /etc/apache2/httpd.conf
-sudo sed -i '' "s/#Include \/private\/etc\/apache2\/extra\/httpd-ssl.conf/Include \/private\/etc\/apache2\/extra\/httpd-ssl.conf/g" /etc/apache2/httpd.conf
-cd /private/etc/apache2
-echo 'Configuring self-signed SSL certificate.......'
-echo '***Enter localhost when asked for your Common Name.***'
-sudo openssl req -new -x509 -days 365 -nodes -out server.crt -keyout server.key
-cd -
-# Ports
-sudo sed -i '' "s/Listen 8080/#Listen 8080/g" /etc/apache2/httpd.conf
-sudo sed -i '' "s/Listen 80/Listen 127.0.0.1:443/g" /etc/apache2/httpd.conf # Listen over SSL only
-sudo sed -i '' "s/DirectoryIndex index.html/DirectoryIndex index.html index.php/g" /etc/apache2/httpd.conf
-sudo sed -i '' "s/#ServerName www.example.com:80/ServerName localhost/g" /etc/apache2/httpd.conf
-# Vhosts
-sudo sed -i '' "s/#Include \/private\/etc\/apache2\/extra\/httpd-vhosts.conf/Include \/private\/etc\/apache2\/extra\/httpd-vhosts.conf/g" /etc/apache2/httpd.conf
-# Other Apache modules
-sudo sed -i '' "s/#LoadModule authz_core_module libexec\/apache2\/mod_authz_core.so/LoadModule authz_core_module libexec\/apache2\/mod_authz_core.so/g" /etc/apache2/httpd.conf
-sudo sed -i '' "s/#LoadModule authz_host_module libexec\/apache2\/mod_authz_host.so/LoadModule authz_host_module libexec\/apache2\/mod_authz_host.so/g" /etc/apache2/httpd.conf
-
-# Make Sites directory
-mkdir $HOME/Sites
-touch $HOME/Sites/index.php
-echo "<?php echo 'Welcome to your web root!<br>'; phpinfo(); ?>" >> $HOME/Sites/index.php
-chmod -R 775 $HOME/Sites/
-
-# Change webserver root directory
-sudo sed -i '' "s/\/Library\/WebServer\/Documents/\/Users\/$(whoami)\/Sites/g" /etc/apache2/httpd.conf
-
-# Allow .htaccess
-sudo sed -i '' "s/AllowOverride None/AllowOverride All/g" /etc/apache2/httpd.conf
-
-# Restart Apache
-sudo apachectl restart
+# Init Apache
+chmod +x ~/.dotfiles/apache/init_apache.sh
+~/.dotfiles/apache/init_apache.sh
 
 # PECL
 pecl install yaml
