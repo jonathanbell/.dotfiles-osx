@@ -9,6 +9,12 @@ alias accesslog='tail -f /usr/local/var/log/httpd/access_log'
 alias errorlog='tail -f /usr/local/var/log/httpd/error_log'
 alias configvhosts='sudo nano /usr/local/etc/httpd/extra/httpd-vhosts.conf'
 
+# Git
+alias gitdangerouslyreset='git checkout master \
+  && git clean -df \
+  && git branch | xargs git branch -d \
+  && git pull origin master'
+
 # PHP
 alias configphp='sudo nano /usr/local/etc/php/7.3/php.ini'
 
@@ -27,7 +33,7 @@ alias dot='cd ~/.dotfiles'
 # Mount Buckups drive
 alias mountbuckups='sudo mount -wt msdos /dev/disk2s1 /mnt/Buckups'
 alias unmountbuckups='sudo diskutil unmount /dev/disk2s1'
-alias mountbuckupsreadable='unmountbuckups && mountbuckups'
+alias mountbuckupswriteable='unmountbuckups && mountbuckups'
 
 # Open your notes in code editor.
 alias notes='cd ~/Dropbox/Notes && code .'
@@ -53,3 +59,6 @@ alias wip='git add . && git commit -am "WIP"'
 
 # List all globally installed NPM packages
 alias globalnpmpackages='npm list -g --depth 0'
+
+# Remove all Docker containers and images
+alias resetdocker='docker stop $(docker ps -aq) && docker rm $(docker ps -aq) && docker rmi $(docker images -q)'

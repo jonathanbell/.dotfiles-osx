@@ -57,7 +57,7 @@ sudo sed -i '' "s|_default_:8443|_default_:443|" /usr/local/etc/httpd/extra/http
 echo
 echo
 echo 'Configuring self-signed SSL certificate (see note below).......'
-echo '********************* NOTE: Enter "localhost" when asked for your "Common Name". *********************'
+echo '********************* NOTE: Enter "localhost" when asked for your "Common Name (CN)". *********************'
 echo
 echo
 cd /usr/local/etc/httpd
@@ -104,4 +104,6 @@ echo 'Apache main site is configured. You can check it out at https://localhost 
 echo 'See: https://getgrav.org/blog/macos-mojave-apache-ssl and https://raw.githubusercontent.com/jonathanbell/.dotfiles-osx/master/apache/httpd-vhosts.conf.example'
 echo 'To edit your hosts file and your VirtualHosts use the command:'
 echo 'sudo nano /etc/hosts && sudo nano /usr/local/etc/httpd/extra/httpd-vhosts.conf'
+echo
+echo 'xdebug can be setup by following the instructions here: https://xdebug.org/wizard.php'
 echo
