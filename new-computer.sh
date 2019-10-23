@@ -100,8 +100,10 @@ BREWPACKAGES=(
   git
   gifsicle
   youtube-dl
-  ffmpeg
   wget
+  # ffmpeg
+  ffmpeg
+  libvo-aacenc
 )
 
 # Install standard `brew` packages

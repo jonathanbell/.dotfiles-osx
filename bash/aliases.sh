@@ -10,10 +10,7 @@ alias errorlog='tail -f /usr/local/var/log/httpd/error_log'
 alias configvhosts='sudo nano /usr/local/etc/httpd/extra/httpd-vhosts.conf'
 
 # Git
-alias gitdangerouslyreset='git checkout master \
-  && git clean -df \
-  && git branch | xargs git branch -d \
-  && git pull origin master'
+alias gitdangerouslyreset='git branch | grep -v "master\|develop\|$(git rev-parse --abbrev-ref HEAD)" | xargs git branch -D && echo "So tidy!"'
 
 # PHP
 alias configphp='sudo nano /usr/local/etc/php/7.3/php.ini'
@@ -34,9 +31,6 @@ alias dot='cd ~/.dotfiles'
 alias mountbuckups='sudo mount -wt msdos /dev/disk2s1 /mnt/Buckups'
 alias unmountbuckups='sudo diskutil unmount /dev/disk2s1'
 alias mountbuckupswriteable='unmountbuckups && mountbuckups'
-
-# Open your notes in code editor.
-alias notes='cd ~/Dropbox/Notes && code .'
 
 # Quickly clear the Terminal window
 alias c='clear'
@@ -62,3 +56,6 @@ alias globalnpmpackages='npm list -g --depth 0'
 
 # Remove all Docker containers and images
 alias resetdocker='docker stop $(docker ps -aq) && docker rm $(docker ps -aq) && docker rmi $(docker images -q)'
+
+# Start and SSH to VirtualBox ubuntu
+alias startubuntu='VBoxManage startvm "Ubuntu 19" --type headless; ssh -p 2281 jonathan@localhost'

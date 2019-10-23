@@ -115,7 +115,8 @@ mkvtomp4() {
   COUNTER=`ls -1 *.mkv 2>/dev/null | wc -l`
   if [ $COUNTER != 0 ]; then
     for filename in *.mkv; do
-      ffmpeg -i "$filename" -c:v libx264 -c:a libvo_aacenc -b:a 128k "${filename%.mkv}.mp4"
+      ffmpeg -i "$filename" -c:v libx264 -b:v 2600k -c:a aac -b:a 128k "${filename%.mkv}.mp4"
+      # ffmpeg -i "$filename" -c:v libx264 -c:a aac -b:a 128k "${filename%.mkv}.mp4"
       echo "Converted: $filename to ${filename%.mkv}.mp4"
       # Now delete the mkv file.
       rm "$filename"
