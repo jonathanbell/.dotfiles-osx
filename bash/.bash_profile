@@ -97,6 +97,12 @@ export EDITOR='code'
 # Use PHP XDebug
 export XDEBUG_CONFIG='idekey=VSCODE'
 
+# PHP Version
+export PATH="/usr/local/opt/php@7.2/bin:$PATH"
+export PATH="/usr/local/opt/php@7.2/sbin:$PATH"
+export LDFLAGS="-L/usr/local/opt/php@7.2/lib"
+export CPPFLAGS="-I/usr/local/opt/php@7.2/include"
+
 # For MySQL
 # https://stackoverflow.com/a/35338119/1171790
 export PATH=/usr/local/mysql/bin:$PATH

@@ -10,7 +10,7 @@ sudo apachectl stop
 # Use Homebrew Apache vs sfock Apache
 brew install httpd
 sudo brew services start httpd
-brew install php@7.1
+brew install php@7.2
 
 # Edit the main Apache file to suit our needs.
 # About `sed`:
@@ -41,7 +41,7 @@ sudo sed -i '' "s|FollowSymLinks|FollowSymLinks Multiviews Indexes Includes|" $A
 sudo sed -i '' "s|DirectoryIndex index.html|DirectoryIndex index.html index.php|" $APACHE_FILE
 sudo sed -i '' "s|#LoadModule include_module $MODULE_DIR/mod_include.so|LoadModule include_module $MODULE_DIR/mod_include.so|" $APACHE_FILE
 # Load PHP7 module
-sudo sed -i '' "s|#LoadModule dav_fs_module lib/httpd/modules/mod_dav_fs.so|LoadModule php7_module /usr/local/opt/php@7.1/lib/httpd/modules/libphp7.so|" $APACHE_FILE
+sudo sed -i '' "s|#LoadModule dav_fs_module lib/httpd/modules/mod_dav_fs.so|LoadModule php7_module /usr/local/opt/php@7.2/lib/httpd/modules/libphp7.so|" $APACHE_FILE
 # Ensure PHP engine is run for PHP files
 echo '<FilesMatch \.php$>' >> $APACHE_FILE
 echo '    SetHandler application/x-httpd-php' >> $APACHE_FILE
