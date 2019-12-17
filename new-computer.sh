@@ -104,6 +104,8 @@ BREWPACKAGES=(
   awscli
   imagemagick
   spotify
+  docker
+  docker-machine
   vlc
   git
   gifsicle
