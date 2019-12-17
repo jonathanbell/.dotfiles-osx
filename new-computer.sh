@@ -70,10 +70,6 @@ command -v brew >/dev/null 2>&1 || {
   exit 1;
 }
 
-# Install X Code Command Line Tools
-echo 'Installing X Code Command Line Tools...'
-xcode-select --install
-
 # Reload Bash profile after XCode installs
 source ~/.bash_profile
 
