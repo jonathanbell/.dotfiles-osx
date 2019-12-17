@@ -18,7 +18,7 @@ Inspired by: <https://dotfiles.github.io/> and <https://github.com/jayharris/dot
 1. From the App Store install: Workflowy, Trello, Evertool
 1. [Install Veracrypt](https://www.veracrypt.fr/en/Downloads.html) manually
 1. [Install Dropbox](https://www.dropbox.com/install) manually
-1. [Install MovesLink](http://www.movescount.com/connect/download?type=moveslink) manually
+1. [Install MovesLink](http://moveslink.static.movescount.com/mac/download.htm?_ga=2.58506541.663209658.1576552893-189153876.1576552893) manually
 1. Install Adobe Creative Cloud manually
     - Photoshop
     - Lightroom
