@@ -96,6 +96,7 @@ BREWPACKAGES=(
   # `gshuf`, `shuf` and other utils
   coreutils
   composer
+  php74
   phpunit
   awscli
   imagemagick
