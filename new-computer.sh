@@ -103,11 +103,6 @@ BREWPACKAGES=(
   phpunit
   awscli
   imagemagick
-  docker
-  docker-machine
-  docker-compose
-  hyve
-  docker-machine-driver-xhyve
   vlc
   gifsicle
   youtube-dl
