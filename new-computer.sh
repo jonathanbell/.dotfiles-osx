@@ -106,6 +106,9 @@ BREWPACKAGES=(
   spotify
   docker
   docker-machine
+  docker-compose
+  hyve
+  docker-machine-driver-xhyve
   vlc
   git
   gifsicle
