@@ -124,6 +124,9 @@ brew cask install font-source-code-pro
 # Install Sequel Pro
 brew cask install sequel-pro
 
+# Telegram
+brew cask install telegram
+
 # Install Insomnia
 brew cask install insomnia
 
