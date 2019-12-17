@@ -134,6 +134,9 @@ brew cleanup
 # PECL
 pecl install yaml
 
+# Install yarn
+curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.17.3
+
 # Setup Git
 echo 'Setting Git configuration variables...'
 chmod +x ~/.dotfiles/git/gitconfig.sh
