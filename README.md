@@ -14,6 +14,8 @@ Inspired by: <https://dotfiles.github.io/> and <https://github.com/jayharris/dot
 ## Setup a Mac with Catalina
 
 1. Install Catalina
+1. Sign in to your Apple ID
+1. From the App Store install: Workflowy, Trello
 1. [Install Veracrypt](https://www.veracrypt.fr/en/Downloads.html) manually
 1. [Install Dropbox](https://www.dropbox.com/install) manually
 1. [Install MovesLink](http://www.movescount.com/connect/download?type=moveslink) manually
