@@ -41,6 +41,11 @@ listening() {
   fi
 }
 
+# Get a known wifi password
+wifi-password() {
+  security find-generic-password -ga $1 | grep password:
+}
+
 # Downloads mp3 audio file from YouTube video.
 yt-getaudio() {
   if [ $# -eq 0 ]; then
