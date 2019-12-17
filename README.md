@@ -42,6 +42,8 @@ This will:
 2. Instal a shwack of software on your machine that I like to use.
 3. Configure your machine for web development use.
 
+Close and re-open Bash after this script has run. 
+
 ---
 
 ### Optional: Extra stuff to do
