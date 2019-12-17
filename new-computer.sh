@@ -138,7 +138,7 @@ brew cleanup
 pecl install yaml
 
 # Install yarn
-curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.17.3
+npm install -g yarn
 
 # Setup Git
 echo 'Setting Git configuration variables...'
