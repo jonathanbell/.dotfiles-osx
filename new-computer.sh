@@ -29,9 +29,9 @@ fi
 
 echo "export sshconfigpath=$sshconfig" >> ./bash/variables.sh
 
-source ~/dotfiles/bash/variables.sh
-source ~/dotfiles/bash/functions.sh
-source ~/dotfiles/bash/aliases.sh
+source ~/.dotfiles/bash/variables.sh
+source ~/.dotfiles/bash/functions.sh
+source ~/.dotfiles/bash/aliases.sh
 
 cd ~
 
