@@ -25,9 +25,9 @@ Inspired by: <https://dotfiles.github.io/> and <https://github.com/jayharris/dot
 1. Install Capture One manually
 1. Change the shell back to good old bash: `chsh -s /bin/bash` (then quit and re-open Terminal)
 1. Install command line tools: `xcode-select --install`
+1. Clone this repo: `cd ~ && git clone git@github.com:jonathanbell/.dotfiles-osx.git .dotfiles` Notice that we ensure we clone this repo down as `.dotfiles`. This will ensure paths are correct in the installation scripts.
 1. Clone any "company" dotfiles from GitHub to your home directory (example): `cd ~ && git clone git@github.com:jonathanbell/.dotfiles-companyname.git`
 1. [Install the Dracula theme for Terminal](https://draculatheme.com/terminal/) (`bash/Dracula.terminal`)
-1. Clone this repo: `cd ~ && git clone git@github.com:jonathanbell/.dotfiles-osx.git .dotfiles` Notice that we ensure we clone this repo down as `.dotfiles`. This will ensure paths are correct in the installation scripts.
 
 Now, run the `new-computer.sh` script. Have the full path to your SSH config file handy.
 
