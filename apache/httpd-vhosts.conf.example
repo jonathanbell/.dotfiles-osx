@@ -1,7 +1,0 @@
-<VirtualHost *:443>
-    DocumentRoot "/Users/your_user/Sites/my-dev-site.local"
-    ServerName my-dev-site.local
-    SSLEngine on
-    SSLCertificateFile "/usr/local/etc/httpd/server.crt"
-    SSLCertificateKeyFile "/usr/local/etc/httpd/server.key"
-</VirtualHost>

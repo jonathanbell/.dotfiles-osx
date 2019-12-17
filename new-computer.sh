@@ -17,8 +17,8 @@ if [ ! -f $sshconfig ] || [ -z "$sshconfig" ]; then
   exit
 fi
 
+# Start setting up a new variables file
 rm -f ./bash/variables.sh
-
 touch ./bash/variables.sh
 echo "#!/usr/bin/env bash" >> ./bash/variables.sh
 echo " " >> ./bash/variables.sh
@@ -41,6 +41,9 @@ if ! [ -d $HOME/bin ]; then
   chmod -R +x $HOME/bin
 fi
 
+# Make a place to mount your personal drive
+mkdir -p $HOME/mnt/Buckups
+
 # Show hidden folders
 defaults write com.apple.finder AppleShowAllFiles YES
 killall Finder
@@ -58,6 +61,7 @@ link $sshconfigpath ~/.ssh/config
 correctsshpermissions
 
 # Install Homebrew
+echo 'Installing Homebrew... (you will be prompted for your password)'
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 # Check that `brew` was installed.
@@ -66,8 +70,18 @@ command -v brew >/dev/null 2>&1 || {
   exit 1;
 }
 
+# Install X Code Command Line Tools
+echo 'Installing X Code Command Line Tools...'
+xcode-select --install
+
+# Reload Bash profile after XCode installs
+source ~/.bash_profile
+
 # Install Chrome
-brew cask install google-chrome
+#brew cask install google-chrome
+
+# Install Evernote
+brew cask install evernote
 
 # Install VS Code
 brew cask install visual-studio-code
@@ -85,23 +99,16 @@ npm -g install cloudinary-cli
 BREWPACKAGES=(
   # `gshuf`, `shuf` and other utils
   coreutils
-  mcrypt
   composer
   phpunit
-  # AWS
   awscli
   imagemagick
-  discord
-  gimp
   spotify
-  visual-studio
   vlc
-  # Git
   git
   gifsicle
   youtube-dl
   wget
-  # ffmpeg
   ffmpeg
   libvo-aacenc
 )
@@ -114,33 +121,18 @@ done
 
 # Install some fonts
 brew tap homebrew/cask-fonts
-brew cask install font-inconsolata
 brew cask install font-source-code-pro
 
 # Install Sequel Pro
 brew cask install sequel-pro
 
-# Install Postman
-brew cask install postman
+# Install Insomnia
+brew cask install insomnia
 
 brew cleanup
 
-# Init Apache
-chmod +x ~/.dotfiles/apache/init_apache.sh
-~/.dotfiles/apache/init_apache.sh
-
 # PECL
 pecl install yaml
-
-# Restart Apache
-sudo apachectl restart
-
-# Install MySQL
-brew install mysql
-brew services start mysql
-brew services list | grep mysql
-mysql -V
-mysqladmin -u root password \"letmein\"
 
 # Setup Git
 echo 'Setting Git configuration variables...'
@@ -152,6 +144,3 @@ if [ -f "$HOME/.dotfiles-$company/new-computer-$company.sh" ]; then
   chmod +x $HOME/.dotfiles-$company/new-computer-$company.sh
   ~/.dotfiles-$company/new-computer-$company.sh
 fi
-
-# Let's see if Apache is working
-open "https://localhost"

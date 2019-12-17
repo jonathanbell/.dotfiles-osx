@@ -26,11 +26,10 @@ link() {
 
 # View log for specific Git branch
 gitbranchlog() {
-  echo 'hi'
   git log --graph --abbrev-commit --decorate  --first-parent $(git branch | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1 /')
 }
 
-# Who is listening?
+# What is listening on a certain port?
 # https://stackoverflow.com/a/30029855/1171790
 listening() {
   if [ $# -eq 0 ]; then

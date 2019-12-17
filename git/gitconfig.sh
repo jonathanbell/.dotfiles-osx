@@ -4,10 +4,6 @@
 git config --global user.name "Jonathan Bell"
 git config --global user.email "jonathanbell.ca@gmail.com"
 
-# Fetch all branches:
-# https://team.benevity.org/pages/viewpage.action?pageId=37562785#SettingupaDrupal8&BonfireEnvironment-Donotchangethisdocumentlightly!
-git config --global remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
-
 # http://stackoverflow.com/q/3206843/1171790
 git config --global core.autocrlf input
 # Fix whitespace isssues. http://stackoverflow.com/a/2948167/1171790
