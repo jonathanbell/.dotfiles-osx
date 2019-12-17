@@ -58,7 +58,7 @@ unset file;
 
 # Link SSH config file
 link $sshconfigpath ~/.ssh/config
-correctsshpermissions
+sudo chmod 700 ~/.ssh && sudo chmod -R 600 $(dirname $sshconfigpath)/*
 
 # Install Homebrew
 echo 'Installing Homebrew... (you will be prompted for your password)'
