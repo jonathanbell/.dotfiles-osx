@@ -82,6 +82,9 @@ brew cask install evernote
 # Install VS Code
 brew cask install visual-studio-code
 
+# Spotify
+brew cask install spotify
+
 # Install PHPStorm
 brew cask install phpstorm
 
@@ -96,18 +99,16 @@ BREWPACKAGES=(
   # `gshuf`, `shuf` and other utils
   coreutils
   composer
-  php74
+  php@7.4
   phpunit
   awscli
   imagemagick
-  spotify
   docker
   docker-machine
   docker-compose
   hyve
   docker-machine-driver-xhyve
   vlc
-  git
   gifsicle
   youtube-dl
   wget
