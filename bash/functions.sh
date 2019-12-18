@@ -183,3 +183,39 @@ static() {
     open https://s3-us-west-2.amazonaws.com/static-jonathanbell-ca/$1
   fi
 }
+
+# Start a LAMP stack with Docker
+# A helper function to launch docker container using mattrayner/lamp with overrideable parameters
+# https://hub.docker.com/r/mattrayner/lamp#introduction
+#
+# $1 - Apache Port (optional)
+# $2 - MySQL Port (optional - no value will cause MySQL not to be mapped)
+function launchlamp {
+  APACHE_PORT=80
+  MYSQL_PORT_COMMAND=""
+
+  if ! [[ -z "$1" ]]; then
+    APACHE_PORT=$1
+  fi
+
+  if ! [[ -z "$2" ]]; then
+    MYSQL_PORT_COMMAND="-p \"$2:3306\""
+  fi
+
+  mkdir -p ./lamp
+  cd ./lamp
+
+  docker run -i -t -p "$APACHE_PORT:80" $MYSQL_PORT_COMMAND -v ${PWD}/app:/app -v ${PWD}/mysql:/var/lib/mysql mattrayner/lamp:latest-1804
+
+  SET_MYSQL_PORT="3306"
+
+  if ! [[ -z "$2" ]]; then
+    SET_MYSQL_PORT="$2"
+  fi
+
+  cd -
+
+  echo "LAMP stack running at http://localhost:$1"
+  echo "Access guest MySQL on port $SET_MYSQL_PORT (user: 'root' | password: '')"
+  echo "Place your PHP code inside 'lamp/app'"
+}
