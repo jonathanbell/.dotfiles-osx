@@ -3,6 +3,7 @@ alias hosts='sudo nano /etc/hosts'
 
 # PHP
 alias configphp='sudo nano /usr/local/etc/php/7.3/php.ini'
+alias serve='open http://127.0.0.1:8080 && php -S 127.0.0.1:8080'
 
 # Change directories to handy OS X places
 alias desk='cd ~/Desktop'
