@@ -2,7 +2,7 @@
 alias hosts='sudo nano /etc/hosts'
 
 # PHP
-alias configphp='sudo nano /usr/local/etc/php/7.3/php.ini'
+alias configphp='sudo nano /usr/local/etc/php/7.4/php.ini'
 alias serve='open http://127.0.0.1:8080 && php -S 127.0.0.1:8080'
 
 # Change directories to handy OS X places
@@ -28,6 +28,9 @@ alias ..='cd ..'
 
 # Add a WTFP Licence to a directory/project.
 alias addwtfpl='wget -O LICENCE http://www.wtfpl.net/txt/copying/'
+
+# Change directory in preparation for making some hashtag goodness.
+alias insta='cd $HOME/bin/hashtags'
 
 # Correct SSH permissions
 alias correctsshpermissions="sudo chmod 700 ~/.ssh && sudo chmod -R 600 $(dirname $sshconfigpath)/*"

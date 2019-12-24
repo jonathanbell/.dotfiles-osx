@@ -73,29 +73,9 @@ command -v brew >/dev/null 2>&1 || {
 # Reload Bash profile after XCode installs
 source ~/.bash_profile
 
-# Install Chrome
-#brew cask install google-chrome
-
-# Install Evernote
-brew cask install evernote
-
-# Install VS Code
-brew cask install visual-studio-code
-
-# Spotify
-brew cask install spotify
-
-# Install PHPStorm
-brew cask install phpstorm
-
-# Install Node 10
-brew install node@10
-
-# Cloudinary CLI
-npm -g install cloudinary-cli
-
 # Standard `brew` packages
 BREWPACKAGES=(
+  node@10
   # `gshuf`, `shuf` and other utils
   coreutils
   composer
@@ -117,18 +97,29 @@ do
   brew install "$i"
 done
 
-# Install some fonts
+# Cloudinary CLI
+npm -g install cloudinary-cli
+
+# To get nice fonts
 brew tap homebrew/cask-fonts
-brew cask install font-source-code-pro
 
-# Install Sequel Pro
-brew cask install sequel-pro
+BREWCASKS=(
+  font-source-code-pro
+  evernote
+  #google-chrome
+  visual-studio-code
+  spotify
+  phpstorm
+  sequel-pro
+  telegram
+  whatsapp
+  insomnia
+)
 
-# Telegram
-brew cask install telegram
-
-# Install Insomnia
-brew cask install insomnia
+for i in "${BREWCASKS[@]}"
+do
+  brew cask install "$i"
+done
 
 brew cleanup
 

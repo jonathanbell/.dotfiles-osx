@@ -98,10 +98,10 @@ export EDITOR='code'
 export XDEBUG_CONFIG='idekey=VSCODE'
 
 # PHP Version
-export PATH="/usr/local/opt/php@7.4/bin:$PATH"
-export PATH="/usr/local/opt/php@7.4/sbin:$PATH"
-export LDFLAGS="-L/usr/local/opt/php@7.4/lib"
-export CPPFLAGS="-I/usr/local/opt/php@7.4/include"
+export PATH="/usr/local/opt/php/bin:$PATH"
+export PATH="/usr/local/opt/php/sbin:$PATH"
+export LDFLAGS="-L/usr/local/opt/php/lib"
+export CPPFLAGS="-I/usr/local/opt/php/include"
 
 # For MySQL
 # https://stackoverflow.com/a/35338119/1171790
@@ -142,3 +142,7 @@ PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}\007"'
 
 # Show a random quote at Bash startup. : )
 echo $(gshuf -n 1 "$HOME/.dotfiles/bash/quotes.txt")
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/jbell/.sdkman"
+[[ -s "/Users/jbell/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/jbell/.sdkman/bin/sdkman-init.sh"
