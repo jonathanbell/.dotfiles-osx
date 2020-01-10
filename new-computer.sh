@@ -113,6 +113,8 @@ BREWCASKS=(
   sequel-pro
   telegram
   whatsapp
+  figma
+  vlc
   insomnia
 )
 
