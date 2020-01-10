@@ -43,7 +43,12 @@ listening() {
 
 # Get a known wifi password
 wifi-password() {
-  security find-generic-password -ga $1 | grep password:
+  if [ $# -eq 0 ]; then
+    echo 'Oops. Please tell me a wifi network name.'
+    echo 'Usage: wifi-password <wifi network name>'
+  else
+    security find-generic-password -ga $1 | grep password:
+  fi
 }
 
 # Downloads mp3 audio file from YouTube video.

@@ -29,9 +29,6 @@ alias ..='cd ..'
 # Add a WTFP Licence to a directory/project.
 alias addwtfpl='wget -O LICENCE http://www.wtfpl.net/txt/copying/'
 
-# Change directory in preparation for making some hashtag goodness.
-alias insta='cd $HOME/bin/hashtags'
-
 # Correct SSH permissions
 alias correctsshpermissions="sudo chmod 700 ~/.ssh && sudo chmod -R 600 $(dirname $sshconfigpath)/*"
 
@@ -39,8 +36,6 @@ alias correctsshpermissions="sudo chmod 700 ~/.ssh && sudo chmod -R 600 $(dirnam
 alias gitdangerouslyreset='git branch | grep -v "master\|develop\|$(git rev-parse --abbrev-ref HEAD)" | xargs git branch -D && echo "So tidy!"'
 # Pretty print Git's history
 alias gitlog='git log --graph --oneline --all --decorate'
-# Work in progress commit
-alias wip='git add . && git commit -am "WIP"'
 
 # List all globally installed NPM packages
 alias globalnpmpackages='npm list -g --depth 0'
@@ -50,3 +45,6 @@ alias resetdocker='docker stop $(docker ps -aq) && docker rm $(docker ps -aq) &&
 
 # Start and SSH to VirtualBox ubuntu
 alias startubuntu='VBoxManage startvm "Ubuntu 19" --type headless; ssh -p 2281 jonathan@localhost'
+
+# Change directory in preparation for making some hashtag goodness.
+alias insta='cd $HOME/bin/hashtags'
