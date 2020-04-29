@@ -19,10 +19,13 @@ alias mountbuckups="sudo mount -wt msdos /dev/disk2s1 $HOME/mnt/Buckups"
 alias unmountbuckups='sudo diskutil unmount /dev/disk2s1'
 alias mountbuckupswriteable='unmountbuckups && mountbuckups'
 
+# Sync and backup
+alias syncbackups="rsync -rv --delete --exclude=.Spotlight* --exclude=.DS_Store exclude=._.DS_Store --exclude=.fseventsd* --exclude=.Trashes* --exclude=/tmp /Volumes/Everything/ /Volumes/PATRICE/"
+
 # Quickly clear the Terminal window
 alias c='clear'
 
-# For when you make that typ-o that you *will* make.
+# For when you make that typ-o...
 alias cd..='cd ..'
 alias ..='cd ..'
 
@@ -33,7 +36,7 @@ alias addwtfpl='wget -O LICENCE http://www.wtfpl.net/txt/copying/'
 alias correctsshpermissions="sudo chmod 700 ~/.ssh && sudo chmod -R 600 $(dirname $sshconfigpath)/*"
 
 # Git
-alias gitdangerouslyreset='git branch | grep -v "master\|develop\|$(git rev-parse --abbrev-ref HEAD)" | xargs git branch -D && echo "So tidy!"'
+alias gitdangerouslyreset='git checkout . && git branch | grep -v "master\|develop\|$(git rev-parse --abbrev-ref HEAD)" | xargs git branch -D && git branch && echo && echo "So tidy!" && echo'
 # Pretty print Git's history
 alias gitlog='git log --graph --oneline --all --decorate'
 
@@ -48,3 +51,6 @@ alias startubuntu='VBoxManage startvm "Ubuntu 19" --type headless; ssh -p 2281 j
 
 # Change directory in preparation for making some hashtag goodness.
 alias insta='cd $HOME/bin/hashtags'
+
+# Run insecure Chrome
+alias chromeinsecure="mkdir -p $HOME/Desktop/tmp && /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome -n --allow-running-insecure-content --user-data-dir=$HOME/Desktop/tmp"

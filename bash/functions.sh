@@ -93,6 +93,16 @@ blogimages() {
   echo 'Done.'
 }
 
+# Prep high-res images for upload to the interweb.
+webimages() {
+  echo 'Converting images to medium-res...'
+  for i in *.jpg; do
+    printf "Resizing $i\n"
+    magick $i -resize 1600 $i
+  done
+  echo 'Done.'
+}
+
 # Trim video to time parameters.
 trim-video() {
   if [ $# -ne 3 ]; then
