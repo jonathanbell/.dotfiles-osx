@@ -31,9 +31,13 @@ git config --global push.default current
 git config --global core.mergeoptions --no-edit
 
 # Default editor
-git config --global core.editor "code --wait"
+git config --global core.editor 'code --wait'
 
 # Config VS Code to be the diff and merge tools
 # https://stackoverflow.com/questions/44549733/how-to-use-visual-studio-code-as-default-editor-for-git-mergetool
+# https://code.visualstudio.com/docs/editor/versioncontrol#_vs-code-as-git-editor
 git config --global merge.tool vscode
-git config --global mergetool.vscode.cmd "code --wait $MERGED"
+git config --global mergetool.vscode.cmd 'code --wait $MERGED'
+git config --global merge.conflictStyle diff3
+git config --global diff.tool default-difftool
+git config --global difftool.default-difftool.cmd 'code --wait --diff $LOCAL $REMOTE'

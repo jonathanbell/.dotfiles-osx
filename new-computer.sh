@@ -48,6 +48,9 @@ mkdir -p $HOME/mnt/Buckups
 defaults write com.apple.finder AppleShowAllFiles YES
 killall Finder
 
+# Save screenshots as jpeg
+defaults write com.apple.screencapture type jpg
+
 # Symlink Bash files
 for file in $HOME/.dotfiles/bash/.{bash_profile,bashrc}; do
   chmod +x $file
