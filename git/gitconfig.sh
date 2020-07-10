@@ -11,6 +11,9 @@ git config --global core.whitespace fix
 # But don't warn about whitespace, thanks.
 git config --global apply.whitespace nowarn
 
+# Don't keep files after a merge
+git config --global mergetool.keepBackup false
+
 # Allow all Git commands to use colored output.
 git config --global color.ui true
 # https://gist.github.com/trey/2722934
