@@ -78,7 +78,7 @@ source ~/.bash_profile
 
 # Standard `brew` packages
 BREWPACKAGES=(
-  node@10
+  node@12
   # `gshuf`, `shuf` and other utils
   coreutils
   composer

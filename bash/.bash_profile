@@ -15,9 +15,9 @@ export PATH="$HOME/bin:$PATH"
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 # Get older version of Node installed via `brew` working
-export PATH="/usr/local/opt/node@10/bin:$PATH"
-export LDFLAGS="-L/usr/local/opt/node@10/lib"
-export CPPFLAGS="-I/usr/local/opt/node@10/include"
+export PATH="/usr/local/opt/node@12/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/node@12/lib"
+export CPPFLAGS="-I/usr/local/opt/node@12/include"
 
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob;
