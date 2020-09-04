@@ -15,11 +15,9 @@ alias s='cd ~/Dropbox/Code'
 alias dot='cd ~/.dotfiles'
 
 # Mount Buckups drive
-alias mountbuckups="sudo mount -wt msdos /dev/disk2s1 $HOME/mnt/Buckups"
-alias unmountbuckups='sudo diskutil unmount /dev/disk2s1'
-alias mountbuckupswriteable='sudo diskutil unmount /dev/disk2s1 && unmountbuckups && mountbuckups'
-
-alias mounteverything="sudo mount -wt exfat /dev/disk2s1 $HOME/mnt/Buckups"
+alias mountbuckups='mntbuckups'
+alias mounteverything='mnteverything'
+alias mountpatrice='mntpatrice'
 
 # Sync and backup
 alias syncbackups="rsync -rv --delete --exclude=.Spotlight* --exclude=.DS_Store exclude=._.DS_Store --exclude=.fseventsd* --exclude=.Trashes* --exclude=/tmp /Volumes/Everything/ /Volumes/PATRICE/"

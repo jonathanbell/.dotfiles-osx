@@ -43,6 +43,9 @@ fi
 
 # Make a place to mount your personal drive
 mkdir -p $HOME/mnt/Buckups
+mkdir -p $HOME/mnt/Everything
+mkdir -p $HOME/mnt/Patrice
+chmod -R 775 $HOME/mnt
 
 # Show hidden folders
 defaults write com.apple.finder AppleShowAllFiles YES
@@ -50,6 +53,9 @@ killall Finder
 
 # Save screenshots as jpeg
 defaults write com.apple.screencapture type jpg
+
+# Don't play sounds for UI actions
+defaults write com.apple.systemsound "com.apple.sound.uiaudio.enabled" -int 0
 
 # Symlink Bash files
 for file in $HOME/.dotfiles/bash/.{bash_profile,bashrc}; do
@@ -92,6 +98,7 @@ BREWPACKAGES=(
   wget
   ffmpeg
   libvo-aacenc
+  bash
 )
 
 # Install standard `brew` packages

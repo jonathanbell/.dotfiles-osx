@@ -24,6 +24,104 @@ link() {
   echo "Symlinked $1 to $2"
 }
 
+getavailabledisk() {
+  i=1
+  FIRSTAVAILABLEDISK="/dev/disk${i}s1"
+  while [ $i -lt 99 ] ; do
+    if ! mount | grep -q "/dev/disk${i}s1"; then
+      FIRSTAVAILABLEDISK="/dev/disk${i}s1"
+      break
+    fi
+    ((i++))
+  done
+
+  echo "$FIRSTAVAILABLEDISK"
+}
+
+# Mount specific external drives as readable
+mnteverything() {
+  EVERYTHINGSHOME="$HOME/mnt/Everything"
+  EVERYTHINGSDEFAULTHOME="/Volumes/Everything"
+
+  # First unmount the drive, if it was already mounted.
+  # `mount` would probably give us a string like this:
+  # "/dev/disk2s1 on /Users/jbell/mnt/Everything"
+  # So, look for that string. If it's inside of `mount`'s output, then it's
+  # likely that the drive is already mounted.
+  if mount | grep -q "mnt/Everything" || mount | grep -q $EVERYTHINGSDEFAULTHOME; then
+    if ! sudo diskutil unmount $EVERYTHINGSHOME >/dev/null && ! sudo diskutil unmount $EVERYTHINGSDEFAULTHOME >/dev/null; then
+        echo 'Unable to unmount Everything! Maybe try force unmounting.' \
+        && return
+    else
+      echo 'Everything was already mounted, re-mounting...'
+    fi
+  fi
+
+  AVAILABLEDISK=$(getavailabledisk)
+
+  mkdir -p $EVERYTHINGSHOME \
+  && chmod -R 775 $EVERYTHINGSHOME \
+  && sudo mount -wt exfat $AVAILABLEDISK $EVERYTHINGSHOME \
+  && echo "Everything is now mounted on ${EVERYTHINGSHOME}" \
+  && open $EVERYTHINGSHOME;
+}
+
+mntpatrice() {
+  PATRICEHOME="$HOME/mnt/Patrice"
+  PATRICEDEFAULTHOME="/Volumes/PATRICE"
+
+  if mount | grep -q $PATRICEHOME || mount | grep -q $PATRICEDEFAULTHOME; then
+    if ! sudo diskutil unmount $PATRICEHOME >/dev/null && ! sudo diskutil unmount $PATRICEDEFAULTHOME >/dev/null; then
+        echo 'Unable to unmount Patrice! Maybe try force unmounting.' \
+        && return
+    else
+      echo 'Patrice was already mounted, re-mounting...'
+    fi
+  fi
+
+  AVAILABLEDISK=$(getavailabledisk)
+
+  mkdir -p $PATRICEHOME \
+  && chmod -R 775 $PATRICEHOME \
+  && sudo mount -wt msdos $AVAILABLEDISK $PATRICEHOME \
+  && echo "Patrice is now mounted on ${PATRICEHOME}" \
+  && open $PATRICEHOME;
+}
+
+mntbuckups() {
+  BUCKUPSHOME="$HOME/mnt/Buckups"
+  BUCKUPSDEFAULTHOME="/Volumes/BUCKUPS"
+
+  if mount | grep -q $BUCKUPSHOME || mount | grep -q $BUCKUPSDEFAULTHOME; then
+    if ! sudo diskutil unmount $BUCKUPSHOME >/dev/null && ! sudo diskutil unmount $BUCKUPSDEFAULTHOME >/dev/null; then
+        echo 'Unable to unmount Buckups drive! Maybe try force unmounting.' \
+        && return
+    else
+      echo 'Buckups drive was already mounted, re-mounting...'
+    fi
+  fi
+
+  AVAILABLEDISK=$(getavailabledisk)
+
+  mkdir -p $BUCKUPSHOME \
+  && chmod -R 775 $BUCKUPSHOME \
+  && sudo mount -wt msdos $AVAILABLEDISK $BUCKUPSHOME \
+  && echo "Buckups drive is now mounted on ${BUCKUPSHOME}" \
+  && open $BUCKUPSHOME;
+}
+
+backupeverything() {
+  EVERYTHINGSHOME="$HOME/mnt/Everything"
+  PATRICEHOME="$HOME/mnt/Patrice"
+
+  if ! mount | grep -q $EVERYTHINGSHOME || ! mount | grep -q $PATRICEHOME; then
+    echo 'Everything drive and Patrice drive have to be mounted first. Exiting...' \
+    && return
+  fi
+
+  rsync -vr --delete --size-only --exclude=/.wd_tv --exclude=/.Spotlight-V100 $EVERYTHINGSHOME/ $PATRICEHOME/Everything\ Backup
+}
+
 # View log for specific Git branch
 gitbranchlog() {
   git log --graph --abbrev-commit --decorate  --first-parent $(git branch | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1 /')
@@ -37,7 +135,7 @@ listening() {
   elif [ $# -eq 1 ]; then
     sudo lsof -iTCP -sTCP:LISTEN -n -P | grep -i --color $1
   else
-    echo "Usage: listening [pattern]"
+    echo "Usage: listening [port]"
   fi
 }
 
