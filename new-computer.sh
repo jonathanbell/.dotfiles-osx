@@ -85,10 +85,13 @@ source ~/.bash_profile
 # Standard `brew` packages
 BREWPACKAGES=(
   node@12
-  # `gshuf`, `shuf` and other utils
+  # Things like `shuf` and other utils.
+  # These utilities won't override the BSD userland by default, they link all
+  # their utilities with a `g` prefix. So `shuf` becomes `gshuf`, for example.
   coreutils
   composer
   php@7.4
+  python@3.7
   phpunit
   awscli
   imagemagick
@@ -98,7 +101,13 @@ BREWPACKAGES=(
   wget
   ffmpeg
   libvo-aacenc
+  # Updates the Bash version vs the antique one that comes with OS X.
   bash
+  # Add more GNU-like command line utilities to a Mac userland.
+  gnu-sed
+  findutils
+  gawk
+  grep
 )
 
 # Install standard `brew` packages
@@ -106,6 +115,13 @@ for i in "${BREWPACKAGES[@]}"
 do
   brew install "$i"
 done
+
+# Setup Python to not update itself
+brew link --force python@3.7
+brew pin python@3.7
+
+# Pin Node at version 12 since most of my work depends on v12
+brew pin node@12
 
 # Cloudinary CLI
 npm -g install cloudinary-cli
@@ -115,7 +131,7 @@ brew tap homebrew/cask-fonts
 
 BREWCASKS=(
   font-source-code-pro
-  evernote
+  # Probably best to install Chrome manually
   #google-chrome
   visual-studio-code
   spotify

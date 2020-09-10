@@ -97,15 +97,11 @@ export EDITOR='code'
 # Use PHP XDebug
 export XDEBUG_CONFIG='idekey=VSCODE'
 
-# PHP Version
+# PHP
 export PATH="/usr/local/opt/php/bin:$PATH"
 export PATH="/usr/local/opt/php/sbin:$PATH"
 export LDFLAGS="-L/usr/local/opt/php/lib"
 export CPPFLAGS="-I/usr/local/opt/php/include"
-
-# For MySQL
-# https://stackoverflow.com/a/35338119/1171790
-export PATH=/usr/local/mysql/bin:$PATH
 
 # Add variables, first!
 source $HOME/.dotfiles/bash/variables.sh
