@@ -119,7 +119,16 @@ backupeverything() {
     && return
   fi
 
-  rsync -vr --delete --size-only --exclude=/.wd_tv --exclude=/.Spotlight-V100 $EVERYTHINGSHOME/ $PATRICEHOME/Everything\ Backup
+  rsync -vr --delete --size-only \
+    --exclude=/.wd_tv \
+    --exclude=*.cof \
+    --exclude=*.cof \
+    --exclude=*.cot \
+    --exclude=*.cos \
+    --exclude=*.bak \
+    --exclude=/.fseventsd \
+    --exclude=/.Spotlight-V100 \
+  $EVERYTHINGSHOME/ $PATRICEHOME/Everything\ Backup
 }
 
 # View log for specific Git branch
