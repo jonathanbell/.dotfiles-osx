@@ -29,6 +29,10 @@ git config --global color.pager true
 # https://git-scm.com/docs/git-config.html#git-config-branchltnamegtremote
 git config --global push.default current
 
+# Default behaviour for a pull.
+# Don't rebase but merge when doing a pull.
+git config --rebase pull.rebase false
+
 # Accept the auto-generated merge message.
 # https://git-scm.com/docs/merge-options#merge-options---no-edit
 git config --global core.mergeoptions --no-edit
