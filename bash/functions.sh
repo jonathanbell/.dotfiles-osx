@@ -119,7 +119,7 @@ backupeverything() {
     && return
   fi
 
-  rsync -vr --delete --size-only \
+  rsync -vr --delete --delete-excluded --size-only \
     --exclude=/.wd_tv \
     --exclude=*.cof \
     --exclude=*.cof \
@@ -128,6 +128,9 @@ backupeverything() {
     --exclude=*.bak \
     --exclude=/.fseventsd \
     --exclude=/.Spotlight-V100 \
+    --exclude=/.TemporaryItems \
+    --exclude=/.Trashes \
+    --exclude=.BridgeSort \
   $EVERYTHINGSHOME/ $PATRICEHOME/Everything\ Backup
 }
 
