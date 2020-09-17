@@ -131,6 +131,7 @@ backupeverything() {
     --exclude=/.TemporaryItems \
     --exclude=/.Trashes \
     --exclude=.BridgeSort \
+    --exclude=.BridgeLabelsAndRatings \
   $EVERYTHINGSHOME/ $PATRICEHOME/Everything\ Backup
 }
 
