@@ -12,7 +12,10 @@ export PATH="$HOME/bin:$PATH"
 
 # Add `code` to path
 # https://code.visualstudio.com/docs/setup/mac
-export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH"
+
+# Add Composer to your `$PATH`
+export PATH="$HOME/.composer/vendor/bin:$PATH"
 
 # Get older version of Node installed via `brew` working
 export PATH="/usr/local/opt/node@12/bin:$PATH"
