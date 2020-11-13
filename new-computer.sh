@@ -108,6 +108,7 @@ BREWPACKAGES=(
   findutils
   gawk
   grep
+  tree
 )
 
 # Install standard `brew` packages
@@ -167,3 +168,9 @@ if [ -f "$HOME/.dotfiles-$company/new-computer-$company.sh" ]; then
   chmod +x $HOME/.dotfiles-$company/new-computer-$company.sh
   ~/.dotfiles-$company/new-computer-$company.sh
 fi
+
+# Set Terminal to use a later version of Bash.
+sudo echo "/usr/local/bin/bash" >> /etc/shells
+echo 'Changing your shell to Bash 5...'
+chsh -s /usr/local/bin/bash
+echo 'Terminal will now use the latest version of Bash available via Homebrew. You should close Terminal and re-open it now.'

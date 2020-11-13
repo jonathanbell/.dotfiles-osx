@@ -110,6 +110,28 @@ mntbuckups() {
   && open $BUCKUPSHOME;
 }
 
+mntbub() {
+  BUBSHOME="$HOME/mnt/Bub"
+  BUBSDEFAULTHOME="/Volumes/BUB"
+
+  if mount | grep -q $BUBSHOME || mount | grep -q $BUBSDEFAULTHOME; then
+    if ! sudo diskutil unmount $BUBSHOME >/dev/null && ! sudo diskutil unmount $BUBSDEFAULTHOME >/dev/null; then
+        echo 'Unable to unmount Bub drive! Maybe try force unmounting.' \
+        && return
+    else
+      echo 'Bub drive was already mounted, re-mounting...'
+    fi
+  fi
+
+  AVAILABLEDISK=$(getavailabledisk)
+
+  mkdir -p $BUBSHOME \
+  && chmod -R 775 $BUBSHOME \
+  && sudo mount -wt msdos $AVAILABLEDISK $BUBSHOME \
+  && echo "Bub drive is now mounted on ${BUBSHOME}" \
+  && open $BUBSHOME;
+}
+
 backupeverything() {
   EVERYTHINGSHOME="$HOME/mnt/Everything"
   PATRICEHOME="$HOME/mnt/Patrice"
