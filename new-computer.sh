@@ -51,6 +51,10 @@ chmod -R 775 $HOME/mnt
 defaults write com.apple.finder AppleShowAllFiles YES
 killall Finder
 
+# Don't show the last login in Terminal
+# https://osxdaily.com/2010/06/22/remove-the-last-login-message-from-the-terminal/
+touch ~/.hushlogin
+
 # Save screenshots as jpeg
 defaults write com.apple.screencapture type jpg
 

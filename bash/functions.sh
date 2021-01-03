@@ -68,7 +68,7 @@ mnteverything() {
 
 mntpatrice() {
   PATRICEHOME="$HOME/mnt/Patrice"
-  PATRICEDEFAULTHOME="/Volumes/PATRICE"
+  PATRICEDEFAULTHOME="/Volumes/Patrice"
 
   if mount | grep -q $PATRICEHOME || mount | grep -q $PATRICEDEFAULTHOME; then
     if ! sudo diskutil unmount $PATRICEHOME >/dev/null && ! sudo diskutil unmount $PATRICEDEFAULTHOME >/dev/null; then
@@ -83,7 +83,7 @@ mntpatrice() {
 
   mkdir -p $PATRICEHOME \
   && chmod -R 775 $PATRICEHOME \
-  && sudo mount -wt msdos $AVAILABLEDISK $PATRICEHOME \
+  && sudo mount -wt exfat $AVAILABLEDISK $PATRICEHOME \
   && echo "Patrice is now mounted on ${PATRICEHOME}" \
   && open $PATRICEHOME;
 }
@@ -132,6 +132,42 @@ mntbub() {
   && open $BUBSHOME;
 }
 
+mntdrive() {
+  DRIVEMOUNTLOCATION=''
+  PS3='Select a drive to mount: '
+  options=("Buckups" "Everything" "Patrice" "Bub" "Other" "Quit")
+  select opt in "${options[@]}"
+  do
+    case $opt in
+        "Buckups")
+            echo "you chose choice 1"
+            break
+            ;;
+        "Everything")
+            echo "you chose choice 2"
+            break
+            ;;
+        "Patrice")
+            echo "you chose choice $REPLY which is $opt"
+            break
+            ;;
+        "Bub")
+            echo "you chose choice $REPLY which is $opt"
+            break
+            ;;
+        "Other")
+            echo "you chose choice $REPLY which is $opt"
+            break
+            ;;
+        "Quit")
+            break
+            ;;
+        *) echo "invalid option $REPLY";;
+    esac
+  done
+  echo "all done!"
+}
+
 backupeverything() {
   EVERYTHINGSHOME="$HOME/mnt/Everything"
   PATRICEHOME="$HOME/mnt/Patrice"
@@ -141,7 +177,9 @@ backupeverything() {
     && return
   fi
 
-  rsync -vr --delete --delete-excluded --size-only \
+  rsync -rv --delete --delete-excluded --size-only $HOME/Movies/Projects/ $EVERYTHINGSHOME/Video\ Projects/
+
+  rsync -rv --delete --delete-excluded --size-only \
     --exclude=/.wd_tv \
     --exclude=*.cof \
     --exclude=*.cof \
