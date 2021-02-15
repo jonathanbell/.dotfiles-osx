@@ -44,7 +44,7 @@ alias gitlog='git log --graph --oneline --all --decorate'
 alias globalnpmpackages='npm list -g --depth 0'
 
 # Remove all Docker containers and images
-alias resetdocker='docker stop $(docker ps -aq) && docker rm $(docker ps -aq) && docker rmi $(docker images -q)'
+alias resetdocker='docker stop $(docker ps -aq) && docker rm $(docker ps -aq) && docker rmi -f $(docker images -q)'
 
 # Start and SSH to VirtualBox ubuntu
 alias startubuntu='VBoxManage startvm "Ubuntu 19" --type headless; ssh -p 2281 jonathan@localhost'
