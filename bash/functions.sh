@@ -172,7 +172,7 @@ backupeverything() {
 
   DRYRUN=""
 
-  if [ $1 = "--dry-run" ]; then
+  if [[ $1 = "--dry-run" ]]; then
     DRYRUN="n"
   fi
 
@@ -197,6 +197,7 @@ backupeverything() {
     --exclude=.BridgeLabelsAndRatings \
   $EVERYTHINGSHOME/ $PATRICEHOME/Everything\ Backup
 
+  mkdir -p $PATRICEHOME/Video/_Davinci\ Backup
   rsync -rv$DRYRUN --delete --size-only $HOME/Movies/Projects/ $PATRICEHOME/Video/_Davinci\ Backup/
 }
 
