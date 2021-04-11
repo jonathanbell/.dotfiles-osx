@@ -197,7 +197,7 @@ backupeverything() {
     --exclude=.BridgeLabelsAndRatings \
   $EVERYTHINGSHOME/ $PATRICEHOME/Everything\ Backup
 
-  rsync -rv$DRYRUN --delete --size-only $HOME/Movies/Projects/ $PATRICEHOME/Video\ Projects/_Davinci\ Backup/
+  rsync -rv$DRYRUN --delete --size-only $HOME/Movies/Projects/ $PATRICEHOME/Video/_Davinci\ Backup/
 }
 
 # View log for specific Git branch
