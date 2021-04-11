@@ -169,6 +169,13 @@ mntdrive() {
 }
 
 backupeverything() {
+
+  DRYRUN=""
+
+  if [ $1 = "--dry-run" ]; then
+    DRYRUN="n"
+  fi
+
   EVERYTHINGSHOME="$HOME/mnt/Everything"
   PATRICEHOME="$HOME/mnt/Patrice"
 
@@ -177,22 +184,20 @@ backupeverything() {
     && return
   fi
 
-  rsync -rv --delete --delete-excluded --size-only $HOME/Movies/Projects/ $EVERYTHINGSHOME/Video\ Projects/
-
-  rsync -rv --delete --delete-excluded --size-only \
+  rsync -rv$DRYRUN --delete --delete-excluded --size-only \
     --exclude=/.wd_tv \
-    --exclude=*.cof \
-    --exclude=*.cof \
-    --exclude=*.cot \
-    --exclude=*.cos \
-    --exclude=*.bak \
     --exclude=/.fseventsd \
     --exclude=/.Spotlight-V100 \
     --exclude=/.TemporaryItems \
     --exclude=/.Trashes \
+    --exclude=._* \
+    --exclude=.*.parts \
+    --exclude=.DS_Store \
     --exclude=.BridgeSort \
     --exclude=.BridgeLabelsAndRatings \
   $EVERYTHINGSHOME/ $PATRICEHOME/Everything\ Backup
+
+  rsync -rv$DRYRUN --delete --size-only $HOME/Movies/Projects/ $PATRICEHOME/Video\ Projects/_Davinci\ Backup/
 }
 
 # View log for specific Git branch
