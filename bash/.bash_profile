@@ -141,7 +141,3 @@ PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}\007"'
 
 # Show a random quote at Bash startup. : )
 echo $(gshuf -n 1 "$HOME/.dotfiles/bash/quotes.txt")
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/Users/jbell/.sdkman"
-[[ -s "/Users/jbell/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/jbell/.sdkman/bin/sdkman-init.sh"

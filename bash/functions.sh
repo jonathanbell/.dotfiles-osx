@@ -61,6 +61,7 @@ mnteverything() {
 
   mkdir -p $EVERYTHINGSHOME \
   && chmod -R 775 $EVERYTHINGSHOME \
+  && echo "Running... sudo mount -wt exfat $AVAILABLEDISK $EVERYTHINGSHOME" \
   && sudo mount -wt exfat $AVAILABLEDISK $EVERYTHINGSHOME \
   && echo "Everything is now mounted on ${EVERYTHINGSHOME}" \
   && open $EVERYTHINGSHOME;
