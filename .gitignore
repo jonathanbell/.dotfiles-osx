@@ -1,4 +1,4 @@
 .DS_Store
-test*.sh
+.bashrc
 variables.sh
-.idea/
+test*.sh

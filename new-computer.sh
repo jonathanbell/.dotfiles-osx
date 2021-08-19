@@ -62,7 +62,7 @@ defaults write com.apple.screencapture type jpg
 defaults write com.apple.systemsound "com.apple.sound.uiaudio.enabled" -int 0
 
 # Symlink Bash files
-for file in $HOME/.dotfiles/bash/.{bash_profile,bashrc}; do
+for file in $HOME/.dotfiles/bash/.{bash_profile}; do
   chmod +x $file
   link $file $HOME/$(basename $file)
   chmod +x $HOME/$(basename $file)
@@ -83,18 +83,18 @@ command -v brew >/dev/null 2>&1 || {
   exit 1;
 }
 
-# Reload Bash profile after XCode installs
+# Reload Bash profile for XCode (installed manually)
 source ~/.bash_profile
 
 # Standard `brew` packages
 BREWPACKAGES=(
-  node@12
+  node
   # Things like `shuf` and other utils.
   # These utilities won't override the BSD userland by default, they link all
   # their utilities with a `g` prefix. So `shuf` becomes `gshuf`, for example.
   coreutils
   composer
-  php@7.4
+  php
   python@3.7
   phpunit
   awscli
@@ -125,9 +125,6 @@ done
 brew link --force python@3.7
 brew pin python@3.7
 
-# Pin Node at version 12 since most of my work depends on v12
-brew pin node@12
-
 # Cloudinary CLI
 npm -g install cloudinary-cli
 
@@ -136,16 +133,11 @@ brew tap homebrew/cask-fonts
 
 BREWCASKS=(
   font-source-code-pro
-  # Probably best to install Chrome manually
-  #google-chrome
+  google-chrome
   visual-studio-code
   spotify
-  phpstorm
   sequel-pro
-  telegram
-  whatsapp
   figma
-  vlc
   insomnia
 )
 

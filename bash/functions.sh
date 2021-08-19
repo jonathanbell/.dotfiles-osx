@@ -67,70 +67,39 @@ mnteverything() {
   && open $EVERYTHINGSHOME;
 }
 
-mntpatrice() {
+backupeverything() {
+
+  DRYRUN=""
+
+  if [[ $1 = "--dry-run" ]]; then
+    DRYRUN="n"
+  fi
+
+  EVERYTHINGSHOME="$HOME/mnt/Everything"
   PATRICEHOME="$HOME/mnt/Patrice"
-  PATRICEDEFAULTHOME="/Volumes/Patrice"
 
-  if mount | grep -q $PATRICEHOME || mount | grep -q $PATRICEDEFAULTHOME; then
-    if ! sudo diskutil unmount $PATRICEHOME >/dev/null && ! sudo diskutil unmount $PATRICEDEFAULTHOME >/dev/null; then
-        echo 'Unable to unmount Patrice! Maybe try force unmounting.' \
-        && return
-    else
-      echo 'Patrice was already mounted, re-mounting...'
-    fi
+  if ! mount | grep -q $EVERYTHINGSHOME || ! mount | grep -q $PATRICEHOME; then
+    echo 'Everything drive and Patrice drive have to be mounted first. Exiting...' \
+    && return
   fi
 
-  AVAILABLEDISK=$(getavailabledisk)
+  rsync -rv$DRYRUN --delete --delete-excluded --size-only \
+    --exclude=/.wd_tv \
+    --exclude=/.fseventsd \
+    --exclude=/.Spotlight-V100 \
+    --exclude=/.TemporaryItems \
+    --exclude=/.Trashes \
+    --exclude=._* \
+    --exclude=.*.parts \
+    --exclude=.DS_Store \
+    --exclude=.BridgeSort \
+    --exclude=.BridgeLabelsAndRatings \
+  $EVERYTHINGSHOME/ $PATRICEHOME/Everything\ Backup
 
-  mkdir -p $PATRICEHOME \
-  && chmod -R 775 $PATRICEHOME \
-  && sudo mount -wt exfat $AVAILABLEDISK $PATRICEHOME \
-  && echo "Patrice is now mounted on ${PATRICEHOME}" \
-  && open $PATRICEHOME;
-}
-
-mntbuckups() {
-  BUCKUPSHOME="$HOME/mnt/Buckups"
-  BUCKUPSDEFAULTHOME="/Volumes/BUCKUPS"
-
-  if mount | grep -q $BUCKUPSHOME || mount | grep -q $BUCKUPSDEFAULTHOME; then
-    if ! sudo diskutil unmount $BUCKUPSHOME >/dev/null && ! sudo diskutil unmount $BUCKUPSDEFAULTHOME >/dev/null; then
-        echo 'Unable to unmount Buckups drive! Maybe try force unmounting.' \
-        && return
-    else
-      echo 'Buckups drive was already mounted, re-mounting...'
-    fi
-  fi
-
-  AVAILABLEDISK=$(getavailabledisk)
-
-  mkdir -p $BUCKUPSHOME \
-  && chmod -R 775 $BUCKUPSHOME \
-  && sudo mount -wt msdos $AVAILABLEDISK $BUCKUPSHOME \
-  && echo "Buckups drive is now mounted on ${BUCKUPSHOME}" \
-  && open $BUCKUPSHOME;
-}
-
-mntbub() {
-  BUBSHOME="$HOME/mnt/Bub"
-  BUBSDEFAULTHOME="/Volumes/BUB"
-
-  if mount | grep -q $BUBSHOME || mount | grep -q $BUBSDEFAULTHOME; then
-    if ! sudo diskutil unmount $BUBSHOME >/dev/null && ! sudo diskutil unmount $BUBSDEFAULTHOME >/dev/null; then
-        echo 'Unable to unmount Bub drive! Maybe try force unmounting.' \
-        && return
-    else
-      echo 'Bub drive was already mounted, re-mounting...'
-    fi
-  fi
-
-  AVAILABLEDISK=$(getavailabledisk)
-
-  mkdir -p $BUBSHOME \
-  && chmod -R 775 $BUBSHOME \
-  && sudo mount -wt msdos $AVAILABLEDISK $BUBSHOME \
-  && echo "Bub drive is now mounted on ${BUBSHOME}" \
-  && open $BUBSHOME;
+  mkdir -p $PATRICEHOME/Everything\ Backup/Video/_Davinci\ Backup
+  rsync -rv$DRYRUN --delete --delete-excluded --size-only \
+    --exclude=.DS_Store \
+  $HOME/Movies/Projects/ $PATRICEHOME/Everything\ Backup/Video/_Davinci\ Backup/
 }
 
 mntdrive() {
@@ -167,41 +136,6 @@ mntdrive() {
     esac
   done
   echo "all done!"
-}
-
-backupeverything() {
-
-  DRYRUN=""
-
-  if [[ $1 = "--dry-run" ]]; then
-    DRYRUN="n"
-  fi
-
-  EVERYTHINGSHOME="$HOME/mnt/Everything"
-  PATRICEHOME="$HOME/mnt/Patrice"
-
-  if ! mount | grep -q $EVERYTHINGSHOME || ! mount | grep -q $PATRICEHOME; then
-    echo 'Everything drive and Patrice drive have to be mounted first. Exiting...' \
-    && return
-  fi
-
-  rsync -rv$DRYRUN --delete --delete-excluded --size-only \
-    --exclude=/.wd_tv \
-    --exclude=/.fseventsd \
-    --exclude=/.Spotlight-V100 \
-    --exclude=/.TemporaryItems \
-    --exclude=/.Trashes \
-    --exclude=._* \
-    --exclude=.*.parts \
-    --exclude=.DS_Store \
-    --exclude=.BridgeSort \
-    --exclude=.BridgeLabelsAndRatings \
-  $EVERYTHINGSHOME/ $PATRICEHOME/Everything\ Backup
-
-  mkdir -p $PATRICEHOME/Everything\ Backup/Video/_Davinci\ Backup
-  rsync -rv$DRYRUN --delete --delete-excluded --size-only \
-    --exclude=.DS_Store \
-  $HOME/Movies/Projects/ $PATRICEHOME/Everything\ Backup/Video/_Davinci\ Backup/
 }
 
 # View log for specific Git branch

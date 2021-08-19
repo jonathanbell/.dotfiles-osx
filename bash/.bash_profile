@@ -17,11 +17,6 @@ export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PA
 # Add Composer to your `$PATH`
 export PATH="$HOME/.composer/vendor/bin:$PATH"
 
-# Get older version of Node installed via `brew` working
-export PATH="/usr/local/opt/node@12/bin:$PATH"
-export LDFLAGS="-L/usr/local/opt/node@12/lib"
-export CPPFLAGS="-I/usr/local/opt/node@12/include"
-
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob;
 
@@ -29,17 +24,14 @@ shopt -s nocaseglob;
 shopt -s histappend;
 
 # Omit duplicates from bash history and commands that begin with a space
-export HISTCONTROL='ignoreboth'
+export HISTCONTROL='erasedups:ignoreboth'
 
 # Save multi-line commands as one command
 shopt -s cmdhist
 
 # Huge history. Doesn't appear to slow things down, so why not?
-HISTSIZE=50000
-HISTFILESIZE=1000
-
-# Avoid duplicate entries
-HISTCONTROL="erasedups:ignoreboth"
+export HISTSIZE=50000
+export HISTFILESIZE=1000
 
 # Don't record some commands
 export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
@@ -68,23 +60,9 @@ complete -W "NSGlobalDomain" defaults;
 # Automatically trim long paths in the prompt (requires Bash 4.x)
 PROMPT_DIRTRIM=2
 
-# Autocorrect typos in path names when using `cd`
-shopt -s cdspell 2> /dev/null
-
-# Prepend cd to directory names automatically
-shopt -s autocd 2> /dev/null
-
-# Use standard ISO 8601 timestamp
-# %F equivalent to %Y-%m-%d
-# %T equivalent to %H:%M:%S (24-hours format)
-HISTTIMEFORMAT='%F %T '
-
 # Prefer US English and use UTF-8
 export LANG='en_US.UTF-8'
 export LC_ALL='en_US.UTF-8'
-
-# Add `killall` tab completion for common apps
-complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
 
 # Enable some Bash 4 features when possible:
 for option in autocd globstar; do

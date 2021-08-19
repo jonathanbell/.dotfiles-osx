@@ -9,18 +9,11 @@ alias serve='open http://127.0.0.1:8080 && php -S 127.0.0.1:8080'
 alias desk='cd ~/Desktop'
 # Dropbox directory.
 alias d='cd ~/Dropbox'
-# Sites folder
-alias s='cd ~/Dropbox/Code'
 # Change directory to your dotfiles directory.
 alias dot='cd ~/.dotfiles'
 
-# Mount Buckups drive
-alias mountbuckups='mntbuckups'
-alias mounteverything='mnteverything'
-alias mountpatrice='mntpatrice'
-
 # Sync and backup
-alias syncbackups="rsync -rv --delete --exclude=.Spotlight* --exclude=.DS_Store exclude=._.DS_Store --exclude=.fseventsd* --exclude=.Trashes* --exclude=/tmp /Volumes/Everything/ /Volumes/PATRICE/"
+#alias syncbackups="rsync -rv --delete --exclude=.Spotlight* --exclude=.DS_Store exclude=._.DS_Store --exclude=.fseventsd* --exclude=.Trashes* --exclude=/tmp /Volumes/Everything/ /Volumes/PATRICE/"
 
 # Quickly clear the Terminal window
 alias c='clear'
@@ -45,9 +38,6 @@ alias globalnpmpackages='npm list -g --depth 0'
 
 # Remove all Docker containers and images
 alias resetdocker='docker stop $(docker ps -aq) && docker rm $(docker ps -aq) && docker rmi -f $(docker images -q)'
-
-# Start and SSH to VirtualBox ubuntu
-alias startubuntu='VBoxManage startvm "Ubuntu 19" --type headless; ssh -p 2281 jonathan@localhost'
 
 # Change directory in preparation for making some hashtag goodness.
 alias insta='cd $HOME/bin/hashtags'
