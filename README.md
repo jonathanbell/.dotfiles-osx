@@ -18,9 +18,6 @@ Inspired by: <https://dotfiles.github.io/> and
 1. [Install
    SuuntoLink](https://www.suunto.com/Support/software-support/suuntolink/)
    manually
-1. Install these Adobe Creative Cloud apps manually:
-    - Photoshop (+ Bridge)
-    - Lightroom
 1. Install command line tools: `xcode-select --install`
 1. Clone this repo: `cd ~ && git clone
    https://github.com/jonathanbell/.dotfiles-osx.git .dotfiles` Notice that we
@@ -48,6 +45,11 @@ This will:
 3. Configure your machine for web development use + photography use.
 
 Close and re-open Bash after this script has run.
+
+1. Sign in to Chrome
+1. Using Chrome, install these Adobe Creative Cloud apps manually:
+    - Photoshop (+ Bridge)
+    - Lightroom
 
 ---
 
