@@ -136,6 +136,7 @@ BREWCASKS=(
   google-chrome
   veracrypt
   slack
+  db-browser-for-sqlite
   visual-studio-code
   spotify
   workflowy
