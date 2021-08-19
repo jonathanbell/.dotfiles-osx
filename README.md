@@ -13,8 +13,7 @@ Inspired by: <https://dotfiles.github.io/> and
 
 1. Install and config the Mac OS
 1. Sign in to your Apple ID
-1. From the App Store install: Workflowy, [DaVinci Resolve](https://apps.apple.com/my/app/davinci-resolve/id571213070?mt=12)
-1. [Install Veracrypt](https://www.veracrypt.fr/en/Downloads.html) manually
+1. From the App Store install: [DaVinci Resolve](https://apps.apple.com/my/app/davinci-resolve/id571213070?mt=12)
 1. [Install Dropbox](https://www.dropbox.com/install) manually
 1. [Install
    SuuntoLink](https://www.suunto.com/Support/software-support/suuntolink/)
