@@ -22,7 +22,7 @@ Inspired by: <https://dotfiles.github.io/> and
    ensure we clone this repo down as `.dotfiles`. This will ensure paths are
    correct in the installation scripts.
 1. Clone any "company" dotfiles from GitHub to your home directory (example):
-   `cd ~ && git clone https://github.com/jonathanbell/.dotfiles-companyname.git`
+   `cd ~ && git clone https://github.com/jonathanbell/.dotfiles-<companyname>.git`
 1. [Install the Dracula theme for Terminal](https://draculatheme.com/terminal/)
    (use the `bash/Dracula.terminal` file. Press `command + shift + .` in order
    to see hidden files)
