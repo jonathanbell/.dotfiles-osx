@@ -15,9 +15,6 @@ Inspired by: <https://dotfiles.github.io/> and
 1. Sign in to your Apple ID
 1. From the App Store install: [DaVinci Resolve](https://apps.apple.com/my/app/davinci-resolve/id571213070?mt=12)
 1. [Install Dropbox](https://www.dropbox.com/install) manually
-1. [Install
-   SuuntoLink](https://www.suunto.com/Support/software-support/suuntolink/)
-   manually
 1. Install command line tools: `xcode-select --install`
 1. Clone this repo: `cd ~ && git clone
    https://github.com/jonathanbell/.dotfiles-osx.git .dotfiles` Notice that we
@@ -46,10 +43,15 @@ This will:
 
 Close and re-open Bash after this script has run.
 
+Finally:
+
 1. Sign in to Chrome
 1. Using Chrome, install these Adobe Creative Cloud apps manually:
     - Photoshop (+ Bridge)
     - Lightroom
+1. [Install
+   SuuntoLink](https://www.suunto.com/Support/software-support/suuntolink/)
+   manually
 
 ---
 
