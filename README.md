@@ -60,7 +60,7 @@ Finally:
 1. [Install Docker manually](https://docs.docker.com/docker-for-mac/install/)
 1. Setup VS Code by [syncing your
    settings](https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync)
-   from the cloud.
+   from the cloud
 1.  Copy your Cloudinary config file from your secret hiding place to
     `~/.cloudinary`
     - You'll then be able to [upload images to
