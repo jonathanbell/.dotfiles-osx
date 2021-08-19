@@ -13,6 +13,7 @@ Inspired by: <https://dotfiles.github.io/> and
 
 1. Install and config the Mac OS
 1. Sign in to your Apple ID
+1. Open Launchpad and delete Things like iMovie and Garbage Band by holding down on the icons until the wiggle
 1. From the App Store install: [DaVinci Resolve](https://apps.apple.com/my/app/davinci-resolve/id571213070?mt=12)
 1. [Install Dropbox](https://www.dropbox.com/install) manually
 1. Install command line tools: `xcode-select --install`
