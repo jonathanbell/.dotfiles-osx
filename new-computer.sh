@@ -135,6 +135,7 @@ BREWCASKS=(
   font-source-code-pro
   google-chrome
   veracrypt
+  slack
   visual-studio-code
   spotify
   workflowy
