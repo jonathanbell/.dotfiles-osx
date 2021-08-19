@@ -10,6 +10,12 @@ parse-git-branch() {
 # Add `~/bin` to your `$PATH`
 export PATH="$HOME/bin:$PATH"
 
+# Add Homebrew to path
+export PATH="/opt/homebrew/bin:$PATH"
+
+# Hide the annoying Bash/Zsh deprecation warning
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
 # Add `code` to path
 # https://code.visualstudio.com/docs/setup/mac
 export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH"

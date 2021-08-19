@@ -16,6 +16,7 @@ Inspired by: <https://dotfiles.github.io/> and
 1. Open Launchpad and delete things like iMovie and Garbage Band by holding down on the icons until the wiggle
 1. From the App Store install: [DaVinci Resolve](https://apps.apple.com/my/app/davinci-resolve/id571213070?mt=12)
 1. [Install Dropbox](https://www.dropbox.com/install) manually
+1. Use Bash as the default for Terminal: `chsh -s /bin/bash` (close and re-open Terminal)
 1. Install command line tools: `xcode-select --install`
 1. Clone this repo: `cd ~ && git clone
    https://github.com/jonathanbell/.dotfiles-osx.git .dotfiles` Notice that we
