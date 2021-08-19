@@ -46,7 +46,7 @@ This will:
 
 Close and re-open Bash after this script has run.
 
-Finally:
+And now, finally:
 
 1. Sign in to Chrome
 1. Using Chrome, install these Adobe Creative Cloud apps manually:
