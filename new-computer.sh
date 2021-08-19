@@ -134,8 +134,10 @@ brew tap homebrew/cask-fonts
 BREWCASKS=(
   font-source-code-pro
   google-chrome
+  veracrypt
   visual-studio-code
   spotify
+  workflowy
   sequel-pro
   figma
   insomnia
@@ -143,7 +145,7 @@ BREWCASKS=(
 
 for i in "${BREWCASKS[@]}"
 do
-  brew cask install "$i"
+  brew install --cask "$i"
 done
 
 brew cleanup
