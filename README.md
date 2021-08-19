@@ -26,6 +26,7 @@ Inspired by: <https://dotfiles.github.io/> and
 1. [Install the Dracula theme for Terminal](https://draculatheme.com/terminal/)
    (use the `bash/Dracula.terminal` file. Press `command + shift + .` in order
    to see hidden files)
+     1. Now, configure your default Terminal profile
 
 Now, run the `new-computer.sh` script. Have the full path to your SSH config
 file handy (from DB).
