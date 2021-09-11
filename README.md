@@ -49,11 +49,11 @@ Close and re-open Bash after this script has run.
 And now, finally:
 
 1. Sign in to Chrome
-1. Using Chrome, install these Adobe Creative Cloud apps manually:
+1. Install these Adobe Creative Cloud apps manually:
     - Photoshop (+ Bridge)
     - Lightroom
-1. [Install
-   SuuntoLink](https://www.suunto.com/Support/software-support/suuntolink/)
+1. Install [Topaz DeNoise](https://topazlabs.com/downloads/) manually
+1. Install [SuuntoLink](https://www.suunto.com/Support/software-support/suuntolink/)
    manually
 
 ---

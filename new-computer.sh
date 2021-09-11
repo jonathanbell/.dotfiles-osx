@@ -129,6 +129,13 @@ BREWCASKS=(
   veracrypt
   slack
   db-browser-for-sqlite
+  firefox
+  notion
+  transmission
+  discord
+  expressvpn
+  stellarium
+  zoom
   visual-studio-code
   spotify
   workflowy
