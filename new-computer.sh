@@ -97,6 +97,7 @@ BREWPACKAGES=(
   python
   phpunit
   awscli
+  volta
   imagemagick
   vlc
   gifsicle
