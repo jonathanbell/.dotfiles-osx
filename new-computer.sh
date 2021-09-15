@@ -51,6 +51,10 @@ chmod -R 775 $HOME/mnt
 defaults write com.apple.finder AppleShowAllFiles YES
 killall Finder
 
+# Display app switcher to display on both external and internal monitors
+defaults write com.apple.Dock appswitcher-all-displays -bool true
+killall Dock
+
 # Don't show the last login in Terminal
 # https://osxdaily.com/2010/06/22/remove-the-last-login-message-from-the-terminal/
 touch ~/.hushlogin
