@@ -141,6 +141,7 @@ BREWCASKS=(
   expressvpn
   stellarium
   zoom
+  meld
   ngrok
   visual-studio-code
   spotify
