@@ -12,6 +12,7 @@ export PATH="$HOME/bin:$PATH"
 
 # Add Homebrew to path
 export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/sbin:$PATH"
 
 # Hide the annoying Bash/Zsh deprecation warning
 export BASH_SILENCE_DEPRECATION_WARNING=1

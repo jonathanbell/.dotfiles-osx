@@ -136,6 +136,7 @@ BREWCASKS=(
   expressvpn
   stellarium
   zoom
+  docker
   visual-studio-code
   spotify
   workflowy
