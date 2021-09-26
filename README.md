@@ -60,7 +60,6 @@ And now, finally:
 
 ### Optional: Extra stuff to do
 
-1. [Install Docker manually](https://docs.docker.com/docker-for-mac/install/)
 1. Setup VS Code by [syncing your
    settings](https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync)
    from the cloud
