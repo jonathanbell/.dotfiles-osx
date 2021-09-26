@@ -319,7 +319,7 @@ addhashtag() {
     echo 'Oops. Please provide a category and value.'
     echo 'Usage: addhashtag <category> <hashtag>'
   else
-    touch $HOME/bin/hashtags/data/$1.txt
+    touch $HOME/bin/hashtags/data/hashtags/$1.txt
     echo "$2" >> "$HOME/bin/hashtags/data/hashtags/$1.txt"
     echo 'Added.'
   fi
