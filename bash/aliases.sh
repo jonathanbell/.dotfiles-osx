@@ -3,7 +3,7 @@ alias hosts='sudo nano /etc/hosts'
 
 # PHP
 alias configphp='sudo nano /usr/local/etc/php/7.4/php.ini'
-alias serve='open http://127.0.0.1:8080 && php -S 127.0.0.1:8080'
+alias serve='open http://127.0.0.1:8080 && /usr/local/opt/php@7.2/bin/php -S 127.0.0.1:8080'
 
 # Change directories to handy OS X places
 alias desk='cd ~/Desktop'
@@ -26,7 +26,7 @@ alias ..='cd ..'
 alias addwtfpl='wget -O LICENCE http://www.wtfpl.net/txt/copying/'
 
 # Correct SSH permissions
-alias correctsshpermissions="sudo chmod 700 ~/.ssh && sudo chmod -R 600 $(dirname $sshconfigpath)/*"
+alias correctsshpermissions="sudo chmod 700 ~/.ssh && sudo chmod -R 600 /Users/jbell/.ssh/*"
 
 # Git
 alias gitdangerouslyreset='git checkout . && git branch | grep -v "master\|develop\|$(git rev-parse --abbrev-ref HEAD)" | xargs git branch -D && git branch && echo && echo "So tidy!" && echo'

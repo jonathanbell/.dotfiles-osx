@@ -40,6 +40,11 @@ git config --global core.mergeoptions --no-edit
 # Default editor
 git config --global core.editor 'code --wait'
 
+# Global gitignore
+touch ~/.gitignore
+git config --global core.excludesFile '~/.gitignore'
+echo ".vscode" >> ~/.gitignore
+
 # Config VS Code to be the diff and merge tools
 # https://stackoverflow.com/questions/44549733/how-to-use-visual-studio-code-as-default-editor-for-git-mergetool
 # https://code.visualstudio.com/docs/editor/versioncontrol#_vs-code-as-git-editor
