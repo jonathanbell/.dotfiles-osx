@@ -51,6 +51,10 @@ chmod -R 775 $HOME/mnt
 defaults write com.apple.finder AppleShowAllFiles YES
 killall Finder
 
+# Display app switcher to display on both external and internal monitors
+defaults write com.apple.Dock appswitcher-all-displays -bool true
+killall Dock
+
 # Don't show the last login in Terminal
 # https://osxdaily.com/2010/06/22/remove-the-last-login-message-from-the-terminal/
 touch ~/.hushlogin
@@ -61,21 +65,20 @@ defaults write com.apple.screencapture type jpg
 # Don't play sounds for UI actions
 defaults write com.apple.systemsound "com.apple.sound.uiaudio.enabled" -int 0
 
-# Symlink Bash files
-for file in $HOME/.dotfiles/bash/.{bash_profile}; do
-  chmod +x $file
-  link $file $HOME/$(basename $file)
-  chmod +x $HOME/$(basename $file)
-done;
-unset file;
+# Symlink .bash_profile
+chmod +x $HOME/.dotfiles/bash/.bash_profile
+link $HOME/.dotfiles/bash/.bash_profile $HOME/.bash_profile
+chmod +x $HOME/.bash_profile
 
 # Link SSH config file
+mkdir -p ~/.ssh
 link $sshconfigpath ~/.ssh/config
 sudo chmod 700 ~/.ssh && sudo chmod -R 600 $(dirname $sshconfigpath)/*
 
 # Install Homebrew
 echo 'Installing Homebrew... (you will be prompted for your password)'
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+sudo mkdir -p /opt/homebrew/bin
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Check that `brew` was installed.
 command -v brew >/dev/null 2>&1 || {
@@ -95,9 +98,10 @@ BREWPACKAGES=(
   coreutils
   composer
   php
-  python@3.7
+  python
   phpunit
   awscli
+  volta
   imagemagick
   vlc
   gifsicle
@@ -121,21 +125,28 @@ do
   brew install "$i"
 done
 
-# Setup Python to not update itself
-brew link --force python@3.7
-brew pin python@3.7
-
 # Cloudinary CLI
 npm -g install cloudinary-cli
 
-# To get nice fonts
-brew tap homebrew/cask-fonts
 
 BREWCASKS=(
-  font-source-code-pro
   google-chrome
+  veracrypt
+  slack
+  db-browser-for-sqlite
+  firefox
+  notion
+  transmission
+  discord
+  expressvpn
+  stellarium
+  zoom
+  docker
+  meld
+  ngrok
   visual-studio-code
   spotify
+  workflowy
   sequel-pro
   figma
   insomnia
@@ -143,7 +154,7 @@ BREWCASKS=(
 
 for i in "${BREWCASKS[@]}"
 do
-  brew cask install "$i"
+  brew install --cask "$i"
 done
 
 brew cleanup
@@ -167,5 +178,8 @@ fi
 # Set Terminal to use a later version of Bash.
 sudo echo "/usr/local/bin/bash" >> /etc/shells
 echo 'Changing your shell to Bash 5...'
-chsh -s /usr/local/bin/bash
+echo /opt/homebrew/bin/bash | sudo tee -a /etc/shells
+chsh -s /opt/homebrew/bin/bash
 echo 'Terminal will now use the latest version of Bash available via Homebrew. You should close Terminal and re-open it now.'
+echo
+echo 'All done!'

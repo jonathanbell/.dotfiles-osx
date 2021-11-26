@@ -313,6 +313,18 @@ static() {
   fi
 }
 
+# Add a hashtag based on category.
+addhashtag() {
+  if [ $# -ne 2 ]; then
+    echo 'Oops. Please provide a category and value.'
+    echo 'Usage: addhashtag <category> <hashtag>'
+  else
+    touch $HOME/bin/hashtags/data/hashtags/$1.txt
+    echo "$2" >> "$HOME/bin/hashtags/data/hashtags/$1.txt"
+    echo 'Added.'
+  fi
+}
+
 # Start a LAMP stack with Docker
 # A helper function to launch docker container using mattrayner/lamp with overrideable parameters
 # https://hub.docker.com/r/mattrayner/lamp#introduction
