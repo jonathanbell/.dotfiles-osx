@@ -3,26 +3,31 @@ parse-git-branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1] /'
 }
 
-# Add git completion
-# https://medium.com/fusionqa/autocomplete-git-commands-and-branch-names-in-terminal-on-mac-os-x-4e0beac0388a
-. ~/.dotfiles/git/git-completion.bash
-
 # Add `~/bin` to your `$PATH`
 export PATH="$HOME/bin:$PATH"
 
 # Add Homebrew to path
-export PATH="/opt/homebrew/bin:$PATH"
-export PATH="/opt/homebrew/sbin:$PATH"
+if [ -d "/opt/homebrew/bin" ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+# Add `code` to path
+# https://code.visualstudio.com/docs/setup/mac
+if [ -d '/Applications/Visual Studio Code.app' ]; then
+  export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH"
+fi
+
+# Add Composer to path
+if [ -d "$HOME/.composer/vendor" ]; then
+  export PATH="$HOME/.composer/vendor/bin:$PATH"
+fi
 
 # Hide the annoying Bash/Zsh deprecation warning
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
-# Add `code` to path
-# https://code.visualstudio.com/docs/setup/mac
-export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH"
-
-# Add Composer to your `$PATH`
-export PATH="$HOME/.composer/vendor/bin:$PATH"
+# Add git completion
+# https://medium.com/fusionqa/autocomplete-git-commands-and-branch-names-in-terminal-on-mac-os-x-4e0beac0388a
+. ~/.dotfiles/git/git-completion.bash
 
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob;
@@ -61,9 +66,6 @@ bind 'set show-all-if-ambiguous on'
 # Immediately add a trailing slash when autocompleting symlinks to directories
 bind 'set mark-symlinked-directories on'
 
-# Add tab completion for `defaults read|write NSGlobalDomain`
-complete -W "NSGlobalDomain" defaults;
-
 # Automatically trim long paths in the prompt (requires Bash 4.x)
 PROMPT_DIRTRIM=2
 
@@ -90,6 +92,9 @@ export PATH="/usr/local/opt/php/bin:$PATH"
 export PATH="/usr/local/opt/php/sbin:$PATH"
 export LDFLAGS="-L/usr/local/opt/php/lib"
 export CPPFLAGS="-I/usr/local/opt/php/include"
+
+# Don't prompt for merge_msg in Git.
+export GIT_MERGE_AUTOEDIT=no
 
 # Add variables, first!
 source $HOME/.dotfiles/bash/variables.sh
@@ -118,11 +123,10 @@ export PS1="\[$(tput bold)\]\[\033[31m\]→ \[\033[0m\]\[\033[105m\]\$(parse-git
 # Colors to differentiate various file types with `ls`
 export LS_COLORS="no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.ogg=01;35:*.mp3=01;35:*.wav=01;35:"
 
-# Don't prompt for merge_msg in Git.
-export GIT_MERGE_AUTOEDIT=no
-
 # Change the title of the Bash terminal to show the User@Hostname connection.
 PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}\007"'
 
 # Show a random quote at Bash startup. : )
-echo $(gshuf -n 1 "$HOME/.dotfiles/bash/quotes.txt")
+if ! [ -x "$(command -v gshuf)" ]; then
+  echo $(gshuf -n 1 "$HOME/.dotfiles/bash/quotes.txt")
+fi
