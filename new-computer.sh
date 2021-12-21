@@ -14,7 +14,7 @@ echo
 
 if [ ! -f $sshconfig ] || [ -z "$sshconfig" ]; then
   echo "Cannot find the path to the ssh config path. Exiting..."
-  exit
+  exit 1;
 fi
 
 # Start setting up a new variables file
@@ -41,14 +41,8 @@ if ! [ -d $HOME/bin ]; then
   chmod -R +x $HOME/bin
 fi
 
-# Make a place to mount your personal drive
-mkdir -p $HOME/mnt/Buckups
-mkdir -p $HOME/mnt/Everything
-mkdir -p $HOME/mnt/Patrice
-chmod -R 775 $HOME/mnt
-
 # Show hidden folders
-defaults write com.apple.finder AppleShowAllFiles YES
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 killall Finder
 
 # Display app switcher to display on both external and internal monitors
@@ -76,15 +70,23 @@ link $sshconfigpath ~/.ssh/config
 sudo chmod 700 ~/.ssh && sudo chmod -R 600 $(dirname $sshconfigpath)/*
 
 # Install Homebrew
-echo 'Installing Homebrew... (you will be prompted for your password)'
-sudo mkdir -p /opt/homebrew/bin
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+which -s brew
+if [[ $? != 0 ]]; then
+  echo 'Installing Homebrew... (you will be prompted for your password)'
+  sudo mkdir -p /opt/homebrew/bin
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+else
+  brew update
+fi
 
-# Check that `brew` was installed.
-command -v brew >/dev/null 2>&1 || {
+# Check that `brew` was installed
+which -s brew
+if [[ $? != 0 ]]; then
+  # Homebrew is not installed correctly
   echo >&2 "This script requires that Homebrew is installed. Aborting...";
   exit 1;
-}
+fi
 
 # Reload Bash profile for XCode (installed manually)
 source ~/.bash_profile
@@ -128,7 +130,6 @@ done
 # Cloudinary CLI
 npm -g install cloudinary-cli
 
-
 BREWCASKS=(
   google-chrome
   veracrypt
@@ -158,11 +159,6 @@ do
 done
 
 brew cleanup
-
-# Install wp-cli
-curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-chmod +x wp-cli.phar
-sudo mv wp-cli.phar /usr/local/bin/wp
 
 # Setup Git
 echo 'Setting Git configuration variables...'

@@ -38,107 +38,42 @@ getavailabledisk() {
   echo "$FIRSTAVAILABLEDISK"
 }
 
-# Mount specific external drives as readable
-mnteverything() {
-  EVERYTHINGSHOME="$HOME/mnt/Everything"
-  EVERYTHINGSDEFAULTHOME="/Volumes/Everything"
+# backupeverything() {
+#   DRYRUN=""
 
-  # First unmount the drive, if it was already mounted.
-  # `mount` would probably give us a string like this:
-  # "/dev/disk2s1 on /Users/jbell/mnt/Everything"
-  # So, look for that string. If it's inside of `mount`'s output, then it's
-  # likely that the drive is already mounted.
-  if mount | grep -q "mnt/Everything" || mount | grep -q $EVERYTHINGSDEFAULTHOME; then
-    if ! sudo diskutil unmount $EVERYTHINGSHOME >/dev/null && ! sudo diskutil unmount $EVERYTHINGSDEFAULTHOME >/dev/null; then
-        echo 'Unable to unmount Everything! Maybe try force unmounting.' \
-        && return
-    else
-      echo 'Everything was already mounted, re-mounting...'
-    fi
-  fi
+#   if [[ $1 = "--dry-run" ]]; then
+#     DRYRUN="n"
+#   fi
 
-  AVAILABLEDISK=$(getavailabledisk)
+#   EVERYTHINGSHOME="$HOME/mnt/Everything"
+#   PATRICEHOME="$HOME/mnt/Patrice"
 
-  mkdir -p $EVERYTHINGSHOME \
-  && chmod -R 775 $EVERYTHINGSHOME \
-  && echo "Running... sudo mount -wt exfat $AVAILABLEDISK $EVERYTHINGSHOME" \
-  && sudo mount -wt exfat $AVAILABLEDISK $EVERYTHINGSHOME \
-  && echo "Everything is now mounted on ${EVERYTHINGSHOME}" \
-  && open $EVERYTHINGSHOME;
-}
+#   if ! mount | grep -q $EVERYTHINGSHOME || ! mount | grep -q $PATRICEHOME; then
+#     echo 'Everything drive and Patrice drive have to be mounted first. Exiting...' \
+#     && return
+#   fi
 
-backupeverything() {
+#   rsync -rv$DRYRUN --delete --delete-excluded --size-only \
+#     --exclude=/.wd_tv \
+#     --exclude=/.fseventsd \
+#     --exclude=/.Spotlight-V100 \
+#     --exclude=/.TemporaryItems \
+#     --exclude=/.Trashes \
+#     --exclude=._* \
+#     --exclude=.*.parts \
+#     --exclude=.DS_Store \
+#     --exclude=.BridgeSort \
+#     --exclude=.BridgeLabelsAndRatings \
+#   $EVERYTHINGSHOME/ $PATRICEHOME/Everything\ Backup
 
-  DRYRUN=""
+#   mkdir -p $PATRICEHOME/Everything\ Backup/Video/_Davinci\ Backup
+#   rsync -rv$DRYRUN --delete --delete-excluded --size-only \
+#     --exclude=.DS_Store \
+#   $HOME/Movies/Projects/ $PATRICEHOME/Everything\ Backup/Video/_Davinci\ Backup/
+# }
 
-  if [[ $1 = "--dry-run" ]]; then
-    DRYRUN="n"
-  fi
 
-  EVERYTHINGSHOME="$HOME/mnt/Everything"
-  PATRICEHOME="$HOME/mnt/Patrice"
-
-  if ! mount | grep -q $EVERYTHINGSHOME || ! mount | grep -q $PATRICEHOME; then
-    echo 'Everything drive and Patrice drive have to be mounted first. Exiting...' \
-    && return
-  fi
-
-  rsync -rv$DRYRUN --delete --delete-excluded --size-only \
-    --exclude=/.wd_tv \
-    --exclude=/.fseventsd \
-    --exclude=/.Spotlight-V100 \
-    --exclude=/.TemporaryItems \
-    --exclude=/.Trashes \
-    --exclude=._* \
-    --exclude=.*.parts \
-    --exclude=.DS_Store \
-    --exclude=.BridgeSort \
-    --exclude=.BridgeLabelsAndRatings \
-  $EVERYTHINGSHOME/ $PATRICEHOME/Everything\ Backup
-
-  mkdir -p $PATRICEHOME/Everything\ Backup/Video/_Davinci\ Backup
-  rsync -rv$DRYRUN --delete --delete-excluded --size-only \
-    --exclude=.DS_Store \
-  $HOME/Movies/Projects/ $PATRICEHOME/Everything\ Backup/Video/_Davinci\ Backup/
-}
-
-mntdrive() {
-  DRIVEMOUNTLOCATION=''
-  PS3='Select a drive to mount: '
-  options=("Buckups" "Everything" "Patrice" "Bub" "Other" "Quit")
-  select opt in "${options[@]}"
-  do
-    case $opt in
-        "Buckups")
-            echo "you chose choice 1"
-            break
-            ;;
-        "Everything")
-            echo "you chose choice 2"
-            break
-            ;;
-        "Patrice")
-            echo "you chose choice $REPLY which is $opt"
-            break
-            ;;
-        "Bub")
-            echo "you chose choice $REPLY which is $opt"
-            break
-            ;;
-        "Other")
-            echo "you chose choice $REPLY which is $opt"
-            break
-            ;;
-        "Quit")
-            break
-            ;;
-        *) echo "invalid option $REPLY";;
-    esac
-  done
-  echo "all done!"
-}
-
-# View log for specific Git branch
+# View log for specific Git branch.
 gitbranchlog() {
   git log --graph --abbrev-commit --decorate  --first-parent $(git branch | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1 /')
 }
@@ -155,7 +90,7 @@ listening() {
   fi
 }
 
-# Get a known wifi password
+# Get a known wifi password.
 wifi-password() {
   if [ $# -eq 0 ]; then
     echo 'Oops. Please tell me a wifi network name.'
@@ -197,7 +132,7 @@ resize-image-width() {
   fi
 }
 
-# Prep high-res images for upload to log.jonathanbell.ca or other blog-like things.
+# Prep high-res images for upload to blog-like things.
 blogimages() {
   echo 'Converting images to lo-res...'
   for i in *.jpg; do
@@ -299,20 +234,6 @@ gifify() {
   fi
 }
 
-# Upload that file to https://s3-us-west-2.amazonaws.com/static-jonathanbell-ca/<filename>
-# Requires awscli be setup and configured.
-static() {
-  if [ $# -eq 0 ]; then
-    echo 'Oops. Please give me a filename.'
-    echo 'Usage: static <filename>'
-  else
-    aws s3 cp $1 s3://static-jonathanbell-ca --acl public-read --cache-control max-age=7776000
-    printf "https://s3-us-west-2.amazonaws.com/static-jonathanbell-ca/$1" > /dev/clipboard
-    echo "File available at: https://s3-us-west-2.amazonaws.com/static-jonathanbell-ca/$1 (copied to clipboard)"
-    open https://s3-us-west-2.amazonaws.com/static-jonathanbell-ca/$1
-  fi
-}
-
 # Add a hashtag based on category.
 addhashtag() {
   if [ $# -ne 2 ]; then
@@ -325,7 +246,7 @@ addhashtag() {
   fi
 }
 
-# Start a LAMP stack with Docker
+# Start a LAMP stack with Docker.
 # A helper function to launch docker container using mattrayner/lamp with overrideable parameters
 # https://hub.docker.com/r/mattrayner/lamp#introduction
 #
