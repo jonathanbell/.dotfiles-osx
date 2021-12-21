@@ -48,6 +48,7 @@ echo ".vscode" >> ~/.gitignore
 # Config Meld to be the mergetool
 # https://stackoverflow.com/a/34119867
 git config --global merge.tool meld
+# TODO: You may have to change this to: `'meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"'` (investigate this)
 git config --global mergetool.meld.cmd 'meld $LOCAL $MERGED $REMOTE --output $MERGED'
 # https://stackoverflow.com/a/27417871
 git config --global merge.conflictStyle diff3
