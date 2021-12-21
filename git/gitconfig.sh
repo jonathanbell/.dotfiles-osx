@@ -45,11 +45,15 @@ touch ~/.gitignore
 git config --global core.excludesFile '~/.gitignore'
 echo ".vscode" >> ~/.gitignore
 
-# Config VS Code to be the diff and merge tools
-# https://stackoverflow.com/questions/44549733/how-to-use-visual-studio-code-as-default-editor-for-git-mergetool
-# https://code.visualstudio.com/docs/editor/versioncontrol#_vs-code-as-git-editor
-git config --global merge.tool vscode
-git config --global mergetool.vscode.cmd 'code --wait $MERGED'
+# Config Meld to be the mergetool
+# https://stackoverflow.com/a/34119867
+git config --global merge.tool meld
+git config --global mergetool.meld.cmd 'meld $LOCAL $MERGED $REMOTE --output $MERGED'
+# https://stackoverflow.com/a/27417871
 git config --global merge.conflictStyle diff3
-git config --global diff.tool default-difftool
-git config --global difftool.default-difftool.cmd 'code --wait --diff $LOCAL $REMOTE'
+
+# Config VS Code to be the difftool
+# https://stackoverflow.com/questions/44549733/how-to-use-visual-studio-code-as-default-editor-for-git-mergetool
+git config --global diff.tool vscode
+git config --global difftool.vscode.cmd 'code -n --wait --diff $LOCAL $REMOTE'
+git config --global difftool.prompt false
