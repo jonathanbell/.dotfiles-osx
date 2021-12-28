@@ -4,6 +4,9 @@
 git config --global user.name "Jonathan Bell"
 git config --global user.email "jonathanbell.ca@gmail.com"
 
+# Change the name of the main branch
+git config --global init.defaultBranch main
+
 # http://stackoverflow.com/q/3206843/1171790
 git config --global core.autocrlf input
 # Fix whitespace isssues. http://stackoverflow.com/a/2948167/1171790
