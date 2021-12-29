@@ -103,7 +103,6 @@ BREWPACKAGES=(
   python
   phpunit
   awscli
-  volta
   imagemagick
   vlc
   gifsicle
@@ -159,6 +158,12 @@ do
 done
 
 brew cleanup
+
+# Install nvm
+# https://github.com/nvm-sh/nvm#usage
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+
+. ~/.nvm/nvm.sh
 
 # Setup Git
 echo 'Setting Git configuration variables...'
