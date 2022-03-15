@@ -127,7 +127,11 @@ do
 done
 
 # Cloudinary CLI
-npm -g install cloudinary-cli
+npm install -g cloudinary-cli
+
+# NCU (NPM Check Updates )
+# https://www.npmjs.com/package/npm-check-updates
+npm install -g npm-check-updates
 
 BREWCASKS=(
   google-chrome
@@ -159,11 +163,7 @@ done
 
 brew cleanup
 
-# Install nvm
-# https://github.com/nvm-sh/nvm#usage
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
-. ~/.nvm/nvm.sh
 
 # Setup Git
 echo 'Setting Git configuration variables...'

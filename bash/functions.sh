@@ -72,6 +72,39 @@ getavailabledisk() {
 #   $HOME/Movies/Projects/ $PATRICEHOME/Everything\ Backup/Video/_Davinci\ Backup/
 # }
 
+backupbuckups() {
+  DRYRUN=""
+
+  if [[ $1 = "--dry-run" ]]; then
+    DRYRUN="n"
+  fi
+
+  BUCKUPSDRIVE="/Volumes/BUCKUPS"
+  LOCALPHOTOS="$HOME/Dropbox/Photos"
+
+  if ! mount | grep -q $BUCKUPSDRIVE; then
+    echo 'Buckups drive not mounted. Exiting...' \
+    && return
+  fi
+
+  rsync -rv$DRYRUN --delete --delete-excluded --size-only \
+    --exclude=/.fseventsd \
+    --exclude=/.wd_tv \
+    --exclude=/.Spotlight-V100 \
+    --exclude=/.TemporaryItems \
+    --exclude=/.Trashes \
+    --exclude=._* \
+    --exclude=.*.parts \
+    --exclude=.DS_Store \
+    --exclude=.BridgeSort \
+    --exclude=.BridgeLabelsAndRatings \
+    --exclude=/Instagram \
+  $LOCALPHOTOS/ $BUCKUPSDRIVE/Photos/
+
+  echo
+  echo "Done backing up photos to BUCKUPS drive ✅"
+  echo
+}
 
 # View log for specific Git branch.
 gitbranchlog() {
