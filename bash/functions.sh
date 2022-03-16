@@ -38,39 +38,51 @@ getavailabledisk() {
   echo "$FIRSTAVAILABLEDISK"
 }
 
-# backupeverything() {
-#   DRYRUN=""
+backupeverything() {
+  DRYRUN=""
 
-#   if [[ $1 = "--dry-run" ]]; then
-#     DRYRUN="n"
-#   fi
+  if [[ $1 = "--dry-run" ]]; then
+    DRYRUN="n"
+  fi
 
-#   EVERYTHINGSHOME="$HOME/mnt/Everything"
-#   PATRICEHOME="$HOME/mnt/Patrice"
+  EVERYTHINGSHOME="/Volumes/Everything"
+  PATRICEHOME="/Volumes/Patrice"
 
-#   if ! mount | grep -q $EVERYTHINGSHOME || ! mount | grep -q $PATRICEHOME; then
-#     echo 'Everything drive and Patrice drive have to be mounted first. Exiting...' \
-#     && return
-#   fi
+  if ! mount | grep -q $EVERYTHINGSHOME && ! mount | grep -q $PATRICEHOME; then
+    echo 'Everything drive or Patrice drive must be mounted before backing up. Exiting...' \
+    && return
+  fi
 
-#   rsync -rv$DRYRUN --delete --delete-excluded --size-only \
-#     --exclude=/.wd_tv \
-#     --exclude=/.fseventsd \
-#     --exclude=/.Spotlight-V100 \
-#     --exclude=/.TemporaryItems \
-#     --exclude=/.Trashes \
-#     --exclude=._* \
-#     --exclude=.*.parts \
-#     --exclude=.DS_Store \
-#     --exclude=.BridgeSort \
-#     --exclude=.BridgeLabelsAndRatings \
-#   $EVERYTHINGSHOME/ $PATRICEHOME/Everything\ Backup
+  if mount | grep -q $PATRICEHOME; then
+    BACKUPDRIVE="$PATRICEHOME/Dropbox Backup"
+  fi
 
-#   mkdir -p $PATRICEHOME/Everything\ Backup/Video/_Davinci\ Backup
-#   rsync -rv$DRYRUN --delete --delete-excluded --size-only \
-#     --exclude=.DS_Store \
-#   $HOME/Movies/Projects/ $PATRICEHOME/Everything\ Backup/Video/_Davinci\ Backup/
-# }
+  if mount | grep -q $EVERYTHINGSHOME; then
+    BACKUPDRIVE="$EVERYTHINGSHOME/Dropbox Backup"
+  fi
+
+  mkdir -p "$BACKUPDRIVE"
+
+  rsync -rv$DRYRUN --delete --delete-excluded --size-only \
+    --exclude=/.wd_tv \
+    --exclude=/.fseventsd \
+    --exclude=/.dropbox \
+    --exclude=/.dropbox.cache \
+    --exclude=**/node_modules \
+    --exclude=/.Spotlight-V100 \
+    --exclude=/.TemporaryItems \
+    --exclude=/.Trashes \
+    --exclude=._* \
+    --exclude=.*.parts \
+    --exclude=./.ssh \
+    --exclude=/Buckups \
+    --exclude=/for\ jeep\ video \
+  "$HOME/Dropbox/" "$BACKUPDRIVE/"
+
+  echo
+  echo "Done backing up everything to Everything drive ✅"
+  echo
+}
 
 backupbuckups() {
   DRYRUN=""
