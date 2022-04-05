@@ -56,6 +56,9 @@ git config --global mergetool.meld.cmd 'meld $LOCAL $MERGED $REMOTE --output $ME
 # https://stackoverflow.com/a/27417871
 git config --global merge.conflictStyle diff3
 
+# To use VSCode as mergetool, see:
+# https://www.roboleary.net/vscode/2020/09/15/vscode-git.html
+
 # Config VS Code to be the difftool
 # https://stackoverflow.com/questions/44549733/how-to-use-visual-studio-code-as-default-editor-for-git-mergetool
 git config --global diff.tool vscode
