@@ -1,12 +1,3 @@
-# Fig env variables
-# This block should remain at the start of this file.
-# A blcok like this will get added by Fig upon install to this file. Feel free
-# to remove that extra block since this one is added directly to this file by
-# a human (and is maintained in our dotfiles repo).
-if [ -d  $HOME/.fig/shell ]; then
-  [ -s ~/.fig/shell/pre.sh ] && source ~/.fig/shell/pre.sh
-fi
-
 # Displays current Git branch, if there is one
 parse-git-branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1] /'
@@ -138,11 +129,4 @@ PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}\007"'
 # Show a random quote at Bash startup. : )
 if ! [ -x "$(command -v gshuf)" ]; then
   echo $(gshuf -n 1 "$HOME/.dotfiles/bash/quotes.txt")
-fi
-
-# Annoyingly, Fig needs this block to be at the very end of this file. Fig will
-# add this block upon installation, but you can remove that block since this one
-# is maintained by a human in our dotfiles repo.
-if [ -d  $HOME/.fig/shell ]; then
-  [ -s ~/.fig/fig.sh ] && source ~/.fig/fig.sh
 fi
