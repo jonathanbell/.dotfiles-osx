@@ -154,6 +154,7 @@ BREWCASKS=(
   sequel-pro
   figma
   insomnia
+  font-jetbrains-mono
 )
 
 for i in "${BREWCASKS[@]}"
@@ -162,8 +163,6 @@ do
 done
 
 brew cleanup
-
-
 
 # Setup Git
 echo 'Setting Git configuration variables...'
