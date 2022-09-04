@@ -40,5 +40,4 @@ alias dockerdangerously='docker stop $(docker ps -aq) && docker rm $(docker ps -
 # Change directory in preparation for making some hashtag goodness
 alias insta='cd $HOME/bin/hashtags'
 
-# Run insecure Chrome
-alias chromeinsecure="mkdir -p $HOME/Desktop/tmp && /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome -n --allow-running-insecure-content --user-data-dir=$HOME/Desktop/tmp"
+alias quote='echo $(gshuf -n 1 "$HOME/.dotfiles/bash/quotes.txt")'
