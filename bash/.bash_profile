@@ -130,3 +130,7 @@ PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}\007"'
 if [ -x "$(command -v gshuf)" ]; then
   echo $(gshuf -n 1 "$HOME/.dotfiles/bash/quotes.txt")
 fi
+
+# Added by `jenv`
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
