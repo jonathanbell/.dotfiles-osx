@@ -138,3 +138,7 @@ eval "$(jenv init -)"
 # Added by `volta`
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+
+# https://linguinecode.com/post/how-to-fix-m1-mac-puppeteer-chromium-arm64-bug
+export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+export PUPPETEER_EXECUTABLE_PATH=`which chromium`
