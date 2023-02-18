@@ -1,3 +1,6 @@
+alias python='/opt/homebrew/bin/python3 $@'
+# use pip3 for pip command
+
 # Edit the hosts file
 alias hosts='sudo nano /etc/hosts'
 
