@@ -11,6 +11,5 @@ jobs:
       - name: Ping request catcher
         id: ping-scrape-stocks
         run: |
-          CURL_RESULT=$(curl --location --request PUT https://jonathanbell.requestcatcher.com/ --header 'Authorization: ${{ secrets.AUTHORIZATION_BEARER }}')
-          echo $CURL_RESULT
+          curl --location --request PUT https://jonathanbell.requestcatcher.com/ --header 'Authorization: ${{ secrets.AUTHORIZATION_BEARER }}'
       - run: echo "🍏 Job completed with status ${{ job.status }}."
