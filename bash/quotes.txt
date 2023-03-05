@@ -1,3 +1,4 @@
+FoooBarrrr
 Life passes most people by while they're making plans for it.
 Beware the barrenness of a busy life.
 Comparison will kill you.
@@ -35,3 +36,4 @@ Alone in your crowd.
 Anxiety loves to validate itself.
 People are not pure functions.
 Fine never means fun.
+Keep it simple, stupid.

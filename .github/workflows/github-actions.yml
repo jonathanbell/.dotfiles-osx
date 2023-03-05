@@ -1,0 +1,15 @@
+name: Scrape Yahoo earnings cron
+run-name: 🚀 Asking service to scrape new data (${{ github.actor }})
+on:
+  schedule:
+    - cron:  '*/5 * * * *'
+jobs:
+  Request-FF-Stock-History-update-earnings:
+    runs-on: ubuntu-latest
+    steps:
+      # TODO: https://stackoverflow.com/a/72081524/1171790
+      - name: Ping request catcher
+        id: ping-scrape-stocks
+        run: |
+          curl --location --request PUT https://jonathanbell.requestcatcher.com/ --header 'Authorization: ${{ secrets.AUTHORIZATION_BEARER }}'
+      - run: echo "🍏 Job completed with status ${{ job.status }}."
