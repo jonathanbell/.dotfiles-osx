@@ -68,9 +68,11 @@ backupeverything() {
     --exclude=/.fseventsd \
     --exclude=/.dropbox \
     --exclude=/.dropbox.cache \
+    --exclude=/Public/Pickup \
     --exclude=**/node_modules \
     --exclude=/.Spotlight-V100 \
     --exclude=/.TemporaryItems \
+    --exclude=/Code/.ssh \
     --exclude=/.Trashes \
     --exclude=._* \
     --exclude=.*.parts \
@@ -111,6 +113,7 @@ backupbuckups() {
     --exclude=.BridgeSort \
     --exclude=.BridgeLabelsAndRatings \
     --exclude=/Instagram \
+    --exclude=**/calendar_ideas \
   $LOCALPHOTOS/ $BUCKUPSDRIVE/Photos/
 
   echo
