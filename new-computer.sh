@@ -147,6 +147,8 @@ BREWCASKS=(
   zoom
   docker
   meld
+  font-hack-nerd-font
+  font-fantasque-sans-mono-nerd-font
   ngrok
   visual-studio-code
   spotify
