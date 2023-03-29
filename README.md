@@ -52,6 +52,7 @@ And now, finally:
     - Photoshop (+ Bridge)
     - Lightroom
 1. Install [Topaz DeNoise](https://topazlabs.com/downloads/) manually
+1. Change your Terminal font to Fantasque Sans Mono Nerd Font
 1. Install [SuuntoLink](https://www.suunto.com/en-ca/Support/software-support/suuntolink/)
    manually
 
