@@ -133,6 +133,8 @@ npm install -g cloudinary-cli
 # https://www.npmjs.com/package/npm-check-updates
 npm install -g npm-check-updates
 
+brew tap homebrew/cask-fonts
+
 BREWCASKS=(
   google-chrome
   veracrypt
