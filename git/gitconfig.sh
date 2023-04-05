@@ -46,21 +46,20 @@ git config --global core.editor 'code --wait'
 # Global gitignore
 touch ~/.gitignore
 git config --global core.excludesFile '~/.gitignore'
-echo ".vscode" >> ~/.gitignore
+#echo ".vscode" >> ~/.gitignore
 
-# Config Meld to be the mergetool
+# Config VS Code to be the mergetool
 # https://stackoverflow.com/a/34119867
-git config --global merge.tool meld
-# TODO: You may have to change this to: `'meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"'` (investigate this)
-git config --global mergetool.meld.cmd 'meld $LOCAL $MERGED $REMOTE --output $MERGED'
+git config --global merge.tool code
+git config --global mergetool.code.cmd 'code --wait --merge $REMOTE $LOCAL $BASE $MERGED'
 # https://stackoverflow.com/a/27417871
-git config --global merge.conflictStyle diff3
+#git config --global merge.conflictStyle diff3
 
 # To use VSCode as mergetool, see:
 # https://www.roboleary.net/vscode/2020/09/15/vscode-git.html
 
 # Config VS Code to be the difftool
 # https://stackoverflow.com/questions/44549733/how-to-use-visual-studio-code-as-default-editor-for-git-mergetool
-git config --global diff.tool vscode
-git config --global difftool.vscode.cmd 'code -n --wait --diff $LOCAL $REMOTE'
+git config --global diff.tool code
+git config --global difftool.code.cmd 'code -n --wait --diff $LOCAL $REMOTE'
 git config --global difftool.prompt false
