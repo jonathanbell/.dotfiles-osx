@@ -46,6 +46,7 @@ defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 killall Finder
 
 # Display app switcher to display on both external and internal monitors
+# https://gist.github.com/jthodge/c4ba15a78fb29671dfa072fe279355f0?permalink_comment_id=4378478#gistcomment-4378478
 defaults write com.apple.Dock appswitcher-all-displays -bool true
 killall Dock
 
