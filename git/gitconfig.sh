@@ -8,7 +8,7 @@ git config --global user.email "jonathanbell.ca@gmail.com"
 git config --global init.defaultBranch main
 
 # http://stackoverflow.com/q/3206843/1171790
-git config --global core.autocrlf input
+git config --global core.autocrlf false
 # Fix whitespace isssues. http://stackoverflow.com/a/2948167/1171790
 git config --global core.whitespace fix
 # But don't warn about whitespace, thanks.
