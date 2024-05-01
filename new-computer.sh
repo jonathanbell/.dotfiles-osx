@@ -152,6 +152,7 @@ BREWCASKS=(
   meld
   font-hack-nerd-font
   font-fantasque-sans-mono-nerd-font
+  corretto
   ngrok
   visual-studio-code
   spotify
