@@ -159,7 +159,7 @@ BREWCASKS=(
   workflowy
   sequel-pro
   figma
-  insomnia
+  postman
   font-jetbrains-mono
 )
 
