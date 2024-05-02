@@ -119,7 +119,6 @@ BREWPACKAGES=(
   gawk
   grep
   tree
-  jenv
 )
 
 # Install standard `brew` packages
