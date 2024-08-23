@@ -3,6 +3,9 @@ parse-git-branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/  [\1] /'
 }
 
+# Add variables, first!
+source $HOME/.dotfiles/bash/variables.sh
+
 # Add `~/bin` to your `$PATH`
 export PATH="$HOME/bin:$PATH"
 
@@ -15,11 +18,6 @@ fi
 # https://code.visualstudio.com/docs/setup/mac
 if [ -d '/Applications/Visual Studio Code.app' ]; then
   export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH"
-fi
-
-# Add Composer to path
-if [ -d "$HOME/.composer/vendor" ]; then
-  export PATH="$HOME/.composer/vendor/bin:$PATH"
 fi
 
 # Hide the annoying Bash/Zsh deprecation warning
@@ -84,38 +82,14 @@ done;
 # Make VS Code the default editor
 export EDITOR='code'
 
-# Use PHP XDebug
-export XDEBUG_CONFIG='idekey=VSCODE'
-
-# PHP
-export PATH="/usr/local/opt/php/bin:$PATH"
-export PATH="/usr/local/opt/php/sbin:$PATH"
-export LDFLAGS="-L/usr/local/opt/php/lib"
-export CPPFLAGS="-I/usr/local/opt/php/include"
-
 # Don't prompt for merge_msg in Git.
 export GIT_MERGE_AUTOEDIT=no
-
-# Add variables, first!
-source $HOME/.dotfiles/bash/variables.sh
 
 # Add aliases
 source $HOME/.dotfiles/bash/aliases.sh
 
 # Add functions
 source $HOME/.dotfiles/bash/functions.sh
-
-# Add company aliases and functions (if the files exist)
-if [ -f "$HOME/.dotfiles-$company/bash/functions.sh" ]; then
-  source $HOME/.dotfiles-$company/bash/functions.sh
-fi
-if [ -f "$HOME/.dotfiles-$company/bash/aliases.sh" ]; then
-  source $HOME/.dotfiles-$company/bash/aliases.sh
-fi
-# And even a company's own `.bash_profile`
-if [ -f "$HOME/.dotfiles-$company/bash/.bash_profile" ]; then
-  source $HOME/.dotfiles-$company/bash/.bash_profile
-fi
 
 # Colorize git branch and current directory in the command prompt
 export PS1="\[$(tput bold)\]\[\033[31m\]→ \[\033[0m\]\[\033[105m\]\$(parse-git-branch)\[\033[0m\]\[$(tput bold)\]\[\033[36m\] \W\[\033[0m\] \[\033[2m\]$\[\033[0m\] "
@@ -138,8 +112,3 @@ eval "$(jenv init -)"
 # Added by `volta`
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
-
-
-# https://github.com/vercel/vercel/discussions/5019
-export NPM_CONFIG_PREFIX=~/.npm-global
-export PATH=$PATH:~/.npm-global/bin

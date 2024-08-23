@@ -4,9 +4,6 @@ alias python='/opt/homebrew/bin/python3 $@'
 # Edit the hosts file
 alias hosts='sudo nano /etc/hosts'
 
-# PHP
-alias serve='open http://127.0.0.1:8080 && php -S 127.0.0.1:8080'
-
 # Change directories to handy OS X places
 alias desk='cd ~/Desktop'
 # Dropbox directory
@@ -38,9 +35,7 @@ alias gitlog='git log --graph --oneline --all --decorate'
 alias globalnpmpackages='npm list -g --depth 0'
 
 # Remove all Docker containers and images
-alias dockerdangerously='docker stop $(docker ps -aq) && docker rm $(docker ps -aq) && docker rmi -f $(docker images -q)'
+alias dockerdangerouslyreset='docker stop $(docker ps -aq) && docker rm $(docker ps -aq) && docker rmi -f $(docker images -q)'
 
-# Change directory in preparation for making some hashtag goodness
-alias insta='cd $HOME/bin/hashtags'
-
+# Show a random quote
 alias quote='echo $(gshuf -n 1 "$HOME/.dotfiles/bash/quotes.txt")'

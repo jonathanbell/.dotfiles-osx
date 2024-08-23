@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
 
-echo "Do you have any additional dotfiles that you'd like to add to this computer's configuration? Enter your company's name in all lowercase and hyphenated."
-echo -n "Example: (my-company). Leave blank to skip. [ENTER]: "
-read companyname
-
-echo
-
 echo "Enter the full path to your SSH config file."
 echo -n "Example: (/Users/<your username>/path/to/.ssh/config). [ENTER]: "
 read sshconfig
@@ -22,10 +16,6 @@ rm -f ./bash/variables.sh
 touch ./bash/variables.sh
 echo "#!/usr/bin/env bash" >> ./bash/variables.sh
 echo " " >> ./bash/variables.sh
-
-if [ ! -z "$companyname" ]; then
-  echo "export company=$companyname" >> ./bash/variables.sh
-fi
 
 echo "export sshconfigpath=$sshconfig" >> ./bash/variables.sh
 
@@ -100,14 +90,11 @@ BREWPACKAGES=(
   # their utilities with a `g` prefix. So `shuf` becomes `gshuf`, for example.
   coreutils
   composer
-  php
   python
-  phpunit
-  awscli
   imagemagick
   vlc
+  maccy
   gifsicle
-  youtube-dl
   wget
   ffmpeg
   libvo-aacenc
@@ -127,9 +114,6 @@ do
   brew install "$i"
 done
 
-# Cloudinary CLI
-npm install -g cloudinary-cli
-
 # NCU (NPM Check Updates )
 # https://www.npmjs.com/package/npm-check-updates
 npm install -g npm-check-updates
@@ -140,16 +124,15 @@ BREWCASKS=(
   google-chrome
   veracrypt
   slack
-  db-browser-for-sqlite
+  notion-calendar
+  tableplus
   firefox
   notion
-  transmission
   discord
-  expressvpn
   stellarium
   zoom
   docker
-  meld
+  imageoptim
   font-hack-nerd-font
   font-fantasque-sans-mono-nerd-font
   corretto
@@ -157,7 +140,6 @@ BREWCASKS=(
   visual-studio-code
   spotify
   workflowy
-  sequel-pro
   figma
   postman
   font-jetbrains-mono
@@ -174,12 +156,6 @@ brew cleanup
 echo 'Setting Git configuration variables...'
 chmod +x ~/.dotfiles/git/gitconfig.sh
 ~/.dotfiles/git/gitconfig.sh
-
-# Add company configurations (if there are any)
-if [ -f "$HOME/.dotfiles-$company/new-computer-$company.sh" ]; then
-  chmod +x $HOME/.dotfiles-$company/new-computer-$company.sh
-  ~/.dotfiles-$company/new-computer-$company.sh
-fi
 
 # Set Terminal to use a later version of Bash.
 sudo echo "/usr/local/bin/bash" >> /etc/shells

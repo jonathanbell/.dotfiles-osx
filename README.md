@@ -11,9 +11,9 @@ Inspired by: <https://dotfiles.github.io/> and
 
 ## Setup a new Mac
 
-1. Install and config the Mac OS
+1. Install the base Mac OS
 1. Sign in to your Apple ID
-1. Open Launchpad and delete things like iMovie and Garbage Band by holding down on the icons until they wiggle
+1. Open Launchpad and delete things like Garbage Band by holding down on the icons until they wiggle
 1. [Install Dropbox](https://www.dropbox.com/install) manually
 1. Use Bash as the default for Terminal: `chsh -s /bin/bash` (close and re-open Terminal)
 1. Install command line tools: `xcode-select --install`
@@ -21,8 +21,6 @@ Inspired by: <https://dotfiles.github.io/> and
    https://github.com/jonathanbell/.dotfiles-osx.git .dotfiles` Notice that we
    ensure we clone this repo down as `.dotfiles`. This will ensure paths are
    correct in the installation scripts.
-1. Clone any "company" dotfiles from GitHub to your home directory (example):
-   `cd ~ && git clone https://github.com/jonathanbell/.dotfiles-<companyname>.git`
 1. [Install the Dracula theme for Terminal](https://draculatheme.com/terminal/)
    (use the `bash/Dracula.terminal` file. Press `command + shift + .` in order
    to see hidden files)
@@ -41,7 +39,7 @@ This will:
 
 1. Symlink the `.bash_profile` file to your home directory.
 2. Install a **shwack** of software on your machine.
-3. Configure your machine for web development use + photography use.
+3. Configure your machine for development + photography use.
 
 Close and re-open Bash after this script has run.
 
@@ -53,17 +51,9 @@ And now, finally:
     - Lightroom
 1. Install [Topaz DeNoise](https://topazlabs.com/downloads/) manually
 1. Change your Terminal font to Fantasque Sans Mono Nerd Font
-1. Install [SuuntoLink](https://www.suunto.com/en-ca/Support/software-support/suuntolink/)
-   manually
 
 ---
 
 ### Optional: Extra stuff to do
 
-1. Setup VS Code by syncing your settings from the cloud via GitHub
-1. Copy your Cloudinary config file from your secret hiding place to
-    `~/.cloudinary`
-    - You'll then be able to [upload images to
-      Cloudinary](https://www.npmjs.com/package/cloudinary-cli#upload) with
-      `cloudinary upload foo.png`
-1. Setup personal and professional AWS keys
+1. Setup VS Code and sync your settings (by signing in via GitHub)

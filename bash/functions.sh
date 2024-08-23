@@ -148,18 +148,6 @@ wifi-password() {
   fi
 }
 
-# Downloads mp3 audio file from YouTube video.
-yt-getaudio() {
-  if [ $# -eq 0 ]; then
-    echo 'Oops. Pass me a url.'
-    echo 'Usage: yt-getaudio <youtube-link>'
-  else
-    echo 'Starting YouTube download. Hit Enter if prompted after metadata is added.'
-    # --audio-quality [0-9]; 0 is best, 9 is worst.
-    youtube-dl --extract-audio --audio-format mp3 --audio-quality 1 --embed-thumbnail --add-metadata $1
-  fi
-}
-
 # Just a quick function to reduce an image's size in order to upload it faster or whatever.
 shrink-image() {
   if [ $# -eq 0 ]; then
@@ -279,18 +267,6 @@ gifify() {
   else
     echo 'Ops. Please enter a filename.'
     echo 'Usage: gifify <input_movie.mov> [ --better | --best | --tumblr ]'
-  fi
-}
-
-# Add a hashtag based on category.
-addhashtag() {
-  if [ $# -ne 2 ]; then
-    echo 'Oops. Please provide a category and value.'
-    echo 'Usage: addhashtag <category> <hashtag>'
-  else
-    touch $HOME/bin/hashtags/data/hashtags/$1.txt
-    echo "$2" >> "$HOME/bin/hashtags/data/hashtags/$1.txt"
-    echo 'Added.'
   fi
 }
 
