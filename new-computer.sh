@@ -1,25 +1,5 @@
 #!/usr/bin/env bash
 
-echo "Enter the full path to your SSH config file."
-echo -n "Example: (/Users/<your username>/path/to/.ssh/config). [ENTER]: "
-read sshconfig
-
-echo
-
-if [ ! -f $sshconfig ] || [ -z "$sshconfig" ]; then
-  echo "Cannot find the path to the ssh config path. Exiting..."
-  exit 1;
-fi
-
-# Start setting up a new variables file
-rm -f ./bash/variables.sh
-touch ./bash/variables.sh
-echo "#!/usr/bin/env bash" >> ./bash/variables.sh
-echo " " >> ./bash/variables.sh
-
-echo "export sshconfigpath=$sshconfig" >> ./bash/variables.sh
-
-source ~/.dotfiles/bash/variables.sh
 source ~/.dotfiles/bash/functions.sh
 source ~/.dotfiles/bash/aliases.sh
 
@@ -55,11 +35,6 @@ chmod +x $HOME/.dotfiles/bash/.bash_profile
 link $HOME/.dotfiles/bash/.bash_profile $HOME/.bash_profile
 chmod +x $HOME/.bash_profile
 
-# Link SSH config file
-mkdir -p ~/.ssh
-link $sshconfigpath ~/.ssh/config
-sudo chmod 700 ~/.ssh && sudo chmod -R 600 $(dirname $sshconfigpath)/*
-
 # Install Homebrew
 which -s brew
 if [[ $? != 0 ]]; then
@@ -79,8 +54,11 @@ if [[ $? != 0 ]]; then
   exit 1;
 fi
 
-# Reload Bash profile for XCode (installed manually)
+# Reload Bash profile in order to keep XCode happy
 source ~/.bash_profile
+
+# Use Rosetta
+softwareupdate --install-rosetta --agree-to-license
 
 # Standard `brew` packages
 BREWPACKAGES=(
@@ -89,10 +67,10 @@ BREWPACKAGES=(
   # These utilities won't override the BSD userland by default, they link all
   # their utilities with a `g` prefix. So `shuf` becomes `gshuf`, for example.
   coreutils
-  composer
-  python
   imagemagick
   vlc
+  go
+  jenv
   maccy
   gifsicle
   wget
@@ -118,25 +96,26 @@ done
 # https://www.npmjs.com/package/npm-check-updates
 npm install -g npm-check-updates
 
-brew tap homebrew/cask-fonts
-
 BREWCASKS=(
   google-chrome
   veracrypt
   slack
+  warp
   notion-calendar
+  overkill
   tableplus
   firefox
   notion
   discord
+  rectangle
   stellarium
   zoom
   docker
+  whatsapp
   imageoptim
   font-hack-nerd-font
   font-fantasque-sans-mono-nerd-font
   corretto
-  ngrok
   visual-studio-code
   spotify
   workflowy
@@ -156,6 +135,11 @@ brew cleanup
 echo 'Setting Git configuration variables...'
 chmod +x ~/.dotfiles/git/gitconfig.sh
 ~/.dotfiles/git/gitconfig.sh
+
+# Make the `.dotfiles` dir a Git repo
+mkdir -p ~/tmp && cd ~/tmp && mkdir -p ~/.dotfiles/.git && git clone git@github.com:jonathanbell/.dotfiles-osx.git && cd .dotfiles-osx/.git && mv $(ls -A) ~/.dotfiles/.git/ && cd ~ && rm -rf ~/tmp
+
+echo "Enter your password when prompted."
 
 # Set Terminal to use a later version of Bash.
 sudo echo "/usr/local/bin/bash" >> /etc/shells

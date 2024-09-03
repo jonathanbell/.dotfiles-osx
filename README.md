@@ -13,27 +13,13 @@ Inspired by: <https://dotfiles.github.io/> and
 
 1. Install the base Mac OS
 1. Sign in to your Apple ID
-1. Open Launchpad and delete things like Garbage Band by holding down on the icons until they wiggle
-1. [Install Dropbox](https://www.dropbox.com/install) manually
-1. Use Bash as the default for Terminal: `chsh -s /bin/bash` (close and re-open Terminal)
-1. Install command line tools: `xcode-select --install`
-1. Clone this repo: `cd ~ && git clone
-   https://github.com/jonathanbell/.dotfiles-osx.git .dotfiles` Notice that we
-   ensure we clone this repo down as `.dotfiles`. This will ensure paths are
-   correct in the installation scripts.
-1. [Install the Dracula theme for Terminal](https://draculatheme.com/terminal/)
-   (use the `bash/Dracula.terminal` file. Press `command + shift + .` in order
-   to see hidden files)
-     1. Now, configure your default Terminal profile
+1. Setup trackpad and gestures
+1. Use Bash as the default for Terminal: `chsh -s /bin/bash` **(close and re-open Terminal)**
+1. Go get your SSH keys from your secret hide-y place
+1. Place your SSH keys and config into `~/.ssh`, then run: `sudo chmod 700 ~/.ssh && sudo chmod -R 600 ~/.ssh/*`
+1. Download this repo/code and setup the `.dotfiles` directory: `rm -rf ~/.dotfiles && cd ~ && mkdir -p .dotfiles && curl -o dotfiles.zip https://github.com/jonathanbell/.dotfiles-osx/archive/refs/heads/main.zip -J -L && unzip dotfiles.zip && cd .dotfiles-osx-main && mv $(ls -A) ../.dotfiles/ && cd .. && rm -rf .dotfiles-osx-main && rm -rf dotfiles.zip`
 
-Now, run the `new-computer.sh` script. Have the full path to your SSH config
-file handy (from DB).
-
-```bash
-cd ~/.dotfiles
-chmod +x new-computer.sh
-./new-computer.sh
-```
+🎉 Now, run the `new-computer.sh` script: `cd ~/.dotfiles && chmod +x new-computer.sh && ./new-computer.sh`
 
 This will:
 
@@ -43,17 +29,14 @@ This will:
 
 Close and re-open Bash after this script has run.
 
-And now, finally:
+### And now, finally...
 
 1. Sign in to Chrome
 1. Install [these](https://creativecloud.adobe.com/apps/all/desktop/pdp/photoshop) Adobe Creative Cloud apps manually:
     - Photoshop (+ Bridge)
     - Lightroom
 1. Install [Topaz DeNoise](https://topazlabs.com/downloads/) manually
-1. Change your Terminal font to Fantasque Sans Mono Nerd Font
-
----
-
-### Optional: Extra stuff to do
-
 1. Setup VS Code and sync your settings (by signing in via GitHub)
+1. Install [MacGPT](https://www.macgpt.com/) manually
+1. Install [Vivid](https://www.getvivid.app/) manually
+1. [Install Dropbox](https://www.dropbox.com/install) manually 
