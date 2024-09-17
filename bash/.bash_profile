@@ -3,9 +3,6 @@ parse-git-branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/  [\1] /'
 }
 
-# Add variables, first!
-source $HOME/.dotfiles/bash/variables.sh
-
 # Add `~/bin` to your `$PATH`
 export PATH="$HOME/bin:$PATH"
 
