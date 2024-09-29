@@ -103,6 +103,7 @@ BREWCASKS=(
   warp
   notion-calendar
   overkill
+  pearcleaner
   tableplus
   firefox
   notion
