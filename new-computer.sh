@@ -100,7 +100,7 @@ BREWCASKS=(
   google-chrome
   veracrypt
   slack
-  warp
+  dbngin
   notion-calendar
   overkill
   pearcleaner
