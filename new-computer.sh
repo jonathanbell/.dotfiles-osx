@@ -70,8 +70,7 @@ BREWPACKAGES=(
   imagemagick
   vlc
   go
-  jenv
-  maccy
+  tmux
   gifsicle
   wget
   ffmpeg
@@ -100,6 +99,7 @@ BREWCASKS=(
   google-chrome
   veracrypt
   slack
+  maccy
   dbngin
   notion-calendar
   overkill
