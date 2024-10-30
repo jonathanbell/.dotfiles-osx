@@ -33,7 +33,7 @@ git config --global color.pager true
 git config --global push.default current
 
 # Default behaviour for a pull.
-# Don't rebase but merge when doing a pull.
+# Rebase when pulling.
 git config --global pull.rebase true
 
 # Accept the auto-generated merge message.
