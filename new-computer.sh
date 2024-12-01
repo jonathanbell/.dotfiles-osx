@@ -69,6 +69,7 @@ BREWPACKAGES=(
   coreutils
   imagemagick
   vlc
+  deno
   go
   tmux
   gifsicle
