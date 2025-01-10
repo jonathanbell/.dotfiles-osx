@@ -103,7 +103,6 @@ BREWCASKS=(
   maccy
   dbngin
   notion-calendar
-  overkill
   pearcleaner
   tableplus
   firefox
@@ -124,6 +123,8 @@ BREWCASKS=(
   figma
   postman
   font-jetbrains-mono
+  intellij-idea-ce
+  webstorm
 )
 
 for i in "${BREWCASKS[@]}"
