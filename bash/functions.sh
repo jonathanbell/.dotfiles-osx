@@ -188,6 +188,11 @@ webimages() {
   echo 'Done.'
 }
 
+# Download video (from YouTube) 
+download-video() {
+  yt-dlp -f "bestvideo[height<=1080][vcodec^=avc1]+bestaudio[acodec^=mp4a]/best[ext=mp4]/best" --merge-output-format mp4 --output "%(title)s(%(upload_date>%Y-%m-%d)s).%(ext)s" $1
+}
+
 # Trim video to time parameters.
 trim-video() {
   if [ $# -ne 3 ]; then
