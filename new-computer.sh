@@ -13,12 +13,16 @@ fi
 
 # Show hidden folders
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
-killall Finder
 
 # Display app switcher to display on both external and internal monitors
 # https://gist.github.com/jthodge/c4ba15a78fb29671dfa072fe279355f0?permalink_comment_id=4378478#gistcomment-4378478
 defaults write com.apple.Dock appswitcher-all-displays -bool true
-killall Dock
+
+# Disable hot corners
+defaults write com.apple.dock wvous-tl-corner -int 0
+defaults write com.apple.dock wvous-tr-corner -int 0
+defaults write com.apple.dock wvous-bl-corner -int 0
+defaults write com.apple.dock wvous-br-corner -int 0
 
 # Don't show the last login in Terminal
 # https://osxdaily.com/2010/06/22/remove-the-last-login-message-from-the-terminal/
@@ -29,6 +33,9 @@ defaults write com.apple.screencapture type jpg
 
 # Don't play sounds for UI actions
 defaults write com.apple.systemsound "com.apple.sound.uiaudio.enabled" -int 0
+
+killall Finder
+killall Dock
 
 # Symlink .bash_profile
 chmod +x $HOME/.dotfiles/bash/.bash_profile
@@ -125,7 +132,6 @@ BREWCASKS=(
   font-jetbrains-mono
   intellij-idea-ce
   webstorm
-  dotnet
 )
 
 for i in "${BREWCASKS[@]}"
