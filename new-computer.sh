@@ -125,6 +125,7 @@ BREWCASKS=(
   font-jetbrains-mono
   intellij-idea-ce
   webstorm
+  dotnet
 )
 
 for i in "${BREWCASKS[@]}"
