@@ -11,9 +11,6 @@ if ! [ -d $HOME/bin ]; then
   chmod -R +x $HOME/bin
 fi
 
-# Show hidden folders
-defaults write NSGlobalDomain AppleShowAllExtensions -bool true
-
 # Display app switcher to display on both external and internal monitors
 # https://gist.github.com/jthodge/c4ba15a78fb29671dfa072fe279355f0?permalink_comment_id=4378478#gistcomment-4378478
 defaults write com.apple.Dock appswitcher-all-displays -bool true
@@ -24,9 +21,10 @@ defaults write com.apple.dock wvous-tr-corner -int 0
 defaults write com.apple.dock wvous-bl-corner -int 0
 defaults write com.apple.dock wvous-br-corner -int 0
 
-# Don't show the last login in Terminal
-# https://osxdaily.com/2010/06/22/remove-the-last-login-message-from-the-terminal/
-touch ~/.hushlogin
+killall Dock
+
+# Show hidden folders
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
 # Save screenshots as jpeg
 defaults write com.apple.screencapture type jpg
@@ -35,7 +33,10 @@ defaults write com.apple.screencapture type jpg
 defaults write com.apple.systemsound "com.apple.sound.uiaudio.enabled" -int 0
 
 killall Finder
-killall Dock
+
+# Don't show the last login in Terminal
+# https://osxdaily.com/2010/06/22/remove-the-last-login-message-from-the-terminal/
+touch ~/.hushlogin
 
 # Symlink .bash_profile
 chmod +x $HOME/.dotfiles/bash/.bash_profile
@@ -105,7 +106,7 @@ npm install -g npm-check-updates
 
 BREWCASKS=(
   google-chrome
-  veracrypt
+  charles
   slack
   maccy
   dbngin
