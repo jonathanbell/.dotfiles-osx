@@ -27,7 +27,7 @@ link() {
 getavailabledisk() {
   i=1
   FIRSTAVAILABLEDISK="/dev/disk${i}s1"
-  while [ $i -lt 99 ] ; do
+  while [ $i -lt 99 ]; do
     if ! mount | grep -q "/dev/disk${i}s1"; then
       FIRSTAVAILABLEDISK="/dev/disk${i}s1"
       break
@@ -49,8 +49,8 @@ backupeverything() {
   PATRICEHOME="/Volumes/Patrice"
 
   if ! mount | grep -q $EVERYTHINGSHOME && ! mount | grep -q $PATRICEHOME; then
-    echo 'Everything drive or Patrice drive must be mounted before backing up. Exiting...' \
-    && return
+    echo 'Everything drive or Patrice drive must be mounted before backing up. Exiting...' &&
+      return
   fi
 
   if mount | grep -q $PATRICEHOME; then
@@ -79,7 +79,7 @@ backupeverything() {
     --exclude=./.ssh \
     --exclude=/Buckups \
     --exclude=/for\ jeep\ video \
-  "$HOME/Dropbox/" "$BACKUPDRIVE/"
+    "$HOME/Dropbox/" "$BACKUPDRIVE/"
 
   echo
   echo "Done backing up everything to Everything drive ✅"
@@ -97,8 +97,8 @@ backupbuckups() {
   LOCALPHOTOS="$HOME/Dropbox/Photos"
 
   if ! mount | grep -q $BUCKUPSDRIVE; then
-    echo 'Buckups drive not mounted. Exiting...' \
-    && return
+    echo 'Buckups drive not mounted. Exiting...' &&
+      return
   fi
 
   rsync -rv$DRYRUN --delete --delete-excluded --size-only \
@@ -114,7 +114,7 @@ backupbuckups() {
     --exclude=.BridgeLabelsAndRatings \
     --exclude=/Instagram \
     --exclude=**/calendar_ideas \
-  $LOCALPHOTOS/ $BUCKUPSDRIVE/Photos/
+    $LOCALPHOTOS/ $BUCKUPSDRIVE/Photos/
 
   echo
   echo "Done backing up photos to BUCKUPS drive ✅"
@@ -123,7 +123,7 @@ backupbuckups() {
 
 # View log for specific Git branch.
 gitbranchlog() {
-  git log --graph --abbrev-commit --decorate  --first-parent $(git branch | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1 /')
+  git log --graph --abbrev-commit --decorate --first-parent $(git branch | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1 /')
 }
 
 # What is listening on a certain port?
@@ -188,9 +188,90 @@ webimages() {
   echo 'Done.'
 }
 
-# Download video (from YouTube) 
-download-video() {
-  yt-dlp -f "bestvideo[height<=1080][vcodec^=avc1]+bestaudio[acodec^=mp4a]/best[ext=mp4]/best" --merge-output-format mp4 --output "%(title)s(%(upload_date>%Y-%m-%d)s).%(ext)s" $1
+download_video() {
+  local url="$1"
+  local output_dir="$HOME/Desktop"
+
+  # Validate input
+  if [[ -z "$url" ]]; then
+    echo "Error: YouTube URL is required"
+    echo "Usage: download_video <youtube_url>"
+    echo "Example: download_video 'https://www.youtube.com/watch?v=8MUNWKQ9_9c'"
+    return 1
+  fi
+
+  # Check if yt-dlp is installed
+  if ! command -v yt-dlp &>/dev/null; then
+    echo "Error: yt-dlp is not installed. Please install it first."
+    echo "Install with: pip install yt-dlp"
+    echo "Or visit: https://github.com/yt-dlp/yt-dlp#installation"
+    return 1
+  fi
+
+  # Create Desktop directory if it doesn't exist (unlikely, but just in case)
+  mkdir -p "$output_dir"
+
+  echo "🔍 Analyzing video: $url"
+  echo "📁 Download location: $output_dir"
+  echo "🎯 Target: Max 1080p, optimized for size and compatibility"
+  echo ""
+
+  # Show available formats (first 15 lines to avoid clutter)
+  echo "Available formats:"
+  yt-dlp -F "$url" 2>/dev/null | head -15
+  echo ""
+
+  echo "🎬 Starting download..."
+  echo ""
+
+  # Download with optimized settings
+  yt-dlp \
+    --format-sort "res:1080,+size,+br,codec:h264:aac" \
+    --format "bv*[height<=1080][ext=mp4]+ba[ext=m4a]/b[height<=1080][ext=mp4]/bv*[height<=720][ext=mp4]+ba[ext=m4a]/b[height<=720][ext=mp4]/bv*+ba/b" \
+    --merge-output-format mp4 \
+    --embed-thumbnail \
+    --embed-metadata \
+    --output "$output_dir/%(title)s [%(id)s].%(ext)s" \
+    --restrict-filenames \
+    --no-overwrites \
+    --continue \
+    --ignore-errors \
+    "$url"
+
+  local exit_code=$?
+
+  if [[ $exit_code -eq 0 ]]; then
+    echo ""
+    echo "✅ Download completed successfully!"
+    echo "📁 Video saved to: $output_dir"
+    echo ""
+
+    # Show downloaded files with sizes
+    echo "📊 Downloaded files:"
+    local video_id
+    video_id=$(yt-dlp --print id "$url" 2>/dev/null)
+    if [[ -n "$video_id" ]]; then
+      find "$output_dir" -name "*${video_id}*" -type f -newer /tmp 2>/dev/null | while read -r file; do
+        if [[ -f "$file" ]]; then
+          local size
+          size=$(du -h "$file" 2>/dev/null | cut -f1)
+          echo "   📄 $(basename "$file") - $size"
+        fi
+      done
+    else
+      # Fallback: show recent files in Desktop
+      echo "   Check your Desktop for the downloaded video files"
+    fi
+
+    echo ""
+    echo "🎉 Ready to watch! The video is optimized for maximum compatibility."
+
+  else
+    echo ""
+    echo "❌ Download failed with exit code: $exit_code"
+    echo "💡 Try checking the URL or your internet connection"
+    return $exit_code
+  fi
 }
 
 # Trim video to time parameters.
@@ -221,7 +302,7 @@ webmify() {
 
 # Convert all mkv video files in a directory into mp4's.
 mkvtomp4() {
-  COUNTER=`ls -1 *.mkv 2>/dev/null | wc -l`
+  COUNTER=$(ls -1 *.mkv 2>/dev/null | wc -l)
   if [ $COUNTER != 0 ]; then
     for filename in *.mkv; do
       ffmpeg -i "$filename" -c:v libx264 -b:v 2600k -c:a aac -b:a 128k "${filename%.mkv}.mp4"
@@ -238,7 +319,7 @@ mkvtomp4() {
 
 # Convert all mov video files in a directory into mp4's.
 movtomp4() {
-  COUNTER=`ls -1 *.mov 2>/dev/null | wc -l`
+  COUNTER=$(ls -1 *.mov 2>/dev/null | wc -l)
   if [ $COUNTER != 0 ]; then
     for filename in *.mov; do
       ffmpeg -i "$filename" -vcodec h264 -acodec aac -strict -2 "${filename%.mov}.mp4"
@@ -260,13 +341,13 @@ gifify() {
   if [[ -n "$1" ]]; then
     if [[ $2 == '--better' ]]; then
       # gifsicle --optimize=2; Can be 1, 2, or 3. 3 is most aggressive.
-      ffmpeg -i "$1" -pix_fmt rgb24 -r 24 -f gif -vf scale=500:-1 - | gifsicle --optimize=2 > "$1.gif"
+      ffmpeg -i "$1" -pix_fmt rgb24 -r 24 -f gif -vf scale=500:-1 - | gifsicle --optimize=2 >"$1.gif"
     elif [[ $2 == '--best' ]]; then
-      ffmpeg -i "$1" -pix_fmt rgb24 -f gif -vf scale=700:-1 - | gifsicle > "$1.gif"
+      ffmpeg -i "$1" -pix_fmt rgb24 -f gif -vf scale=700:-1 - | gifsicle >"$1.gif"
     elif [[ $2 == '--tumblr' ]]; then
-      ffmpeg -i "$1" -pix_fmt rgb24 -f gif -vf scale=400:-1 - | gifsicle -i --optimize=3 > "$1.gif"
+      ffmpeg -i "$1" -pix_fmt rgb24 -f gif -vf scale=400:-1 - | gifsicle -i --optimize=3 >"$1.gif"
     else
-      ffmpeg -i "$1" -pix_fmt rgb24 -r 10 -f gif -vf scale=400:-1 - | gifsicle --optimize=3 --delay=7 > "$1.gif"
+      ffmpeg -i "$1" -pix_fmt rgb24 -r 10 -f gif -vf scale=400:-1 - | gifsicle --optimize=3 --delay=7 >"$1.gif"
     fi
     open $1.gif
   else

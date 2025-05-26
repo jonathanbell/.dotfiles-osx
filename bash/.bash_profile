@@ -102,10 +102,6 @@ if [ -x "$(command -v gshuf)" ]; then
   echo $(gshuf -n 1 "$HOME/.dotfiles/bash/quotes.txt")
 fi
 
-# Added by `jenv`
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
-
 # Added by `volta`
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
