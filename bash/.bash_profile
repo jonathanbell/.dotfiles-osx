@@ -49,17 +49,20 @@ shopt -s cdspell;
 # Colorize 'grep'
 alias grep='grep --color=auto'
 
-# Perform file completion in a case insensitive fashion
-bind 'set completion-ignore-case on'
-
-# Treat hyphens and underscores as equivalent
-bind 'set completion-map-case on'
-
-# Display matches for ambiguous patterns at first tab press
-bind 'set show-all-if-ambiguous on'
-
-# Immediately add a trailing slash when autocompleting symlinks to directories
-bind 'set mark-symlinked-directories on'
+# `bind` is only available in interactive shells
+if [[ $- == *i* ]]; then
+    # Perform file completion in a case insensitive fashion
+    bind 'set completion-ignore-case on'
+    
+    # Treat hyphens and underscores as equivalent
+    bind 'set completion-map-case on'
+    
+    # Display matches for ambiguous patterns at first tab press
+    bind 'set show-all-if-ambiguous on'
+    
+    # Immediately add a trailing slash when autocompleting symlinks to directories
+    bind 'set mark-symlinked-directories on'
+fi
 
 # Automatically trim long paths in the prompt (requires Bash 4.x)
 PROMPT_DIRTRIM=2
