@@ -92,6 +92,7 @@ BREWPACKAGES=(
   gawk
   grep
   tree
+  gh
 )
 
 # Install standard `brew` packages
@@ -103,6 +104,9 @@ done
 # NCU (NPM Check Updates )
 # https://www.npmjs.com/package/npm-check-updates
 npm install -g npm-check-updates
+
+# Claude Code: https://docs.anthropic.com/en/docs/claude-code/setup
+npm install -g @anthropic-ai/claude-code
 
 BREWCASKS=(
   google-chrome
