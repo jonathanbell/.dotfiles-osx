@@ -32,7 +32,7 @@ git config --global color.pager true
 # https://git-scm.com/docs/git-config.html#git-config-branchltnamegtremote
 git config --global push.default current
 
-# Default behaviour for a pull.
+# Default behavior for a pull.
 # Rebase when pulling.
 git config --global pull.rebase true
 

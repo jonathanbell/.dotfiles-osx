@@ -58,8 +58,8 @@ fi
 which -s brew
 if [[ $? != 0 ]]; then
   # Homebrew is not installed correctly
-  echo >&2 "This script requires that Homebrew is installed. Aborting...";
-  exit 1;
+  echo >&2 "This script requires that Homebrew is installed. Aborting..."
+  exit 1
 fi
 
 # Reload Bash profile in order to keep XCode happy
@@ -80,7 +80,6 @@ BREWPACKAGES=(
   deno
   go
   tmux
-  gifsicle
   wget
   ffmpeg
   libvo-aacenc
@@ -96,8 +95,7 @@ BREWPACKAGES=(
 )
 
 # Install standard `brew` packages
-for i in "${BREWPACKAGES[@]}"
-do
+for i in "${BREWPACKAGES[@]}"; do
   brew install "$i"
 done
 
@@ -139,8 +137,7 @@ BREWCASKS=(
   webstorm
 )
 
-for i in "${BREWCASKS[@]}"
-do
+for i in "${BREWCASKS[@]}"; do
   brew install --cask "$i"
 done
 
@@ -157,7 +154,7 @@ mkdir -p ~/tmp && cd ~/tmp && mkdir -p ~/.dotfiles/.git && git clone git@github.
 echo "Enter your password when prompted."
 
 # Set Terminal to use a later version of Bash.
-sudo echo "/usr/local/bin/bash" >> /etc/shells
+sudo echo "/usr/local/bin/bash" >>/etc/shells
 echo 'Changing your shell to Bash 5...'
 echo /opt/homebrew/bin/bash | sudo tee -a /etc/shells
 chsh -s /opt/homebrew/bin/bash

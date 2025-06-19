@@ -16,7 +16,7 @@ alias backupbackups="rsync -rv --delete --exclude=.Spotlight* --exclude=.DS_Stor
 
 # Quickly clear the Terminal window
 alias c='clear'
-# For when you make that typ-o...
+# For when you make "that" typ-o...
 alias cd..='cd ..'
 alias ..='cd ..'
 
