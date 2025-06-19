@@ -134,7 +134,7 @@ BREWCASKS=(
   postman
   font-jetbrains-mono
   intellij-idea-ce
-  webstorm
+  claude
 )
 
 for i in "${BREWCASKS[@]}"; do

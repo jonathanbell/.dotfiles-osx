@@ -13,7 +13,7 @@ Inspired by: <https://dotfiles.github.io/> and
 
 1. Install the base Mac OS
 1. Sign in to your Apple ID
-1. Setup trackpad and gestures
+1. Setup trackpad and gestures (there isn't a public CLI API to change a lot of these settings)
 1. Use Bash as the default for Terminal: `chsh -s /bin/bash` **(close and re-open Terminal)**
 1. Go get your SSH keys from your secret hide-y place
 1. Place your SSH keys and config into `~/.ssh`, then run: `sudo chmod 700 ~/.ssh && sudo chmod -R 600 ~/.ssh/*`
@@ -29,7 +29,7 @@ This will:
 
 Close and re-open Bash after this script has run.
 
-### And now, finally...
+### And now, finally
 
 1. Sign in to Chrome
 1. Install [these](https://creativecloud.adobe.com/apps/all/desktop/pdp/photoshop) Adobe Creative Cloud apps manually:
@@ -37,6 +37,5 @@ Close and re-open Bash after this script has run.
     - Lightroom
 1. Install [Topaz DeNoise](https://topazlabs.com/downloads/) manually
 1. Setup VS Code and sync your settings (by signing in via GitHub)
-1. Install [MacGPT](https://www.macgpt.com/) manually
 1. Install [Vivid](https://www.getvivid.app/) manually
-1. [Install Dropbox](https://www.dropbox.com/install) manually 
+1. [Install Dropbox](https://www.dropbox.com/install) manually
