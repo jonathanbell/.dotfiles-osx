@@ -121,11 +121,6 @@ backupbuckups() {
   echo
 }
 
-# View log for specific Git branch.
-gitbranchlog() {
-  git log --graph --abbrev-commit --decorate --first-parent $(git branch | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1 /')
-}
-
 # What is listening on a certain port?
 # https://stackoverflow.com/a/30029855/1171790
 listening() {
@@ -138,7 +133,7 @@ listening() {
   fi
 }
 
-# Get a known wifi password.
+# Get a known wifi password
 wifi-password() {
   if [ $# -eq 0 ]; then
     echo 'Oops. Please tell me a wifi network name.'
@@ -148,7 +143,7 @@ wifi-password() {
   fi
 }
 
-# Just a quick function to reduce an image's size in order to upload it faster or whatever.
+# Just a quick function to reduce an image's size in order to upload it faster or whatever
 shrink-image() {
   if [ $# -eq 0 ]; then
     echo 'Oops. Please give me a filename.'
@@ -158,7 +153,7 @@ shrink-image() {
   fi
 }
 
-# Quickly resize an image to a given width.
+# Quickly resize an image to a given width
 resize-image-width() {
   if [ $# -ne 2 ]; then
     echo 'Oops. Please give me a filename and desired width.'
@@ -168,7 +163,7 @@ resize-image-width() {
   fi
 }
 
-# Prep high-res images for upload to blog-like things.
+# Prep high-res images for upload to blog-like things
 blogimages() {
   echo 'Converting images to lo-res...'
   for i in *.jpg; do
@@ -188,17 +183,10 @@ webimages() {
   echo 'Done.'
 }
 
-download_video() {
+# Download a YouTube video to the Desktop using `yt-dlp`
+download-video() {
   local url="$1"
   local output_dir="$HOME/Desktop"
-
-  # Validate input
-  if [[ -z "$url" ]]; then
-    echo "Error: YouTube URL is required"
-    echo "Usage: download_video <youtube_url>"
-    echo "Example: download_video 'https://www.youtube.com/watch?v=8MUNWKQ9_9c'"
-    return 1
-  fi
 
   # Check if yt-dlp is installed
   if ! command -v yt-dlp &>/dev/null; then
@@ -208,7 +196,14 @@ download_video() {
     return 1
   fi
 
-  # Create Desktop directory if it doesn't exist (unlikely, but just in case)
+  # Validate input
+  if [[ -z "$url" ]]; then
+    echo "Error: YouTube URL is required"
+    echo "Usage: download_video <youtube_url>"
+    echo "Example: download_video 'https://www.youtube.com/watch?v=8MUNWKQ9_9c'"
+    return 1
+  fi
+
   mkdir -p "$output_dir"
 
   echo "🔍 Analyzing video: $url"
@@ -264,7 +259,7 @@ download_video() {
     fi
 
     echo ""
-    echo "🎉 Ready to watch! The video is optimized for maximum compatibility."
+    echo "🎉 Ready! The video is optimized for maximum compatibility."
 
   else
     echo ""
@@ -274,7 +269,7 @@ download_video() {
   fi
 }
 
-# Trim video to time parameters.
+# Trim video to time parameters
 trim-video() {
   if [ $# -ne 3 ]; then
     echo 'Ops. Please pass in the new video start time and the total duration in seconds.'
@@ -288,19 +283,7 @@ trim-video() {
   fi
 }
 
-# Turn that video into webm format and make a poster image for it!
-webmify() {
-  if [ $# -eq 0 ]; then
-    echo 'Oops. Please tell me the filename.'
-    echo 'Usage: webmify <filename>'
-  else
-    ffmpeg -i "$1" -vcodec libvpx -acodec libvorbis -isync -copyts -aq 80 -threads 3 -qmax 30 -y "$1.webm"
-    ffmpeg -ss 00:00:15 -i "$1.webm" -vframes 1 -q:v 2 "$1.jpg"
-    open $1.webm
-  fi
-}
-
-# Convert all mkv video files in a directory into mp4's.
+# Convert all mkv video files in a directory into mp4
 mkvtomp4() {
   COUNTER=$(ls -1 *.mkv 2>/dev/null | wc -l)
   if [ $COUNTER != 0 ]; then
@@ -331,63 +314,4 @@ movtomp4() {
     echo 'No mkv files were found in this directory.'
     echo 'mkvtomp4 Usage: "cd" to the directory where the mkv video files are located and run "mkvtomp4" (then go grab a coffee).'
   fi
-}
-
-# Make an animated gif from any video file.
-# http://gist.github.com/SlexAxton/4989674
-# https://eternallybored.org/misc/gifsicle/
-# Requires gifsicle.
-gifify() {
-  if [[ -n "$1" ]]; then
-    if [[ $2 == '--better' ]]; then
-      # gifsicle --optimize=2; Can be 1, 2, or 3. 3 is most aggressive.
-      ffmpeg -i "$1" -pix_fmt rgb24 -r 24 -f gif -vf scale=500:-1 - | gifsicle --optimize=2 >"$1.gif"
-    elif [[ $2 == '--best' ]]; then
-      ffmpeg -i "$1" -pix_fmt rgb24 -f gif -vf scale=700:-1 - | gifsicle >"$1.gif"
-    elif [[ $2 == '--tumblr' ]]; then
-      ffmpeg -i "$1" -pix_fmt rgb24 -f gif -vf scale=400:-1 - | gifsicle -i --optimize=3 >"$1.gif"
-    else
-      ffmpeg -i "$1" -pix_fmt rgb24 -r 10 -f gif -vf scale=400:-1 - | gifsicle --optimize=3 --delay=7 >"$1.gif"
-    fi
-    open $1.gif
-  else
-    echo 'Ops. Please enter a filename.'
-    echo 'Usage: gifify <input_movie.mov> [ --better | --best | --tumblr ]'
-  fi
-}
-
-# Start a LAMP stack with Docker.
-# A helper function to launch docker container using mattrayner/lamp with overrideable parameters
-# https://hub.docker.com/r/mattrayner/lamp#introduction
-#
-# $1 - Apache Port (optional)
-# $2 - MySQL Port (optional - no value will cause MySQL not to be mapped)
-function launchlamp {
-  APACHE_PORT=80
-  MYSQL_PORT_COMMAND=""
-
-  if ! [[ -z "$1" ]]; then
-    APACHE_PORT=$1
-  fi
-
-  if ! [[ -z "$2" ]]; then
-    MYSQL_PORT_COMMAND="-p \"$2:3306\""
-  fi
-
-  mkdir -p ./lamp
-  cd ./lamp
-
-  docker run -i -t -p "$APACHE_PORT:80" $MYSQL_PORT_COMMAND -v ${PWD}/app:/app -v ${PWD}/mysql:/var/lib/mysql mattrayner/lamp:latest-1804
-
-  SET_MYSQL_PORT="3306"
-
-  if ! [[ -z "$2" ]]; then
-    SET_MYSQL_PORT="$2"
-  fi
-
-  cd -
-
-  echo "LAMP stack running at http://localhost:$1"
-  echo "Access guest MySQL on port $SET_MYSQL_PORT (user: 'root' | password: '')"
-  echo "Place your PHP code inside 'lamp/app'"
 }
