@@ -121,7 +121,6 @@ BREWCASKS=(
   rectangle
   stellarium
   zoom
-  docker
   whatsapp
   imageoptim
   font-hack-nerd-font
