@@ -77,9 +77,7 @@ BREWPACKAGES=(
   coreutils
   imagemagick
   vlc
-  deno
   go
-  tmux
   wget
   ffmpeg
   libvo-aacenc
@@ -112,7 +110,6 @@ BREWCASKS=(
   slack
   maccy
   dbngin
-  notion-calendar
   pearcleaner
   tableplus
   firefox
@@ -128,11 +125,9 @@ BREWCASKS=(
   corretto
   visual-studio-code
   spotify
-  workflowy
   figma
   postman
   font-jetbrains-mono
-  intellij-idea-ce
   claude
 )
 
