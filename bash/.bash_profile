@@ -6,10 +6,6 @@ parse-git-branch() {
 # Add `~/bin` to your `$PATH`
 export PATH="$HOME/bin:$PATH"
 
-# Added by `volta`
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
-
 # Add Homebrew to path
 if [ -d "/opt/homebrew/bin" ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
