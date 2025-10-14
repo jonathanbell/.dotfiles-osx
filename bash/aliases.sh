@@ -7,7 +7,7 @@ alias hosts='sudo nano /etc/hosts'
 # Change directories to handy OS X places
 alias desk='cd ~/Desktop'
 # Dropbox directory
-alias d='cd ~/Dropbox'
+alias d="cd \"$ICLOUD_HOME\""
 # Change directory to your dotfiles directory
 alias dot='cd ~/.dotfiles'
 
@@ -30,9 +30,6 @@ alias correctsshpermissions="sudo chmod 700 $HOME/.ssh && sudo chmod -R 600 $HOM
 alias gitdangerouslyreset='git checkout . && git branch | grep -v "master\|develop\|$(git rev-parse --abbrev-ref HEAD)" | xargs git branch -D && git branch && echo && echo "So tidy!" && echo'
 # Pretty print Git's history
 alias gitlog='git log --graph --oneline --all --decorate'
-
-# List all globally installed NPM packages
-alias globalnpmpackages='npm list -g --depth 0'
 
 # Remove all Docker containers and images
 alias dockerdangerouslyreset='docker stop $(docker ps -aq) && docker rm $(docker ps -aq) && docker rmi -f $(docker images -q)'
