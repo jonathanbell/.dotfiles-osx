@@ -2,6 +2,7 @@
   "cSpell.words": [
     "aacenc",
     "acodec",
+    "appswitcher",
     "autocd",
     "backupbuckups",
     "BACKUPDRIVE",
@@ -16,6 +17,7 @@
     "coreutils",
     "dbngin",
     "difftool",
+    "downloadsite",
     "DRYRUN",
     "erasedups",
     "EVERYTHINGSHOME",
@@ -26,6 +28,7 @@
     "getavailabledisk",
     "gitbranchlog",
     "gshuf",
+    "gsub",
     "ignoreboth",
     "imageoptim",
     "interweb",
@@ -44,11 +47,14 @@
     "nocaseglob",
     "PATRICEHOME",
     "pearcleaner",
+    "shuf",
     "shwack",
     "stellarium",
     "tableplus",
     "trackpad",
+    "userland",
     "webimages",
-    "workflowy"
+    "workflowy",
+    "wvous"
   ]
 }

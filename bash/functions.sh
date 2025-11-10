@@ -8,6 +8,15 @@ lsaliases() {
 	echo
 }
 
+# Download a whole site, I think..
+downloadsite() {
+	if [ $# -eq 0 ]; then
+		echo 'Oops. Please give me a directory.'
+		return 1
+	fi
+	wget --mirror --convert-links --adjust-extension --page-requisites --no-parent $1
+}
+
 # List available functions
 lsfunctions() {
 	echo
@@ -266,37 +275,6 @@ download-video() {
 		echo "❌ Download failed with exit code: $exit_code"
 		echo "💡 Try checking the URL or your internet connection"
 		return $exit_code
-	fi
-}
-
-# Trim video to time parameters
-trim-video() {
-	if [ $# -ne 3 ]; then
-		echo 'Ops. Please pass in the new video start time and the total duration in seconds.'
-		echo 'Usage: trim-video <input_movie.mov> <time in seconds from start> <duration of new clip in seconds>'
-		echo 'Example: "trim-video myvideo.mov 3 10" Produces a 10 second video begining from 3 seconds inside of the original clip.'
-	else
-		echo 'Beginning to trim video...'
-		ffmpeg -i $1 -ss $2 -c copy -t $3 trimmed_$1
-		echo 'Complete. Video trimmed.'
-		open trimmed_$1
-	fi
-}
-
-# Convert all mkv video files in a directory into mp4
-mkvtomp4() {
-	COUNTER=$(ls -1 *.mkv 2>/dev/null | wc -l)
-	if [ $COUNTER != 0 ]; then
-		for filename in *.mkv; do
-			ffmpeg -i "$filename" -c:v libx264 -b:v 2600k -c:a aac -b:a 128k "${filename%.mkv}.mp4"
-			# ffmpeg -i "$filename" -c:v libx264 -c:a aac -b:a 128k "${filename%.mkv}.mp4"
-			echo "Converted: $filename to ${filename%.mkv}.mp4"
-			# Now delete the mkv file.
-			rm "$filename"
-		done
-	else
-		echo 'No mkv files were found in this directory.'
-		echo 'mkvtomp4 Usage: "cd" to the directory where the mkv video files are located and run "mkvtomp4" (and then go grab a coffee).'
 	fi
 }
 

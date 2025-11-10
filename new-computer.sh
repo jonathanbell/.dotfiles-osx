@@ -7,8 +7,8 @@ cd ~
 
 # Make a "personal" `bin` folder
 if ! [ -d $HOME/bin ]; then
-  mkdir $HOME/bin
-  chmod -R +x $HOME/bin
+	mkdir $HOME/bin
+	chmod -R +x $HOME/bin
 fi
 
 # Display app switcher to display on both external and internal monitors
@@ -46,20 +46,20 @@ chmod +x $HOME/.bash_profile
 # Install Homebrew
 which -s brew
 if [[ $? != 0 ]]; then
-  echo 'Installing Homebrew... (you will be prompted for your password)'
-  sudo mkdir -p /opt/homebrew/bin
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  eval "$(/opt/homebrew/bin/brew shellenv)"
+	echo 'Installing Homebrew... (you will be prompted for your password)'
+	sudo mkdir -p /opt/homebrew/bin
+	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	eval "$(/opt/homebrew/bin/brew shellenv)"
 else
-  brew update
+	brew update
 fi
 
 # Check that `brew` was installed
 which -s brew
 if [[ $? != 0 ]]; then
-  # Homebrew is not installed correctly
-  echo >&2 "This script requires that Homebrew is installed. Aborting..."
-  exit 1
+	# Homebrew is not installed correctly
+	echo >&2 "This script requires that Homebrew is installed. Aborting..."
+	exit 1
 fi
 
 # Reload Bash profile in order to keep XCode happy
@@ -70,31 +70,30 @@ softwareupdate --install-rosetta --agree-to-license
 
 # Standard `brew` packages
 BREWPACKAGES=(
-  node
-  # Things like `shuf` and other utils.
-  # These utilities won't override the BSD userland by default, they link all
-  # their utilities with a `g` prefix. So `shuf` becomes `gshuf`, for example.
-  coreutils
-  imagemagick
-  vlc
-  go
-  wget
-  ffmpeg
-  libvo-aacenc
-  # Updates the Bash version vs the antique one that comes with OS X.
-  bash
-  # Add more GNU-like command line utilities to a Mac userland.
-  gnu-sed
-  findutils
-  gawk
-  grep
-  tree
-  gh
+	node
+	# Things like `shuf` and other utils.
+	# These utilities won't override the BSD userland by default, they link all
+	# their utilities with a `g` prefix. So `shuf` becomes `gshuf`, for example.
+	coreutils
+	vlc
+	go
+	wget
+	ffmpeg
+	libvo-aacenc
+	# Updates the Bash version vs the antique one that comes with OS X.
+	bash
+	# Add more GNU-like command line utilities to a Mac userland.
+	gnu-sed
+	findutils
+	gawk
+	grep
+	tree
+	gh
 )
 
 # Install standard `brew` packages
 for i in "${BREWPACKAGES[@]}"; do
-  brew install "$i"
+	brew install "$i"
 done
 
 # NCU (NPM Check Updates )
@@ -105,34 +104,34 @@ npm install -g npm-check-updates
 npm install -g @anthropic-ai/claude-code
 
 BREWCASKS=(
-  google-chrome
-  charles
-  slack
-  maccy
-  dbngin
-  pearcleaner
-  tableplus
-  firefox
-  notion
-  discord
-  rectangle
-  stellarium
-  zoom
-  whatsapp
-  imageoptim
-  font-hack-nerd-font
-  font-fantasque-sans-mono-nerd-font
-  corretto
-  visual-studio-code
-  spotify
-  figma
-  postman
-  font-jetbrains-mono
-  claude
+	google-chrome
+	charles
+	slack
+	maccy
+	dbngin
+	pearcleaner
+	tableplus
+	firefox
+	notion
+	discord
+	rectangle
+	stellarium
+	zoom
+	whatsapp
+	imageoptim
+	font-hack-nerd-font
+	font-fantasque-sans-mono-nerd-font
+	corretto
+	visual-studio-code
+	spotify
+	figma
+	postman
+	font-jetbrains-mono
+	claude
 )
 
 for i in "${BREWCASKS[@]}"; do
-  brew install --cask "$i"
+	brew install --cask "$i"
 done
 
 brew cleanup
