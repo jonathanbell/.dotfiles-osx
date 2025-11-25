@@ -1,0 +1,12 @@
+.wd_tv
+.fseventsd
+.dropbox
+.dropbox.cache
+**/node_modules
+.TemporaryItems
+**/.ssh
+.DS_Store
+.Spotlight-V100
+.Trashes
+.VolumeIcon.icns
+.DocumentRevisions-V100

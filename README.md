@@ -17,9 +17,17 @@ Inspired by: <https://dotfiles.github.io/> and
 1. Use Bash as the default for Terminal: `chsh -s /bin/bash` **(close and re-open Terminal)**
 1. Go get your SSH keys from your secret hide-y place
 1. Place your SSH keys and config into `~/.ssh`, then run: `sudo chmod 700 ~/.ssh && sudo chmod -R 600 ~/.ssh/*`
-1. Download this repo/code and setup the `.dotfiles` directory: `rm -rf ~/.dotfiles && cd ~ && mkdir -p .dotfiles && curl -o dotfiles.zip https://github.com/jonathanbell/.dotfiles-osx/archive/refs/heads/main.zip -J -L && unzip dotfiles.zip && cd .dotfiles-osx-main && mv $(ls -A) ../.dotfiles/ && cd .. && rm -rf .dotfiles-osx-main && rm -rf dotfiles.zip`
+1. Download this repo/code and setup the `.dotfiles` directory:
 
-🎉 Now, run the `new-computer.sh` script: `cd ~/.dotfiles && chmod +x new-computer.sh && ./new-computer.sh`
+```sh
+rm -rf ~/.dotfiles && cd ~ && mkdir -p .dotfiles && curl -o dotfiles.zip https://github.com/jonathanbell/.dotfiles-osx/archive/refs/heads/main.zip -J -L && unzip dotfiles.zip && cd .dotfiles-osx-main && mv $(ls -A) ../.dotfiles/ && cd .. && rm -rf .dotfiles-osx-main && rm -rf dotfiles.zip
+```
+
+🎉 Now, run the `new-computer.sh` script:
+
+```sh
+cd ~/.dotfiles && chmod +x new-computer.sh && ./new-computer.sh
+```
 
 This will:
 
@@ -32,10 +40,8 @@ Close and re-open Bash after this script has run.
 ### And now, finally
 
 1. Sign in to Chrome
-1. Install [these](https://creativecloud.adobe.com/apps/all/desktop/pdp/photoshop) Adobe Creative Cloud apps manually:
-    - Photoshop (+ Bridge)
-    - Lightroom
+1. Make sure you are signed into iCloud
+1. Install [Affinity](https://www.affinity.studio/get-affinity) manually
 1. Install [Topaz DeNoise](https://topazlabs.com/downloads/) manually
-1. Setup VS Code and sync your settings (by signing in via GitHub)
+1. Setup VS Code and sync your settings (by signing in via GitHub or Microsoft)
 1. Install [Vivid](https://www.getvivid.app/) manually
-1. [Install Dropbox](https://www.dropbox.com/install) manually

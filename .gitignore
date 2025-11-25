@@ -2,3 +2,4 @@
 .bashrc
 /.claude
 test*.sh
+*.log

@@ -1,18 +1,14 @@
 alias python='/opt/homebrew/bin/python3 $@'
-# use pip3 for pip command
 
 # Edit the hosts file
 alias hosts='sudo nano /etc/hosts'
 
 # Change directories to handy OS X places
 alias desk='cd ~/Desktop'
-# Dropbox directory
+# iCloud directory
 alias d="cd \"$ICLOUD_HOME\""
 # Change directory to your dotfiles directory
 alias dot='cd ~/.dotfiles'
-
-# Sync and backup.
-alias backupbackups="rsync -rv --delete --exclude=.Spotlight* --exclude=.DS_Store exclude=._.DS_Store --exclude=.fseventsd* --exclude=.Trashes* --exclude=/tmp /Volumes/Everything/ /Volumes/PATRICE/"
 
 # Quickly clear the Terminal window
 alias c='clear'
@@ -20,8 +16,8 @@ alias c='clear'
 alias cd..='cd ..'
 alias ..='cd ..'
 
-# Add a WTFP Licence to a directory/project
-alias addwtfpl='wget -O LICENCE http://www.wtfpl.net/txt/copying/'
+# Add a WTFP License to a directory/project
+alias addwtfpl='wget -O LICENSE http://www.wtfpl.net/txt/copying/'
 
 # Correct SSH permissions
 alias correctsshpermissions="sudo chmod 700 $HOME/.ssh && sudo chmod -R 600 $HOME/.ssh/*"

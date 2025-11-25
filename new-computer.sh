@@ -1,17 +1,12 @@
 #!/usr/bin/env bash
 
+source ~/.dotfiles/bash/constants.sh
 source ~/.dotfiles/bash/functions.sh
 source ~/.dotfiles/bash/aliases.sh
 
 cd ~
 
-# Make a "personal" `bin` folder
-if ! [ -d $HOME/bin ]; then
-	mkdir $HOME/bin
-	chmod -R +x $HOME/bin
-fi
-
-# Display app switcher to display on both external and internal monitors
+# Display app switcher on both external and internal monitors
 # https://gist.github.com/jthodge/c4ba15a78fb29671dfa072fe279355f0?permalink_comment_id=4378478#gistcomment-4378478
 defaults write com.apple.Dock appswitcher-all-displays -bool true
 
@@ -78,11 +73,12 @@ BREWPACKAGES=(
 	vlc
 	go
 	wget
+	rsync
 	ffmpeg
 	libvo-aacenc
-	# Updates the Bash version vs the antique one that comes with OS X.
+	# Updates the Bash version vs the antique one that comes with OS X
 	bash
-	# Add more GNU-like command line utilities to a Mac userland.
+	# Add more GNU-like command line utilities to a Mac userland
 	gnu-sed
 	findutils
 	gawk
@@ -146,7 +142,7 @@ mkdir -p ~/tmp && cd ~/tmp && mkdir -p ~/.dotfiles/.git && git clone git@github.
 
 echo "Enter your password when prompted."
 
-# Set Terminal to use a later version of Bash.
+# Set Terminal to use the correct version of Bash
 sudo echo "/usr/local/bin/bash" >>/etc/shells
 echo 'Changing your shell to Bash 5...'
 echo /opt/homebrew/bin/bash | sudo tee -a /etc/shells
