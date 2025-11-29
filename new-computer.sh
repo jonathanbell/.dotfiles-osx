@@ -60,6 +60,9 @@ fi
 # Reload Bash profile in order to keep XCode happy
 source ~/.bash_profile
 
+# GOPATH
+mkdir -p $HOME/go
+
 # Use Rosetta
 softwareupdate --install-rosetta --agree-to-license
 
@@ -85,6 +88,7 @@ BREWPACKAGES=(
 	grep
 	tree
 	gh
+	exiftool
 )
 
 # Install standard `brew` packages

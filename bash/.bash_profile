@@ -6,6 +6,10 @@ parse-git-branch() {
 # Add common bin locations
 export PATH="$HOME/.local/bin:$PATH"
 
+# Golang
+export GOPATH=$HOME/go
+export PATH="$GOPATH/bin:$PATH"
+
 # Add Homebrew to path
 if [ -d "/opt/homebrew/bin" ]; then
 	eval "$(/opt/homebrew/bin/brew shellenv)"

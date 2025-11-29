@@ -81,6 +81,8 @@ backup() {
 			--exclude-from="$HOME/.dotfiles/config/.rsyncignore" \
 			"$ICLOUD_HOME/" "$EVERYTHINGDRIVE/"
 
+		echo "Rsync backed up everything and completed with exit code: $?"
+
 		# Backup things that are not in iCloud
 		mkdir -p $EVERYTHINGDRIVE/Backups
 		rsync -rv$DRYRUN --delete --delete-after --size-only \
@@ -143,6 +145,74 @@ blogimages() {
 		sips -z 900 auto "$i" --out "$i"
 	done
 	echo 'Done.'
+}
+
+# Rotates iPhone (and presumably iPad, etc) images based on their EXIF
+# `Orientation` data. Removes whacky EXIF values after rotating the image.
+#
+# Usage: bake_exif_rotation_to_jpegs /path/to/directory
+#   bake_exif_rotation_to_jpegs .
+#
+# Use recursively:
+#   find /path/to/folder -type d -print0 | while IFS= read -r -d '' dir; do bake_exif_rotation_to_jpegs "$dir"; done
+#
+# Parameters: $1 - Directory path containing image files to rotate
+bake_exif_rotation_to_jpegs() {
+	set -euo pipefail
+
+	if [[ $# -ne 1 ]]; then
+		echo "Usage: $0 <directory>"
+		exit 1
+	fi
+
+	dir="$1"
+
+	if [[ ! -d "$dir" ]]; then
+		echo "❌ Error: '$dir' is not a directory"
+		exit 1
+	fi
+
+	echo "📂 Processing JPEGs in: $dir"
+	echo
+
+	# Find all JPEGs (case-insensitive)
+	find "$dir" -maxdepth 1 -type f \( -iname "*.jpg" -o -iname "*.jpeg" \) | while read -r file; do
+		filename=$(basename "$file")
+
+		# Get orientation value (numeric)
+		# Note: You can see human readable values by removing the -n and -s3 flags: `exiftool <file>` - exiftool seems pretty neat!
+		orientation=$(exiftool -n -s3 -Orientation "$file" 2>/dev/null || echo "1")
+
+		orientation="${orientation:-1}"
+
+		case "$orientation" in
+		1)
+			echo "🙄 Skipping (orientation seems to be standard): $filename"
+			;;
+		3)
+			echo "🔄 Rotating 180°: $filename"
+			sips --rotate 180 "$file" >/dev/null
+			exiftool -overwrite_original -Orientation=1 -n "$file" >/dev/null
+			;;
+		6)
+			echo "↩️ Rotating 90° CW: $filename"
+			sips --rotate 90 "$file" >/dev/null
+			exiftool -overwrite_original -Orientation=1 -n "$file" >/dev/null
+			;;
+		8)
+			echo "↪️ Rotating 270° CW: $filename"
+			sips --rotate 270 "$file" >/dev/null
+			exiftool -overwrite_original -Orientation=1 -n "$file" >/dev/null
+			;;
+		*)
+			echo "❓ Unknown orientation ($orientation), skipping: $filename"
+			;;
+		esac
+	done
+
+	echo
+	echo "Done rotating images"
+	echo
 }
 
 # Converts various image formats (HEIC, DNG, 3G2, 3GP, PSD, TIFF, TIF, BMP, PDF, DV, MPEG) to JPEG.
