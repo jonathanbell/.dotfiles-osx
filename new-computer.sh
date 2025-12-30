@@ -20,6 +20,7 @@ killall Dock
 
 # Show hidden folders
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+chflags nohidden ~/Library
 
 # Save screenshots as jpeg
 defaults write com.apple.screencapture type jpg
