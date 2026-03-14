@@ -6,7 +6,7 @@ alias hosts='sudo nano /etc/hosts'
 # Change directories to handy OS X places
 alias desk='cd ~/Desktop'
 # iCloud directory
-alias d="cd \"$ICLOUD_HOME\""
+alias d="cd \"$JONATHAN_HOME\""
 # Change directory to your dotfiles directory
 alias dot='cd ~/.dotfiles'
 

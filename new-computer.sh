@@ -39,6 +39,12 @@ chmod +x $HOME/.dotfiles/bash/.bash_profile
 link $HOME/.dotfiles/bash/.bash_profile $HOME/.bash_profile
 chmod +x $HOME/.bash_profile
 
+# Symlink Claude config files
+mkdir -p $HOME/.claude
+link $HOME/.dotfiles/claude/commands $HOME/.claude/commands
+link $HOME/.dotfiles/claude/statusline.sh $HOME/.claude/statusline.sh
+link $HOME/.dotfiles/claude/settings.json $HOME/.claude/settings.json
+
 # Symlink Zed config files
 mkdir -p $HOME/.config/zed
 link $HOME/.dotfiles/zed/settings.json $HOME/.config/zed/settings.json
@@ -113,6 +119,7 @@ BREWCASKS=(
 	google-chrome
 	charles
 	slack
+	zed
 	maccy
 	dbngin
 	pearcleaner

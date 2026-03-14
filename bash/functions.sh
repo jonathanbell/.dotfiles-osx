@@ -69,7 +69,7 @@ backup() {
 
 		rsync -rv$DRYRUN --delete --delete-after --size-only \
 			--exclude-from="$HOME/.dotfiles/config/.rsyncignore" \
-			"$ICLOUD_HOME/Photos/" "$PHOTODRIVE/"
+			"$JONATHAN_HOME/Photos/" "$PHOTODRIVE/"
 
 		echo "📷 Completed rsync photo backup with exit code: $?"
 	fi
@@ -79,17 +79,17 @@ backup() {
 
 		rsync -rv$DRYRUN --delete --delete-after --size-only \
 			--exclude-from="$HOME/.dotfiles/config/.rsyncignore" \
-			"$ICLOUD_HOME/" "$EVERYTHINGDRIVE/"
+			"$JONATHAN_HOME/" "$EVERYTHINGDRIVE/"
 
 		echo "Rsync backed up everything and completed with exit code: $?"
 
 		# Backup things that are not in iCloud
-		mkdir -p $EVERYTHINGDRIVE/Backups
-		rsync -rv$DRYRUN --delete --delete-after --size-only \
-			--exclude-from="$HOME/.dotfiles/config/.rsyncignore" \
-			"$HOME/Backups/" "$EVERYTHINGDRIVE/Backups/"
+		# mkdir -p $EVERYTHINGDRIVE/Backups
+		# rsync -rv$DRYRUN --delete --delete-after --size-only \
+		# 	--exclude-from="$HOME/.dotfiles/config/.rsyncignore" \
+		# 	"$HOME/Backups/" "$EVERYTHINGDRIVE/Backups/"
 
-		echo "Rsync backup completed with exit code: $?"
+		# echo "Rsync backup completed with exit code: $?"
 	fi
 }
 
@@ -114,6 +114,11 @@ wifi_password() {
 	else
 		security find-generic-password -ga $1 | grep password:
 	fi
+}
+
+# Open Zed
+zed() {
+	open -a Zed "$@"
 }
 
 # Just a quick function to reduce an image's size by percentage
