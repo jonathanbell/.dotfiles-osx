@@ -87,7 +87,7 @@ export LC_ALL='en_US.UTF-8'
 # Enable some Bash 4 features when possible:
 shopt -s autocd globstar 2>/dev/null
 
-# Make VS Code the default editor
+# Make Zed the default editor
 export EDITOR='zed --wait'
 
 # Don't prompt for merge_msg in Git

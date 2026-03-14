@@ -18,13 +18,12 @@ git config --global apply.whitespace nowarn
 git config --global mergetool.keepBackup false
 
 # Allow all Git commands to use colored output.
-git config --global color.ui true
 # https://gist.github.com/trey/2722934
+git config --global color.ui true
 git config --global color.branch auto
 git config --global color.diff auto
 git config --global color.status auto
 git config --global color.interactive auto
-git config --global color.ui true
 git config --global color.pager true
 
 # Push only the current branch to remote (same as what a `git pull` would use).
