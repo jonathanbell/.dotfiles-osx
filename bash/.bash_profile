@@ -88,7 +88,7 @@ export LC_ALL='en_US.UTF-8'
 shopt -s autocd globstar 2>/dev/null
 
 # Make VS Code the default editor
-export EDITOR='code'
+export EDITOR='zed --wait'
 
 # Don't prompt for merge_msg in Git
 export GIT_MERGE_AUTOEDIT=no

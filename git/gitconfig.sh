@@ -41,7 +41,7 @@ git config --global pull.rebase true
 git config --global core.mergeoptions --no-edit
 
 # Default editor
-git config --global core.editor 'code --wait'
+git config --global core.editor '/Applications/Zed.app/Contents/MacOS/cli --wait'
 
 # Global gitignore
 touch ~/.gitignore

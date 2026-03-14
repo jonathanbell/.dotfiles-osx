@@ -118,7 +118,7 @@ wifi_password() {
 
 # Open Zed
 zed() {
-	open -a Zed "$@"
+	/Applications/Zed.app/Contents/MacOS/cli "$@"
 }
 
 # Just a quick function to reduce an image's size by percentage
