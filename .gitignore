@@ -2,5 +2,7 @@
 .bashrc
 test*.sh
 *.log
-zed/prompts/
+zed/*
+!zed/settings.json
+!zed/keymap.json
 .claude/**/*.local.*

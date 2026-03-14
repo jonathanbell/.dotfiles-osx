@@ -39,6 +39,11 @@ chmod +x $HOME/.dotfiles/bash/.bash_profile
 link $HOME/.dotfiles/bash/.bash_profile $HOME/.bash_profile
 chmod +x $HOME/.bash_profile
 
+# Symlink Zed config files
+mkdir -p $HOME/.config/zed
+link $HOME/.dotfiles/zed/settings.json $HOME/.config/zed/settings.json
+link $HOME/.dotfiles/zed/keymap.json $HOME/.config/zed/keymap.json
+
 # Install Homebrew
 which -s brew
 if [[ $? != 0 ]]; then
