@@ -1,0 +1,208 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "show_wrap_guides": true,
+  "indent_guides": {
+    "active_line_width": 1,
+  },
+  "languages": {
+    "Plain Text": {
+      "soft_wrap": "editor_width",
+    },
+    "Markdown": {
+      "soft_wrap": "preferred_line_length",
+      "format_on_save": "off",
+    },
+  },
+  "diff_view_style": "split",
+  "disable_ai": true,
+  "edit_predictions": {
+    "enabled_in_text_threads": false,
+    "mode": "subtle",
+  },
+  "theme_overrides": {
+    "Ayu Dark": {
+      "syntax": {
+        "comment": {
+          "font_style": "italic",
+        },
+        "comment.doc": {
+          "font_style": "italic",
+        },
+      },
+    },
+  },
+  "format_on_save": "on",
+  "show_edit_predictions": true,
+  "preview_tabs": {
+    "enabled": true,
+  },
+  "tab_bar": {
+    "show_pinned_tabs_in_separate_row": true,
+    "show_tab_bar_buttons": false,
+    "show_nav_history_buttons": false,
+    "show": true,
+  },
+  "title_bar": {
+    "show_menus": false,
+    "show_user_picture": false,
+    "show_user_menu": true,
+    "show_sign_in": true,
+    "show_onboarding_banner": true,
+    "show_project_items": true,
+    "show_branch_icon": true,
+  },
+  "diagnostics": {
+    "button": true,
+  },
+  "status_bar": {
+    "cursor_position_button": true,
+    "active_language_button": true,
+  },
+  "file_finder": {
+    "file_icons": true,
+  },
+  "search": {
+    "button": true,
+    "center_on_match": true,
+  },
+  "prettier": {
+    "allowed": true,
+  },
+  "semantic_tokens": "combined",
+  "lsp_document_colors": "inlay",
+  "inlay_hints": {
+    "show_background": false,
+    "enabled": false,
+  },
+  "show_completions_on_input": true,
+  "toolbar": {
+    "code_actions": true,
+    "agent_review": true,
+    "selections_menu": true,
+    "quick_actions": true,
+    "breadcrumbs": true,
+  },
+  "scrollbar": {
+    "axes": {
+      "horizontal": true,
+    },
+  },
+  "gutter": {
+    "folds": false,
+  },
+  "agent_buffer_font_size": 13.0,
+  "ui_font_family": ".ZedSans",
+  "buffer_line_height": "comfortable",
+  "buffer_font_weight": 400.0,
+  "session": {
+    "trust_all_worktrees": true,
+  },
+  "git": {
+    "inline_blame": {
+      "enabled": false,
+    },
+  },
+  "git_hosting_providers": [
+    {
+      "provider": "github",
+      "name": "megaleo",
+      "base_url": "https://ghe.megaleo.com",
+    },
+  ],
+  "debugger": {
+    "button": true,
+    "dock": "right",
+  },
+  "outline_panel": {
+    "dock": "right",
+  },
+  "git_panel": {
+    "dock": "right",
+  },
+  "project_panel": {
+    "bold_folder_labels": false,
+    "auto_fold_dirs": false,
+    "file_icons": true,
+    "entry_spacing": "standard",
+    "button": true,
+    "dock": "right",
+  },
+  "telemetry": {
+    "diagnostics": true,
+    "metrics": false,
+  },
+  "terminal": {
+    "keep_selection_on_copy": false,
+    "font_size": 14.0,
+    "font_family": "Hack Nerd Font Mono",
+    "font_fallbacks": ["Courier New"],
+    "max_scroll_history_lines": 50000,
+  },
+  "agent": {
+    "enable_feedback": false,
+    "default_model": {
+      "provider": "openai",
+      "model": "gpt-5-codex",
+      "enable_thinking": false,
+    },
+    "enabled": true,
+    "button": true,
+    "model_parameters": [],
+  },
+  "tabs": {
+    "show_close_button": "always",
+    "close_position": "right",
+    "git_status": true,
+    "file_icons": true,
+  },
+  "sticky_scroll": {
+    "enabled": true,
+  },
+  "minimap": {
+    "show": "never",
+  },
+  "cursor_shape": "bar",
+  "cursor_blink": false,
+  "autosave": "off",
+  "buffer_font_fallbacks": ["Menlo", "Hack Nerd Font Mono"],
+  "buffer_font_family": "JetBrains Mono NL",
+  "file_types": {
+    "ini": [
+      ".gitattributes",
+      ".dockerignore",
+      ".gitignore",
+      ".stylelintignore",
+      ".editorconfig",
+      ".rsyncignore",
+      ".prettierignore",
+    ],
+    "json": [".babelrc", ".prettierrc"],
+    "javascript": ["*.gs"],
+    "html": ["*.html", "*.mustache"],
+    "php": ["*.profile", "*.install", "*.inc", "*.module"],
+    "vb": ["*.cls", "*.bas"],
+    "Dockerfile": ["Dockerfile*"],
+  },
+  "buffer_font_features": {
+    "calt": false,
+  },
+  "colorize_brackets": true,
+  "auto_indent_on_paste": false,
+  "linked_edits": true,
+  "ensure_final_newline_on_save": true,
+  "wrap_guides": [80],
+  "soft_wrap": "preferred_line_length",
+  "tab_size": 2,
+  "icon_theme": "Zed (Default)",
+  "base_keymap": "VSCode",
+  "ui_font_size": 16.0,
+  "buffer_font_size": 13.0,
+  "theme": "New Darcula Darker",
+}

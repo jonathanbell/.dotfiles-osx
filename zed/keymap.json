@@ -1,0 +1,63 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      "shift shift": "file_finder::Toggle",
+    },
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "cmd-left": null,
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "cmd-left": null,
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "cmd-right": null,
+    },
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "cmd-right": "pane::GoForward",
+    },
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "cmd-left": "pane::GoBack",
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "cmd-backspace": "editor::DeleteLine",
+    }
+  },
+  {
+    "context": "(Editor && extension == md)",
+    "bindings": {
+      "cmd-shift-m": "markdown::OpenPreviewToTheSide"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "cmd-shift-g": "git::Blame"
+    }
+  }
+]

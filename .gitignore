@@ -2,3 +2,4 @@
 .bashrc
 test*.sh
 *.log
+zed/prompts/
