@@ -1,8 +1,57 @@
 {
-  "model": "opus",
+  "env": {
+    "CLAUDE_CODE_ENABLE_TELEMETRY": "0"
+  },
+  "includeCoAuthoredBy": false,
+  "permissions": {
+    "allow": [
+      "Bash(npm run build:*)",
+      "Bash(pnpm lint:*)",
+      "Bash(pnpm test:*)",
+      "Bash(pnpm:*)",
+      "mcp__github__get_issue",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(npm run check:*)",
+      "Bash(npx tsc:*)",
+      "mcp__github__get_pull_request",
+      "mcp__github__get_pull_request_files",
+      "mcp__github__get_pull_request_status",
+      "mcp__github__get_pull_request_reviews",
+      "WebFetch(domain:jenkins.pt-ci-aws.megaleo.com)",
+      "Bash(gh run view:*)",
+      "Bash(git log:*)",
+      "mcp__github__search_repositories",
+      "mcp__github__list_pull_requests",
+      "Bash(gh pr view:*)",
+      "Bash(npx tsx:*)",
+      "Bash(npm view:*)",
+      "Bash(git remote:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(gh run list:*)",
+      "Bash(gh pr list:*)",
+      "mcp__github__get_issue_comments",
+      "Bash(gh pr diff:*)",
+      "WebSearch"
+    ],
+    "deny": [],
+    "defaultMode": "default"
+  },
+  "model": "opus[1m]",
+  "hooks": {
+    "Notification": []
+  },
   "statusLine": {
     "type": "command",
     "command": "~/.claude/statusline.sh",
     "padding": 0
-  }
+  },
+  "enabledPlugins": {
+    "typescript-lsp@claude-plugins-official": true
+  },
+  "alwaysThinkingEnabled": true,
+  "effortLevel": "high",
+  "promptSuggestionEnabled": false,
+  "voiceEnabled": true,
+  "skipDangerousModePermissionPrompt": true
 }
