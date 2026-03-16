@@ -47,6 +47,10 @@ link $HOME/.dotfiles/claude/commands $HOME/.claude/commands
 link $HOME/.dotfiles/claude/statusline.sh $HOME/.claude/statusline.sh
 link $HOME/.dotfiles/claude/settings.json $HOME/.claude/settings.json
 
+# Symlink Kitty config files
+mkdir -p $HOME/.config/kitty
+link $HOME/.dotfiles/kitty/kitty.conf $HOME/.config/kitty/kitty.conf
+
 # Symlink Zed config files
 mkdir -p $HOME/.config/zed
 link $HOME/.dotfiles/zed/settings.json $HOME/.config/zed/settings.json
