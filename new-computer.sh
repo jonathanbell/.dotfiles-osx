@@ -81,7 +81,6 @@ BREWPACKAGES=(
 	wget
 	rsync
 	ffmpeg
-	libvo-aacenc
 	# Updates the Bash version vs the antique one that comes with OS X
 	bash
 	# Add more GNU-like command line utilities to a Mac userland
@@ -102,9 +101,6 @@ done
 # NCU (NPM Check Updates )
 # https://www.npmjs.com/package/npm-check-updates
 npm install -g npm-check-updates
-
-# Claude Code: https://docs.anthropic.com/en/docs/claude-code/setup
-npm install -g @anthropic-ai/claude-code
 
 BREWCASKS=(
 	google-chrome
@@ -167,7 +163,6 @@ mkdir -p ~/tmp && cd ~/tmp && mkdir -p ~/.dotfiles/.git && git clone git@github.
 echo "Enter your password when prompted."
 
 # Set Terminal to use the correct version of Bash
-sudo echo "/usr/local/bin/bash" >>/etc/shells
 echo 'Changing your shell to Bash 5...'
 echo /opt/homebrew/bin/bash | sudo tee -a /etc/shells
 chsh -s /opt/homebrew/bin/bash

@@ -20,8 +20,8 @@ lsfunctions() {
 # Create a symlink for a source and destination
 # Params: $1 {source}, $2 {destination}
 link() {
-	rm -f $2
-	ln -s $1 $2
+	rm -f "$2"
+	ln -s "$1" "$2"
 	echo "Symlinked $1 to $2"
 }
 
@@ -167,14 +167,14 @@ bake_exif_rotation_to_jpegs() {
 
 	if [[ $# -ne 1 ]]; then
 		echo "Usage: $0 <directory>"
-		exit 1
+		return 1
 	fi
 
 	dir="$1"
 
 	if [[ ! -d "$dir" ]]; then
 		echo "❌ Error: '$dir' is not a directory"
-		exit 1
+		return 1
 	fi
 
 	echo "📂 Processing JPEGs in: $dir"
@@ -308,15 +308,18 @@ convert_images_to_jpg() {
 		fi
 
 		# Convert to JPEG with quality and resize if needed
+		local sips_exit
 		if [ "$long_edge" -gt $IMAGE_LONG_EDGE_SIZE ]; then
 			echo "🔄 Converting and resizing: $file -> $output"
 			sips -s format jpeg -s formatOptions 87 --resampleHeightWidthMax $IMAGE_LONG_EDGE_SIZE "$file" --out "$output" >/dev/null 2>&1
+			sips_exit=$?
 		else
 			echo "🔄 Converting (no resize needed): $file -> $output"
 			sips -s format jpeg -s formatOptions 83 "$file" --out "$output" >/dev/null 2>&1
+			sips_exit=$?
 		fi
 
-		if [ $? -eq 0 ]; then
+		if [ $sips_exit -eq 0 ]; then
 			echo "✅ Successfully created: $output"
 			if rm "$file"; then
 				echo "🗑️  Deleted original: $file"
