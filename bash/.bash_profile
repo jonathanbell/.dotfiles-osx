@@ -109,6 +109,6 @@ if [ -f "$HOME/.dotfiles/bash/functions.sh" ]; then
 fi
 
 # Show a random quote at Bash startup. : )
-if [[ $- == *i* ]] && [ -x "$(command -v gshuf)" ]; then # Only show the quote for interactive shells
+if [[ $- == *i* ]] && [ "$SHOW_QUOTE" = "true" ] && [ -x "$(command -v gshuf)" ]; then
 	gshuf -n 1 "$HOME/.dotfiles/bash/quotes.txt"
 fi

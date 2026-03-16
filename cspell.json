@@ -74,6 +74,20 @@
     "workflowy",
     "WTFP",
     "wvous",
-    "UIPLATFORM"
+    "UIPLATFORM",
+    "shopt",
+    "cmdhist",
+    "screencapture",
+    "uiaudio",
+    "systemsound",
+    "killall",
+    "chflags",
+    "nohidden",
+    "keymap",
+    "statusline",
+    "shellenv",
+    "jonathanbell",
+    "rsyncignore",
+    "esac"
   ]
 }

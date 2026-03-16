@@ -1,3 +1,4 @@
+# Python.. _why_ are you so difficult to configure?
 alias python='/opt/homebrew/bin/python3 $@'
 
 # Edit the hosts file
