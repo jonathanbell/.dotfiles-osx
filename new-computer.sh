@@ -69,6 +69,9 @@ mkdir -p $HOME/go
 # Use Rosetta
 softwareupdate --install-rosetta --agree-to-license
 
+# Install Claude Code
+curl -fsSL https://claude.ai/install.sh | bash
+
 # Standard `brew` packages
 BREWPACKAGES=(
 	node
@@ -111,7 +114,6 @@ BREWCASKS=(
 	dbngin
 	pearcleaner
 	tableplus
-	claude-code
 	discord
 	rectangle
 	stellarium
