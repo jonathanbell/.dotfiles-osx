@@ -8,7 +8,7 @@ macOS dotfiles repository for development and photography workflow setup. The ma
 
 ## Structure
 
-- `bash/` - Shell configuration: `.bash_profile` (main config, PATH, prompt), `aliases.sh`, `functions.sh`, `constants.sh`, `quotes.txt`
+- `bash/` - Shell configuration: `.bash_profile` (main config, PATH, prompt), `aliases.sh`, `functions.sh`, `env.sh` (gitignored), `env.sh.example` (template), `quotes.txt`
 - `git/` - Git configuration (`gitconfig.sh`) and completion scripts
 - `claude/` - Claude Code config files (commands, settings, statusline) symlinked to `~/.claude/`
 - `zed/` - Zed editor config symlinked to `~/.config/zed/`
@@ -27,7 +27,7 @@ Packages are managed as arrays (`BREWPACKAGES`, `BREWCASKS`) in `new-computer.sh
 
 ### Shell Configuration
 
-`.bash_profile` sources `constants.sh`, `aliases.sh`, and `functions.sh` in that order. The shell uses Bash 5 from Homebrew (not the macOS default).
+`.bash_profile` sources `env.sh`, `aliases.sh`, and `functions.sh` in that order. `env.sh` is gitignored and holds machine-specific variables and secrets - copy `env.sh.example` to get started. The shell uses Bash 5 from Homebrew (not the macOS default).
 
 ## GitHub and Source Control
 

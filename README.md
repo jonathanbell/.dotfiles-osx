@@ -23,7 +23,14 @@ Inspired by: <https://dotfiles.github.io/> and
 rm -rf ~/.dotfiles && cd ~ && mkdir -p .dotfiles && curl -o dotfiles.zip https://github.com/jonathanbell/.dotfiles-osx/archive/refs/heads/main.zip -J -L && unzip dotfiles.zip && cd .dotfiles-osx-main && mv $(ls -A) ../.dotfiles/ && cd .. && rm -rf .dotfiles-osx-main && rm -rf dotfiles.zip
 ```
 
-🎉 Now, run the `new-computer.sh` script:
+1. Copy the environment template and fill in your secrets:
+
+```sh
+cp ~/.dotfiles/bash/env.sh.example ~/.dotfiles/bash/env.sh
+# Edit env.sh with your secrets and machine-specific values
+```
+
+Now, run the `new-computer.sh` script:
 
 ```sh
 cd ~/.dotfiles && chmod +x new-computer.sh && ./new-computer.sh

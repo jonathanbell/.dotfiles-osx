@@ -93,9 +93,9 @@ export EDITOR='zed --wait'
 # Don't prompt for merge_msg in Git
 export GIT_MERGE_AUTOEDIT=no
 
-# Add constants
-if [ -f "$HOME/.dotfiles/bash/constants.sh" ]; then
-	source "$HOME/.dotfiles/bash/constants.sh"
+# Add machine-specific environment variables and secrets
+if [ -f "$HOME/.dotfiles/bash/env.sh" ]; then
+	source "$HOME/.dotfiles/bash/env.sh"
 fi
 
 # Add aliases

@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-source ~/.dotfiles/bash/constants.sh
+if [ -f "$HOME/.dotfiles/bash/env.sh" ]; then
+	source "$HOME/.dotfiles/bash/env.sh"
+fi
 source ~/.dotfiles/bash/functions.sh
 source ~/.dotfiles/bash/aliases.sh
 

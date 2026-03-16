@@ -1,2 +1,0 @@
-export JONATHAN_HOME="$HOME/Dropbox"
-export IMAGE_LONG_EDGE_SIZE=5400
