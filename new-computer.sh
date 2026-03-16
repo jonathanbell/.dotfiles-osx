@@ -46,6 +46,7 @@ mkdir -p $HOME/.claude
 link $HOME/.dotfiles/claude/commands $HOME/.claude/commands
 link $HOME/.dotfiles/claude/statusline.sh $HOME/.claude/statusline.sh
 link $HOME/.dotfiles/claude/settings.json $HOME/.claude/settings.json
+link $HOME/.dotfiles/claude/CLAUDE.md $HOME/.claude/CLAUDE.md
 
 # Symlink Kitty config files
 mkdir -p $HOME/.config/kitty
