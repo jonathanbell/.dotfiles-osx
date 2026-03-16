@@ -41,22 +41,6 @@ chmod +x $HOME/.dotfiles/bash/.bash_profile
 link $HOME/.dotfiles/bash/.bash_profile $HOME/.bash_profile
 chmod +x $HOME/.bash_profile
 
-# Symlink Claude config files
-mkdir -p $HOME/.claude
-link $HOME/.dotfiles/claude/commands $HOME/.claude/commands
-link $HOME/.dotfiles/claude/statusline.sh $HOME/.claude/statusline.sh
-link $HOME/.dotfiles/claude/settings.json $HOME/.claude/settings.json
-link $HOME/.dotfiles/claude/CLAUDE.md $HOME/.claude/CLAUDE.md
-
-# Symlink Kitty config files
-mkdir -p $HOME/.config/kitty
-link $HOME/.dotfiles/kitty/kitty.conf $HOME/.config/kitty/kitty.conf
-
-# Symlink Zed config files
-mkdir -p $HOME/.config/zed
-link $HOME/.dotfiles/zed/settings.json $HOME/.config/zed/settings.json
-link $HOME/.dotfiles/zed/keymap.json $HOME/.config/zed/keymap.json
-
 # Install Homebrew
 which -s brew
 if [[ $? != 0 ]]; then
@@ -131,14 +115,14 @@ BREWCASKS=(
 	dbngin
 	pearcleaner
 	tableplus
-	firefox
-	notion
+	claude-code
 	discord
 	rectangle
 	stellarium
 	zoom
 	whatsapp
 	imageoptim
+	kitty
 	font-hack-nerd-font
 	font-fantasque-sans-mono-nerd-font
 	corretto
@@ -155,6 +139,22 @@ for i in "${BREWCASKS[@]}"; do
 done
 
 brew cleanup
+
+# Symlink Claude config files
+mkdir -p $HOME/.claude
+link $HOME/.dotfiles/claude/commands $HOME/.claude/commands
+link $HOME/.dotfiles/claude/statusline.sh $HOME/.claude/statusline.sh
+link $HOME/.dotfiles/claude/settings.json $HOME/.claude/settings.json
+link $HOME/.dotfiles/claude/CLAUDE.md $HOME/.claude/CLAUDE.md
+
+# Symlink Kitty config files
+mkdir -p $HOME/.config/kitty
+link $HOME/.dotfiles/kitty/kitty.conf $HOME/.config/kitty/kitty.conf
+
+# Symlink Zed config files
+mkdir -p $HOME/.config/zed
+link $HOME/.dotfiles/zed/settings.json $HOME/.config/zed/settings.json
+link $HOME/.dotfiles/zed/keymap.json $HOME/.config/zed/keymap.json
 
 # Setup Git
 echo 'Setting Git configuration variables...'

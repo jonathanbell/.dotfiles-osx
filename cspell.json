@@ -88,6 +88,7 @@
     "shellenv",
     "jonathanbell",
     "rsyncignore",
-    "esac"
+    "esac",
+    "hushlogin"
   ]
 }
