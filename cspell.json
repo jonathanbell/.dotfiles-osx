@@ -89,6 +89,7 @@
     "jonathanbell",
     "rsyncignore",
     "esac",
-    "hushlogin"
+    "hushlogin",
+    "emdash"
   ]
 }

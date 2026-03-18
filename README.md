@@ -13,34 +13,30 @@ Inspired by: <https://dotfiles.github.io/> and
 
 1. Install the base Mac OS
 1. Sign in to your Apple ID
-1. Setup trackpad and gestures (there isn't a public CLI API to change a lot of these settings)
-1. Use Bash as the default for Terminal: `chsh -s /bin/bash` **(close and re-open Terminal)**
+1. Setup trackpad and gestures (there isn't a public CLI API to change a lot of
+   these settings)
+1. Use Bash as the default for Terminal: `chsh -s /bin/bash` **(close and
+   re-open Terminal)**
 1. Go get your SSH keys from your secret hide-y place
-1. Place your SSH keys and config into `~/.ssh`, then run: `sudo chmod 700 ~/.ssh && sudo chmod -R 600 ~/.ssh/*`
-1. Download this repo/code and setup the `.dotfiles` directory:
-
-```sh
-rm -rf ~/.dotfiles && cd ~ && mkdir -p .dotfiles && curl -o dotfiles.zip https://github.com/jonathanbell/.dotfiles-osx/archive/refs/heads/main.zip -J -L && unzip dotfiles.zip && cd .dotfiles-osx-main && mv $(ls -A) ../.dotfiles/ && cd .. && rm -rf .dotfiles-osx-main && rm -rf dotfiles.zip
-```
+1. Place your SSH keys and config into `~/.ssh`, then run: `sudo chmod 700
+   ~/.ssh && sudo chmod -R 600 ~/.ssh/*`
+1. `git clone git@github.com:jonathanbell/.dotfiles-osx.git ~/.dotfiles`
 
 1. Copy the environment template and fill in your secrets:
 
-```sh
-cp ~/.dotfiles/bash/env.sh.example ~/.dotfiles/bash/env.sh
+```sh cp ~/.dotfiles/bash/env.sh.example ~/.dotfiles/bash/env.sh
 # Edit env.sh with your secrets and machine-specific values
 ```
 
 Now, run the `new-computer.sh` script:
 
-```sh
-cd ~/.dotfiles && chmod +x new-computer.sh && ./new-computer.sh
-```
+```sh cd ~/.dotfiles && chmod +x new-computer.sh && ./new-computer.sh ```
 
 This will:
 
-1. Symlink the `.bash_profile` file to your home directory.
-2. Install a **shwack** of software on your machine.
-3. Configure your machine for development + photography use.
+1. Symlink the `.bash_profile` file to your home directory. 2. Install a
+   **shwack** of software on your machine. 3. Configure your machine for
+   development + photography use.
 
 Close and re-open Bash after this script has run.
 

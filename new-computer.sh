@@ -60,6 +60,12 @@ if [[ $? != 0 ]]; then
 	exit 1
 fi
 
+# Ensure that we have a local bin directory to use
+mkdir -p ~/.local/bin
+
+# Add scripts and binaries to a PATH location
+link $HOME/.dotfiles/config/switch-node.sh ~/.local/bin/switch-node.sh
+
 # Reload Bash profile in order to keep XCode happy
 source ~/.bash_profile
 
@@ -141,6 +147,7 @@ brew cleanup
 # Symlink Claude config files
 mkdir -p $HOME/.claude
 link $HOME/.dotfiles/claude/commands $HOME/.claude/commands
+link $HOME/.dotfiles/claude/skills $HOME/.claude/skills
 link $HOME/.dotfiles/claude/statusline.sh $HOME/.claude/statusline.sh
 link $HOME/.dotfiles/claude/settings.json $HOME/.claude/settings.json
 link $HOME/.dotfiles/claude/CLAUDE.md $HOME/.claude/CLAUDE.md
@@ -158,9 +165,6 @@ link $HOME/.dotfiles/zed/keymap.json $HOME/.config/zed/keymap.json
 echo 'Setting Git configuration variables...'
 chmod +x ~/.dotfiles/git/gitconfig.sh
 ~/.dotfiles/git/gitconfig.sh
-
-# Make the `.dotfiles` dir a Git repo
-mkdir -p ~/tmp && cd ~/tmp && mkdir -p ~/.dotfiles/.git && git clone git@github.com:jonathanbell/.dotfiles-osx.git && cd .dotfiles-osx/.git && mv $(ls -A) ~/.dotfiles/.git/ && cd ~ && rm -rf ~/tmp
 
 echo "Enter your password when prompted."
 

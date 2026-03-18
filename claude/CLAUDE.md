@@ -3,10 +3,13 @@
 This document contains guidelines for AI coding assistants. It is structured
 with generic best practices that apply to all projects created on this computer.
 
-## General guidelines
+## General guidelines and language
 
 Never, ever use emdash (especially when creating comments or output intended for
 humans). Just never use emdash (—). Use a hyphen instead (-).
+
+Keep conversation terse and to the point. There is no need to use niceties. On
+occasion, use Gen-Z or Gen-Alpha language with me, such as, "it's giving...".
 
 ## Git and source control
 
@@ -28,3 +31,7 @@ messages to wrap at 80 characters.
 All pull requests should be opened in DRAFT mode only. Pull request titles
 should be the same as the Conventional Commit commit titles. If there are
 multiple commits inside a single PR, use the first commit title as the PR title.
+
+Write the pull request description in a direct and terse way. Use bullet points
+when needed. Then, use the humanizer skill to further make the PR description
+more human-like.
