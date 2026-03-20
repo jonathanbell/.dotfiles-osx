@@ -7,7 +7,6 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "show_completions_on_input": false,
   "experimental.theme_overrides": {
     "editor.active_line.background": "#ffffff10",
     "syntax": {
@@ -27,10 +26,19 @@
     "Plain Text": {
       "soft_wrap": "editor_width",
     },
+    "Shell Script": {
+      "soft_wrap": "editor_width",
+      "formatter": {
+        "external": {
+          "command": "shfmt",
+          "arguments": ["--filename", "{buffer_path}", "--indent", "2"],
+        },
+      },
+    },
     "Markdown": {
-      "soft_wrap": "preferred_line_length",
+      "soft_wrap": "editor_width",
       "format_on_save": "off",
-      "allow_rewrap": "anywhere",
+      // "allow_rewrap": "anywhere",
     },
   },
   "diff_view_style": "split",
@@ -198,7 +206,6 @@
   "linked_edits": true,
   "ensure_final_newline_on_save": true,
   "wrap_guides": [80],
-  "soft_wrap": "preferred_line_length",
   "tab_size": 2,
   "icon_theme": "Zed (Default)",
   "base_keymap": "VSCode",

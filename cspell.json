@@ -90,6 +90,7 @@
     "rsyncignore",
     "esac",
     "hushlogin",
-    "emdash"
+    "emdash",
+    "shfmt"
   ]
 }
