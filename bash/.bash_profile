@@ -68,7 +68,7 @@ if [[ $- == *i* ]]; then
 	[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(awk '/^Host/ && !/[?*]/ {for(i=2;i<=NF;i++) print $i}' ~/.ssh/config)" scp sftp ssh
 
 	# Colorize git branch and current directory in the command prompt
-	export PS1="\[$(tput bold)\]\[\033[31m\]→ \[\033[0m\]\[\033[105m\]\$(parse-git-branch)\[\033[0m\]\[$(tput bold)\]\[\033[36m\] \W\[\033[0m\] \[\033[2m\]$\[\033[0m\] "
+	export PS1="\[$(tput bold)\]\[\033[31m\]→ \[\033[0m\]\[\033[30;105m\]\$(parse-git-branch)\[\033[0m\]\[$(tput bold)\]\[\033[36m\] \W\[\033[0m\] \[\033[2m\]$\[\033[0m\] "
 
 	# Change the title of the Bash terminal to show the User@Hostname connection
 	PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}\007"'

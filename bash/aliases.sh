@@ -33,3 +33,8 @@ alias dockerdangerouslyreset='docker stop $(docker ps -aq) && docker rm $(docker
 
 # Show a random quote
 alias quote='echo $(gshuf -n 1 "$HOME/.dotfiles/bash/quotes.txt")'
+
+# Claude - using two accounts on one computer
+if [ "$IS_WORK_COMPUTER" = true ]; then
+  alias claude-personal="CLAUDE_CONFIG_DIR=~/.claude-personal claude"
+fi
