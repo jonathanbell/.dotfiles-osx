@@ -176,7 +176,7 @@
   "minimap": {
     "show": "never",
   },
-  "cursor_shape": "bar",
+  "cursor_shape": "block",
   "cursor_blink": false,
   "autosave": "off",
   "buffer_font_fallbacks": ["Menlo", "Hack Nerd Font Mono"],

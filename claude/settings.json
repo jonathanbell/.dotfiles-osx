@@ -37,7 +37,6 @@
     "deny": [],
     "defaultMode": "default"
   },
-  "model": "opus",
   "hooks": {
     "Notification": []
   },
@@ -50,8 +49,9 @@
     "typescript-lsp@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": true,
-  "effortLevel": "high",
+  "effortLevel": "medium",
   "promptSuggestionEnabled": false,
   "voiceEnabled": true,
-  "skipDangerousModePermissionPrompt": true
+  "skipDangerousModePermissionPrompt": true,
+  "model": "opus[1m]"
 }

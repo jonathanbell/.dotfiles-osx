@@ -2,6 +2,7 @@ Review the pull request number: $ARGUMENTS
 
 Rules:
 
+- Run `git remote -v` if you need to know the remote for the rest of the task.
 - Use either the Github MCP server or the `gh` command line tool; never use the
   Jira MCP server for this task.
 - Look at the bot's review comments with a critical eye. Generally, the bot is
