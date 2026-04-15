@@ -10,7 +10,7 @@ macOS dotfiles repository for development and photography workflow setup. The ma
 
 - `bash/` - Shell configuration: `.bash_profile` (main config, PATH, prompt), `aliases.sh`, `functions.sh`, `env.sh` (gitignored), `env.sh.example` (template), `quotes.txt`
 - `git/` - Git configuration (`gitconfig.sh`) and completion scripts
-- `claude/` - Claude Code config files (commands, settings, statusline) symlinked to `~/.claude/`
+- `claude/` - Claude Code config files (commands, settings, statusline) symlinked to `~/.claude/`. Skills are not stored here: `new-computer.sh` creates `~/.agents/skills` and symlinks `~/.claude/skills` to it.
 - `zed/` - Zed editor config symlinked to `~/.config/zed/`
 - `config/` - Misc config files (e.g. `.rsyncignore`)
 - `new-computer.sh` - Main installation script

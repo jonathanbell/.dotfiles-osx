@@ -147,11 +147,19 @@ brew cleanup
 
 # Symlink Claude config files
 mkdir -p $HOME/.claude
+mkdir -p $HOME/.agents/skills
+link $HOME/.agents/skills $HOME/.claude/skills
 link $HOME/.dotfiles/claude/commands $HOME/.claude/commands
-link $HOME/.dotfiles/claude/skills $HOME/.claude/skills
 link $HOME/.dotfiles/claude/statusline.sh $HOME/.claude/statusline.sh
 link $HOME/.dotfiles/claude/settings.json $HOME/.claude/settings.json
 link $HOME/.dotfiles/claude/CLAUDE.md $HOME/.claude/CLAUDE.md
+
+# Install AI skills
+npx skills add --global --copy --yes blader/humanizer
+npx skills add --global --copy --yes JuliusBrussee/caveman --skill caveman-commit
+npx skills add --global --copy --yes JuliusBrussee/caveman --skill caveman
+npx skills add --global --copy --yes https://github.com/anthropics/skills --skill skill-creator
+npx skills list --global --yes
 
 # Symlink Kitty config files
 mkdir -p $HOME/.config/kitty
