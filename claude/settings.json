@@ -37,7 +37,7 @@
     "deny": [],
     "defaultMode": "default"
   },
-  "model": "opus[1m]",
+  "model": "opus",
   "hooks": {
     "Notification": []
   },
@@ -52,6 +52,6 @@
   "alwaysThinkingEnabled": true,
   "effortLevel": "high",
   "promptSuggestionEnabled": false,
-  "voiceEnabled": true,
-  "skipDangerousModePermissionPrompt": true
+  "skipDangerousModePermissionPrompt": true,
+  "voiceEnabled": true
 }
