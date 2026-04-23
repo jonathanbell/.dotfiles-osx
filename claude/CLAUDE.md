@@ -35,3 +35,11 @@ multiple commits inside a single PR, use the first commit title as the PR title.
 Write the pull request description in a direct and terse way. Use bullet points
 when needed. Then, use the humanizer skill to further make the PR description
 more human-like.
+
+### Calling the Github API
+
+You will likely have access to the Github MCP server and/or the gh CLI tool.
+Always use THESE tools when you need to read or write to anything on Github. Do
+not use the other tools for any Github related queries. These tools are much 
+better at all things Github than any other MCP servers.
+

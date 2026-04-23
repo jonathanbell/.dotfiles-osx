@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [ -f "$HOME/.dotfiles/bash/env.sh" ]; then
-  source "$HOME/.dotfiles/bash/env.sh"
+	source "$HOME/.dotfiles/bash/env.sh"
 fi
 source ~/.dotfiles/bash/functions.sh
 source ~/.dotfiles/bash/aliases.sh
@@ -44,20 +44,20 @@ chmod +x $HOME/.bash_profile
 # Install Homebrew
 which -s brew
 if [[ $? != 0 ]]; then
-  echo 'Installing Homebrew... (you will be prompted for your password)'
-  sudo mkdir -p /opt/homebrew/bin
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  eval "$(/opt/homebrew/bin/brew shellenv)"
+	echo 'Installing Homebrew... (you will be prompted for your password)'
+	sudo mkdir -p /opt/homebrew/bin
+	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	eval "$(/opt/homebrew/bin/brew shellenv)"
 else
-  brew update
+	brew update
 fi
 
 # Check that `brew` was installed
 which -s brew
 if [[ $? != 0 ]]; then
-  # Homebrew is not installed correctly
-  echo >&2 "This script requires that Homebrew is installed. Aborting..."
-  exit 1
+	# Homebrew is not installed correctly
+	echo >&2 "This script requires that Homebrew is installed. Aborting..."
+	exit 1
 fi
 
 # Ensure that we have a local bin directory to use
@@ -80,32 +80,32 @@ curl -fsSL https://claude.ai/install.sh | bash
 
 # Standard `brew` packages
 BREWPACKAGES=(
-  node
-  # Things like `shuf` and other utils.
-  # These utilities won't override the BSD userland by default, they link all
-  # their utilities with a `g` prefix. So `shuf` becomes `gshuf`, for example.
-  coreutils
-  vlc
-  shfmt
-  go
-  wget
-  rsync
-  ffmpeg
-  # Updates the Bash version vs the antique one that comes with OS X
-  bash
-  # Add more GNU-like command line utilities to a Mac userland
-  gnu-sed
-  findutils
-  gawk
-  grep
-  tree
-  gh
-  exiftool
+	node
+	# Things like `shuf` and other utils.
+	# These utilities won't override the BSD userland by default, they link all
+	# their utilities with a `g` prefix. So `shuf` becomes `gshuf`, for example.
+	coreutils
+	vlc
+	shfmt
+	go
+	wget
+	rsync
+	ffmpeg
+	# Updates the Bash version vs the antique one that comes with OS X
+	bash
+	# Add more GNU-like command line utilities to a Mac userland
+	gnu-sed
+	findutils
+	gawk
+	grep
+	tree
+	gh
+	exiftool
 )
 
 # Install standard `brew` packages
 for i in "${BREWPACKAGES[@]}"; do
-  brew install "$i"
+	brew install "$i"
 done
 
 # NCU (NPM Check Updates )
@@ -113,34 +113,34 @@ done
 npm install -g npm-check-updates
 
 BREWCASKS=(
-  google-chrome
-  charles
-  slack
-  zed
-  maccy
-  dbngin
-  pearcleaner
-  tableplus
-  discord
-  rectangle
-  stellarium
-  zoom
-  whatsapp
-  imageoptim
-  kitty
-  font-hack-nerd-font
-  font-fantasque-sans-mono-nerd-font
-  corretto
-  visual-studio-code
-  spotify
-  figma
-  postman
-  font-jetbrains-mono
-  claude
+	google-chrome
+	charles
+	slack
+	zed
+	maccy
+	dbngin
+	pearcleaner
+	tableplus
+	discord
+	rectangle
+	stellarium
+	zoom
+	whatsapp
+	imageoptim
+	kitty
+	font-hack-nerd-font
+	font-fantasque-sans-mono-nerd-font
+	corretto
+	visual-studio-code
+	spotify
+	figma
+	postman
+	font-jetbrains-mono
+	claude
 )
 
 for i in "${BREWCASKS[@]}"; do
-  brew install --cask "$i"
+	brew install --cask "$i"
 done
 
 brew cleanup
@@ -153,7 +153,7 @@ link $HOME/.dotfiles/claude/settings.json $HOME/.claude/settings.json
 link $HOME/.dotfiles/claude/CLAUDE.md $HOME/.claude/CLAUDE.md
 
 # Install AI skills
-npx skills add --global --yes blader/humanizer --skill=humanizer --agent=claude-code
+npx skills add --global --yes blader/humanizer --skill humanizer --agent=claude-code
 npx skills add --global --yes JuliusBrussee/caveman --skill caveman-commit --agent claude-code
 npx skills add --global --yes JuliusBrussee/caveman --skill caveman --agent=claude-code
 npx skills add --global --yes https://github.com/anthropics/skills --skill skill-creator --agent=claude-code
