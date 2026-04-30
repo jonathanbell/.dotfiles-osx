@@ -7,6 +7,9 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "collaboration_panel": {
+    "dock": "left"
+  },
   "experimental.theme_overrides": {
     "editor.active_line.background": "#ffffff10",
     "syntax": {
@@ -154,6 +157,7 @@
     "max_scroll_history_lines": 50000,
   },
   "agent": {
+    "dock": "right",
     "enable_feedback": false,
     "default_model": {
       "provider": "openai",

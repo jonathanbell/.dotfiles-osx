@@ -37,7 +37,7 @@
     "deny": [],
     "defaultMode": "default"
   },
-  "model": "opus",
+  "model": "opus[1m]",
   "hooks": {
     "Notification": []
   },
@@ -53,5 +53,7 @@
   "effortLevel": "high",
   "promptSuggestionEnabled": false,
   "skipDangerousModePermissionPrompt": true,
+  "theme": "dark-daltonized",
+  "preferredNotifChannel": "notifications_disabled",
   "voiceEnabled": true
 }

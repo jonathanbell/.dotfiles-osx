@@ -29,12 +29,20 @@ messages to wrap at 80 characters.
 ### Creating pull requests
 
 All pull requests should be opened in DRAFT mode only. Pull request titles
-should be the same as the Conventional Commit commit titles. If there are
-multiple commits inside a single PR, use the first commit title as the PR title.
+should be the same as the Conventional Commit commit titles. Do not use backticks 
+in Pull Request titles. If there are
+multiple commits inside a single PR, use the first commit title as the PR title, (with backticks removed).
+
+Do not use a Summary heading, write the description/summary right away, at the 
+top of the PR - no need for a heading. 
 
 Write the pull request description in a direct and terse way. Use bullet points
 when needed. Then, use the humanizer skill to further make the PR description
 more human-like.
+
+Use the heading "Testing" vs "Test plan". If the PR appears to be a small change to you, do not write any testing instructions or test plan. 
+
+Do not mention that you added a Changesets file (if you did).
 
 ### Calling the Github API
 
