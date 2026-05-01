@@ -11,8 +11,10 @@ alias d="cd \"$JONATHAN_HOME\""
 # Change directory to your dotfiles directory
 alias dot='cd ~/.dotfiles'
 
-# Quickly clear the Terminal window
+# Quickly clear the terminal window
 alias c='clear'
+# Quickly reset the shell
+alias r='reset'
 # For when you make "that" typ-o...
 alias cd..='cd ..'
 alias ..='cd ..'
@@ -36,5 +38,5 @@ alias quote='echo $(gshuf -n 1 "$HOME/.dotfiles/bash/quotes.txt")'
 
 # Claude - using two accounts on one computer
 if [ "$IS_WORK_COMPUTER" = true ]; then
-  alias claude-personal="CLAUDE_CONFIG_DIR=~/.claude-personal claude"
+	alias claude-personal="CLAUDE_CONFIG_DIR=~/.claude-personal claude"
 fi

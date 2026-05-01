@@ -50,10 +50,11 @@
     "typescript-lsp@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": true,
-  "effortLevel": "high",
+  "effortLevel": "xhigh",
   "promptSuggestionEnabled": false,
   "skipDangerousModePermissionPrompt": true,
   "theme": "dark-daltonized",
+  "verbose": true,
   "preferredNotifChannel": "notifications_disabled",
   "voiceEnabled": true
 }

@@ -99,7 +99,7 @@ if [ -f "$HOME/.dotfiles/bash/env.sh" ]; then
 fi
 
 # Add aliases
-if [ -f "$HOME/.dotfiles/bash/aliases.sh" ]; then
+if [[ -f "$HOME/.dotfiles/bash/aliases.sh" && $- == *i* ]]; then
 	source "$HOME/.dotfiles/bash/aliases.sh"
 fi
 
