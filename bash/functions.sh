@@ -266,7 +266,7 @@ convert_images_to_jpg() {
 	local files=()
 	while IFS= read -r -d '' file; do
 		files+=("$file")
-	done < <(find "$dir" -maxdepth 1 -type f \( \
+	done < <(find "$dir" -type f \( \
 		-iname "*.heic" -o \
 		-iname "*.dng" -o \
 		-iname "*.3g2" -o \
