@@ -18,6 +18,8 @@ defaults write com.apple.dock wvous-tr-corner -int 0
 defaults write com.apple.dock wvous-bl-corner -int 0
 defaults write com.apple.dock wvous-br-corner -int 0
 
+sudo pmset -a displaysleep 5
+
 killall Dock
 
 # Show hidden folders
