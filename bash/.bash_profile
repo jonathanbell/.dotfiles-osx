@@ -10,6 +10,14 @@ export PATH="$HOME/.local/bin:$PATH"
 export GOPATH=$HOME/go
 export PATH="$GOPATH/bin:$PATH"
 
+# Java
+# Homebrew's `mvn` and `gradle` shims default to their own openjdk unless
+# JAVA_HOME is set, so pin it and keep the CLI on the same runtime as VS Code.
+# Bump the -v when the pinned JDK changes; it falls back to the newest one.
+if [ -x '/usr/libexec/java_home' ]; then
+	export JAVA_HOME="$(/usr/libexec/java_home -v 25 2>/dev/null || /usr/libexec/java_home 2>/dev/null)"
+fi
+
 # Add Homebrew to path
 if [ -d "/opt/homebrew/bin" ]; then
 	eval "$(/opt/homebrew/bin/brew shellenv)"

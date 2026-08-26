@@ -35,7 +35,7 @@
       "WebSearch"
     ],
     "deny": [],
-    "defaultMode": "default"
+    "defaultMode": "auto"
   },
   "model": "opus[1m]",
   "hooks": {
@@ -51,10 +51,16 @@
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "xhigh",
+  "modelSettings": {
+    "claude-opus-5": {
+      "effortLevel": "xhigh"
+    }
+  },
   "promptSuggestionEnabled": false,
   "skipDangerousModePermissionPrompt": true,
   "theme": "dark-daltonized",
   "verbose": true,
   "preferredNotifChannel": "notifications_disabled",
+  "agentPushNotifEnabled": false,
   "voiceEnabled": true
 }
