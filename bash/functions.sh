@@ -116,15 +116,6 @@ wifi_password() {
 	fi
 }
 
-# Open Zed
-zed() {
-	if [ "$IS_WORK_COMPUTER" = true ]; then
-		GITHUB_TOKEN=${PUBLIC_GITHUB_TOKEN} /Applications/Zed.app/Contents/MacOS/cli "$@"
-	else
-		GITHUB_TOKEN=${GITHUB_TOKEN} /Applications/Zed.app/Contents/MacOS/cli "$@"
-	fi
-}
-
 # Just a quick function to reduce an image's size by percentage
 shrink_image() {
 	if [ $# -eq 0 ]; then

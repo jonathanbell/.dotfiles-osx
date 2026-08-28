@@ -57,10 +57,11 @@
     }
   },
   "promptSuggestionEnabled": false,
+  "tui": "default",
   "skipDangerousModePermissionPrompt": true,
   "theme": "dark-daltonized",
-  "verbose": true,
   "preferredNotifChannel": "notifications_disabled",
   "agentPushNotifEnabled": false,
+  "skipAutoPermissionPrompt": true,
   "voiceEnabled": true
 }

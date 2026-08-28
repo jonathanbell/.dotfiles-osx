@@ -118,7 +118,6 @@ BREWCASKS=(
 	google-chrome
 	charles
 	slack
-	zed
 	maccy
 	dbngin
 	pearcleaner
@@ -164,11 +163,6 @@ npx skills list --global --yes
 # Symlink Kitty config files
 mkdir -p $HOME/.config/kitty
 link $HOME/.dotfiles/kitty/kitty.conf $HOME/.config/kitty/kitty.conf
-
-# Symlink Zed config files
-mkdir -p $HOME/.config/zed
-link $HOME/.dotfiles/zed/settings.json $HOME/.config/zed/settings.json
-link $HOME/.dotfiles/zed/keymap.json $HOME/.config/zed/keymap.json
 
 # Setup Git
 echo 'Setting Git configuration variables...'

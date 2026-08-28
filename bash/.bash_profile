@@ -52,7 +52,7 @@ if [[ $- == *i* ]]; then
 	export HISTFILESIZE=50000
 
 	# Don't record some commands
-	export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
+	export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear:c"
 
 	# Auto-correct typo-s in path names when using `cd`
 	shopt -s cdspell
@@ -83,7 +83,7 @@ if [[ $- == *i* ]]; then
 fi
 
 # Hide the annoying Bash/Zsh deprecation warning
-export BASH_SILENCE_DEPRECATION_WARNING=1
+# export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # Automatically trim long paths in the prompt (requires Bash 4.x)
 PROMPT_DIRTRIM=2
@@ -95,8 +95,14 @@ export LC_ALL='en_US.UTF-8'
 # Enable some Bash 4 features when possible:
 shopt -s autocd globstar 2>/dev/null
 
-# Make Zed the default editor
-export EDITOR='zed --wait'
+# Default editor. `vim` works everywhere (including over SSH, where there is no
+# GUI); VS Code takes over as VISUAL only when running locally.
+export EDITOR='vim'
+if [ -z "$SSH_CONNECTION" ] && [ -z "$SSH_TTY" ]; then
+	export VISUAL='code --wait'
+else
+	export VISUAL="$EDITOR"
+fi
 
 # Don't prompt for merge_msg in Git
 export GIT_MERGE_AUTOEDIT=no
@@ -119,4 +125,10 @@ fi
 # Show a random quote at Bash startup. : )
 if [[ $- == *i* ]] && [ "$SHOW_QUOTE" = "true" ] && [ -x "$(command -v gshuf)" ]; then
 	gshuf -n 1 "$HOME/.dotfiles/bash/quotes.txt"
+fi
+
+# Load .bashrc (installers often append PATH exports there, and macOS Terminal
+# starts login shells which would otherwise skip it)
+if [ -f "$HOME/.bashrc" ]; then
+	source "$HOME/.bashrc"
 fi

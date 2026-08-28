@@ -29,25 +29,30 @@ messages to wrap at 80 characters.
 ### Creating pull requests
 
 All pull requests should be opened in DRAFT mode only. Pull request titles
-should be the same as the Conventional Commit commit titles. Do not use backticks 
+should be the same as the Conventional Commit commit titles. Do not use backticks
 in Pull Request titles. If there are
 multiple commits inside a single PR, use the first commit title as the PR title, (with backticks removed).
 
-Do not use a Summary heading, write the description/summary right away, at the 
-top of the PR - no need for a heading. 
+Do not use a Summary heading, write the description/summary right away, at the
+top of the PR - no need for a heading.
 
 Write the pull request description in a direct and terse way. Use bullet points
 when needed. Then, use the humanizer skill to further make the PR description
 more human-like.
 
-Use the heading "Testing" vs "Test plan". If the PR appears to be a small change to you, do not write any testing instructions or test plan. 
+Use the heading "Testing" vs "Test plan". If the PR appears to be a small change to you, do not write any testing instructions or test plan.
 
 Do not mention that you added a Changesets file (if you did).
+
+**Always** purpose a PR title and description presented in an easy to read way before actually creating the PR. Once approval is given, proceed to create the pull request.
+
+### Commenting on pull requests
+
+Always print the comment in an easy to read way before calling the Github APIs to actually post the comment. Wait for approval before actually commenting on the pull request. Keep comments terse and low-key relaxed and occasionally funny.
 
 ### Calling the Github API
 
 You will likely have access to the Github MCP server and/or the gh CLI tool.
 Always use THESE tools when you need to read or write to anything on Github. Do
-not use the other tools for any Github related queries. These tools are much 
+not use the other tools for any Github related queries. These tools are much
 better at all things Github than any other MCP servers.
-
