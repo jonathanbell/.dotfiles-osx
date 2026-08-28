@@ -446,7 +446,7 @@ download_video() {
 		local video_id
 		video_id=$(yt-dlp --print id "$url" 2>/dev/null)
 		if [[ -n "$video_id" ]]; then
-			find "$output_dir" -name "*${video_id}*" -type f -newer /tmp 2>/dev/null | while read -r file; do
+			find "$output_dir" -name "*${video_id}*" -type f 2>/dev/null | while read -r file; do
 				if [[ -f "$file" ]]; then
 					local size
 					size=$(du -h "$file" 2>/dev/null | cut -f1)

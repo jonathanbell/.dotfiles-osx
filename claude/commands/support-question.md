@@ -17,5 +17,5 @@ Rules:
   the Jira MCP server for this task unless you need to lookup something
   specifically in Jira.
 - Craft your reply and print it in a copy and pasteable format here.
-- Whenever possible, sight your sources with URLs/links or direct quotes from
+- Whenever possible, cite your sources with URLs/links or direct quotes from
   the documentation.

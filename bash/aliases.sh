@@ -2,6 +2,9 @@
 # (No `$@` here: aliases already pass through whatever follows them.)
 alias python='/opt/homebrew/bin/python3'
 
+# Colorize `grep`
+alias grep='grep --color=auto'
+
 # Edit the hosts file
 alias hosts='sudo nano /etc/hosts'
 

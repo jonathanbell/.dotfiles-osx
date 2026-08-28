@@ -33,7 +33,9 @@ fi
 if [[ $- == *i* ]]; then
 	# Add git completion
 	# https://medium.com/fusionqa/autocomplete-git-commands-and-branch-names-in-terminal-on-mac-os-x-4e0beac0388a
-	. ~/.dotfiles/git/git-completion.bash
+	if [ -f "$HOME/.dotfiles/git/git-completion.bash" ]; then
+		. "$HOME/.dotfiles/git/git-completion.bash"
+	fi
 
 	# Case-insensitive globbing (used in pathname expansion)
 	shopt -s nocaseglob
@@ -56,9 +58,6 @@ if [[ $- == *i* ]]; then
 
 	# Auto-correct typo-s in path names when using `cd`
 	shopt -s cdspell
-
-	# Colorize `grep`
-	alias grep='grep --color=auto'
 
 	# Perform file completion in a case insensitive fashion
 	bind 'set completion-ignore-case on'
@@ -84,9 +83,6 @@ fi
 
 # Hide the annoying Bash/Zsh deprecation warning
 # export BASH_SILENCE_DEPRECATION_WARNING=1
-
-# Automatically trim long paths in the prompt (requires Bash 4.x)
-PROMPT_DIRTRIM=2
 
 # Prefer US English and use UTF-8
 export LANG='en_US.UTF-8'

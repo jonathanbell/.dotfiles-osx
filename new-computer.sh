@@ -87,8 +87,8 @@ mkdir -p "$HOME/go"
 # Use Rosetta (already-installed and Intel Macs both exit non-zero here)
 softwareupdate --install-rosetta --agree-to-license || true
 
-# Install Claude Code
-curl -fsSL https://claude.ai/install.sh | bash
+# Install Claude Code. Network fetch, so don't let a blip abort the run.
+curl -fsSL https://claude.ai/install.sh | bash || echo >&2 'Skipping Claude Code (the install failed).'
 
 # Standard `brew` packages
 BREWPACKAGES=(
@@ -97,7 +97,6 @@ BREWPACKAGES=(
 	# These utilities won't override the BSD userland by default, they link all
 	# their utilities with a `g` prefix. So `shuf` becomes `gshuf`, for example.
 	coreutils
-	vlc
 	shfmt
 	# This repo is ~all Bash and runs under `set -euo pipefail`; lint it
 	shellcheck
@@ -128,9 +127,10 @@ done
 
 # NCU (NPM Check Updates )
 # https://www.npmjs.com/package/npm-check-updates
-npm install -g npm-check-updates
+npm install -g npm-check-updates || echo >&2 'Skipping npm-check-updates (the install failed).'
 
 BREWCASKS=(
+	vlc
 	google-chrome
 	charles
 	slack
@@ -165,8 +165,11 @@ brew cleanup
 # yt-dlp (used by the `download_video` function) ships a macOS release binary.
 # https://github.com/yt-dlp/yt-dlp/wiki/Installation
 echo 'Installing yt-dlp...'
-curl -fL https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos -o ~/.local/bin/yt-dlp
-chmod a+rx ~/.local/bin/yt-dlp
+if curl -fL https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos -o ~/.local/bin/yt-dlp; then
+	chmod a+rx ~/.local/bin/yt-dlp
+else
+	echo >&2 'Skipping yt-dlp (the download failed). The `download_video` function needs it.'
+fi
 
 # Symlink Claude config files
 mkdir -p "$HOME/.claude"
@@ -177,11 +180,11 @@ link "$HOME/.dotfiles/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 
 # Install AI skills. These are fetched from the network, so don't let one
 # unreachable repo abort the whole setup.
-npx skills add --global --yes blader/humanizer --skill humanizer --agent=claude-code || true
-npx skills add --global --yes JuliusBrussee/caveman --skill caveman-commit --agent claude-code || true
-npx skills add --global --yes JuliusBrussee/caveman --skill caveman --agent=claude-code || true
-npx skills add --global --yes https://github.com/anthropics/skills --skill skill-creator --agent=claude-code || true
-npx skills list --global --yes || true
+npx --yes skills add --global blader/humanizer --skill humanizer --agent=claude-code || true
+npx --yes skills add --global JuliusBrussee/caveman --skill caveman-commit --agent claude-code || true
+npx --yes skills add --global JuliusBrussee/caveman --skill caveman --agent=claude-code || true
+npx --yes skills add --global https://github.com/anthropics/skills --skill skill-creator --agent=claude-code || true
+npx --yes skills list --global || true
 
 # Install the Claude Code plugins that settings.json enables
 claude plugin install --yes typescript-lsp@claude-plugins-official || true
