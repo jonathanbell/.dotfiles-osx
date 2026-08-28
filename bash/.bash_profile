@@ -92,13 +92,15 @@ PROMPT_DIRTRIM=2
 export LANG='en_US.UTF-8'
 export LC_ALL='en_US.UTF-8'
 
-# Enable some Bash 4 features when possible:
-shopt -s autocd globstar 2>/dev/null
+# Enable some Bash 4 features when possible. The system Bash on macOS is still
+# 3.2 and doesn't know these, so swallow the failure: `new-computer.sh` sources
+# this file under `set -e` before Homebrew's Bash 5 exists.
+shopt -s autocd globstar 2>/dev/null || true
 
 # Default editor. `vim` works everywhere (including over SSH, where there is no
 # GUI); VS Code takes over as VISUAL only when running locally.
 export EDITOR='vim'
-if [ -z "$SSH_CONNECTION" ] && [ -z "$SSH_TTY" ]; then
+if [ -z "${SSH_CONNECTION:-}" ] && [ -z "${SSH_TTY:-}" ]; then
 	export VISUAL='code --wait'
 else
 	export VISUAL="$EDITOR"
@@ -117,13 +119,15 @@ if [[ -f "$HOME/.dotfiles/bash/aliases.sh" && $- == *i* ]]; then
 	source "$HOME/.dotfiles/bash/aliases.sh"
 fi
 
-# Add functions
-if [ -f "$HOME/.dotfiles/bash/functions.sh" ]; then
+# Add functions. These are interactive helpers, so load them on the same terms
+# as the aliases above. Scripts that need one (new-computer.sh wants `link`)
+# source functions.sh directly.
+if [[ -f "$HOME/.dotfiles/bash/functions.sh" && $- == *i* ]]; then
 	source "$HOME/.dotfiles/bash/functions.sh"
 fi
 
 # Show a random quote at Bash startup. : )
-if [[ $- == *i* ]] && [ "$SHOW_QUOTE" = "true" ] && [ -x "$(command -v gshuf)" ]; then
+if [[ $- == *i* ]] && [ "${SHOW_QUOTE:-}" = "true" ] && [ -x "$(command -v gshuf)" ]; then
 	gshuf -n 1 "$HOME/.dotfiles/bash/quotes.txt"
 fi
 

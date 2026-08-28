@@ -20,76 +20,93 @@ lsfunctions() {
 # Create a symlink for a source and destination
 # Params: $1 {source}, $2 {destination}
 link() {
-	rm -f "$2"
-	ln -s "$1" "$2"
-	echo "Symlinked $1 to $2"
+	if [ $# -ne 2 ]; then
+		echo 'Oops. Please give me a source and a destination.'
+		echo 'Usage: link <source> <destination>'
+		return 1
+	fi
+
+	# A plain `rm -f` fails when the destination is a real directory, and `ln -s`
+	# then quietly nests the link *inside* it. Clear symlinks, files and
+	# directories separately so the destination is always gone before linking.
+	if [ -L "$2" ] || [ -f "$2" ]; then
+		rm -f "$2"
+	elif [ -d "$2" ]; then
+		rm -rf "$2"
+	fi
+
+	if ln -s "$1" "$2"; then
+		echo "Symlinked $1 to $2"
+	else
+		echo "Failed to symlink $1 to $2" >&2
+		return 1
+	fi
 }
 
 # Download a whole site, I think..
 download_website() {
 	if [ $# -eq 0 ]; then
-		echo 'Oops. Please give me a directory.'
+		echo 'Oops. Please give me a URL.'
+		echo 'Usage: download_website <url>'
 		return 1
 	fi
-	wget --mirror --convert-links --adjust-extension --page-requisites --no-parent $1
-}
-
-getavailabledisk() {
-	i=1
-	FIRSTAVAILABLEDISK="/dev/disk${i}s1"
-
-	while [ $i -lt 99 ]; do
-		if ! mount | grep -q "/dev/disk${i}s1"; then
-			FIRSTAVAILABLEDISK="/dev/disk${i}s1"
-			break
-		fi
-		((i++))
-	done
-
-	echo "$FIRSTAVAILABLEDISK"
+	wget --mirror --convert-links --adjust-extension --page-requisites --no-parent "$1"
 }
 
 backup() {
-	DRYRUN=""
+	local dryrun=""
 
-	if [[ $1 = "--dry-run" ]]; then
-		DRYRUN="n"
+	if [[ ${1:-} = "--dry-run" ]]; then
+		dryrun="n"
 	fi
 
-	EVERYTHINGDRIVE="/Volumes/Everything"
-	PHOTODRIVE="/Volumes/THICCC"
+	local everythingdrive="/Volumes/Everything"
+	local photodrive="/Volumes/THICCC"
 
-	if ! mount | grep -q $EVERYTHINGDRIVE && ! mount | grep -q $PHOTODRIVE; then
+	if [ -z "${JONATHAN_HOME:-}" ]; then
+		echo '🙈 JONATHAN_HOME is not set. Add it to bash/env.sh. Exiting...'
+		return 1
+	fi
+
+	# Junk that should never make it onto a backup drive
+	local excludes=(
+		--exclude=.wd_tv
+		--exclude=.fseventsd
+		--exclude=.dropbox
+		--exclude=.dropbox.cache
+		--exclude=**/node_modules
+		--exclude=.TemporaryItems
+		--exclude=**/.ssh
+		--exclude=.DS_Store
+		--exclude=.Spotlight-V100
+		--exclude=.Trashes
+		--exclude=.VolumeIcon.icns
+		--exclude=.DocumentRevisions-V100
+	)
+
+	if ! mount | grep -q "$everythingdrive" && ! mount | grep -q "$photodrive"; then
 		echo '🙈 Either the Everything drive or the Photos drive must be mounted in order to continue. Exiting...'
 		return 1
 	fi
 
-	if mount | grep -q $PHOTODRIVE; then
-		echo "Starting photo backup to $PHOTODRIVE"
+	if mount | grep -q "$photodrive"; then
+		echo "Starting photo backup to $photodrive"
 
-		rsync -rv$DRYRUN --delete --delete-after --size-only \
-			--exclude-from="$HOME/.dotfiles/config/.rsyncignore" \
-			"$JONATHAN_HOME/Photos/" "$PHOTODRIVE/"
+		rsync -rv$dryrun --delete --delete-after --size-only \
+			"${excludes[@]}" \
+			"$JONATHAN_HOME/Photos/" "$photodrive/"
 
 		echo "📷 Completed rsync photo backup with exit code: $?"
 	fi
 
-	if mount | grep -q $EVERYTHINGDRIVE; then
-		echo "Starting to backup everything to $EVERYTHINGDRIVE"
+	if mount | grep -q "$everythingdrive"; then
+		echo "Starting to backup everything to $everythingdrive"
 
-		rsync -rv$DRYRUN --delete --delete-after --size-only \
-			--exclude-from="$HOME/.dotfiles/config/.rsyncignore" \
-			"$JONATHAN_HOME/" "$EVERYTHINGDRIVE/"
+		rsync -rv$dryrun --delete --delete-after --size-only \
+			"${excludes[@]}" \
+			"$JONATHAN_HOME/" "$everythingdrive/"
 
 		echo "Rsync backed up everything and completed with exit code: $?"
-
-		# Backup things that are not in iCloud
-		# mkdir -p $EVERYTHINGDRIVE/Backups
-		# rsync -rv$DRYRUN --delete --delete-after --size-only \
-		# 	--exclude-from="$HOME/.dotfiles/config/.rsyncignore" \
-		# 	"$HOME/Backups/" "$EVERYTHINGDRIVE/Backups/"
-
-		# echo "Rsync backup completed with exit code: $?"
 	fi
 }
 
@@ -100,9 +117,9 @@ listening() {
 	if [ $# -eq 0 ]; then
 		sudo lsof -iTCP -sTCP:LISTEN -n -P
 	elif [ $# -eq 1 ]; then
-		sudo lsof -iTCP -sTCP:LISTEN -n -P | grep -i --color $1
+		sudo lsof -iTCP -sTCP:LISTEN -n -P | grep -i --color "$1"
 	else
-		echo "Usage: listening [port]"
+		echo 'Usage: listening [port]'
 	fi
 }
 
@@ -110,39 +127,82 @@ listening() {
 wifi_password() {
 	if [ $# -eq 0 ]; then
 		echo 'Oops. Please tell me a wifi network name.'
-		echo 'Usage: wifi-password <wifi network name>'
+		echo 'Usage: wifi_password <wifi network name>'
 	else
-		security find-generic-password -ga $1 | grep password:
+		security find-generic-password -ga "$1" | grep password:
 	fi
 }
 
 # Just a quick function to reduce an image's size by percentage
+# Note: `sips` has no percentage mode. `-Z` takes a pixel count, so read the
+# current dimensions and work out the target long edge here.
 shrink_image() {
 	if [ $# -eq 0 ]; then
 		echo 'Oops. Please give me a filename.'
-		echo 'Usage: shrink-image <filename> [percentage]'
-	else
-		local percentage="${2:-50}"
-		sips -Z "$percentage"% "$1" --out "$1"
+		echo 'Usage: shrink_image <filename> [percentage]'
+		return 1
 	fi
+
+	local percentage="${2:-50}"
+
+	if ! [[ $percentage =~ ^[0-9]+$ ]]; then
+		echo "❌ Error: the percentage must be a whole number, got: $percentage"
+		return 1
+	fi
+
+	local width height long_edge target
+	width=$(sips -g pixelWidth "$1" 2>/dev/null | awk '/pixelWidth:/ {print $2}')
+	height=$(sips -g pixelHeight "$1" 2>/dev/null | awk '/pixelHeight:/ {print $2}')
+
+	if [ -z "$width" ] || [ -z "$height" ]; then
+		echo "❌ Error: could not read the dimensions of: $1"
+		return 1
+	fi
+
+	if [ "$width" -ge "$height" ]; then
+		long_edge=$width
+	else
+		long_edge=$height
+	fi
+
+	target=$((long_edge * percentage / 100))
+
+	if [ "$target" -lt 1 ]; then
+		echo "❌ Error: ${percentage}% of ${long_edge}px rounds down to nothing."
+		return 1
+	fi
+
+	echo "Shrinking $1 to ${percentage}% (long edge ${long_edge}px -> ${target}px)"
+	sips -Z "$target" "$1" --out "$1"
 }
 
 # Quickly resize an image to a given width
+# Note: `-z` takes its arguments as <height> <width>, so use `--resampleWidth`
+# to constrain the width and let sips work out the height.
 resize_image_width() {
 	if [ $# -ne 2 ]; then
 		echo 'Oops. Please give me a filename and desired width.'
-		echo 'Usage: resize-image-width <filename> <width in pixels>'
+		echo 'Usage: resize_image_width <filename> <width in pixels>'
 	else
-		sips -z "$2" auto "$1" --out "$1"
+		sips --resampleWidth "$2" "$1" --out "$1"
 	fi
 }
 
 # Prep high-res images for upload to blog-like things
 blogimages() {
+	shopt -s nullglob
+	local images=(*.jpg)
+	shopt -u nullglob
+
+	if [ ${#images[@]} -eq 0 ]; then
+		echo 'No jpg files were found in this directory.'
+		return 1
+	fi
+
 	echo 'Converting images to lo-res (900px wide)...'
-	for i in *.jpg; do
-		printf "Resizing $i\n"
-		sips -z 900 auto "$i" --out "$i"
+	for i in "${images[@]}"; do
+		printf 'Resizing %s\n' "$i"
+		sips --resampleWidth 900 "$i" --out "$i"
 	done
 	echo 'Done.'
 }
@@ -158,14 +218,12 @@ blogimages() {
 #
 # Parameters: $1 - Directory path containing image files to rotate
 bake_exif_rotation_to_jpegs() {
-	set -euo pipefail
-
 	if [[ $# -ne 1 ]]; then
-		echo "Usage: $0 <directory>"
+		echo 'Usage: bake_exif_rotation_to_jpegs <directory>'
 		return 1
 	fi
 
-	dir="$1"
+	local dir="$1"
 
 	if [[ ! -d "$dir" ]]; then
 		echo "❌ Error: '$dir' is not a directory"
@@ -250,9 +308,8 @@ convert_images_to_jpg() {
 
 	local dir="$1"
 
-	if [ -z "$IMAGE_LONG_EDGE_SIZE" ]; then
-		IMAGE_LONG_EDGE_SIZE=3600
-	fi
+	# Keep this local so the caller's environment variable survives the call
+	local long_edge_max="${IMAGE_LONG_EDGE_SIZE:-3600}"
 
 	local files=()
 	while IFS= read -r -d '' file; do
@@ -306,9 +363,9 @@ convert_images_to_jpg() {
 
 		# Convert to JPEG with quality and resize if needed
 		local sips_exit
-		if [ "$long_edge" -gt $IMAGE_LONG_EDGE_SIZE ]; then
+		if [ "$long_edge" -gt "$long_edge_max" ]; then
 			echo "🔄 Converting and resizing: $file -> $output"
-			sips -s format jpeg -s formatOptions 87 --resampleHeightWidthMax $IMAGE_LONG_EDGE_SIZE "$file" --out "$output" >/dev/null 2>&1
+			sips -s format jpeg -s formatOptions 87 --resampleHeightWidthMax "$long_edge_max" "$file" --out "$output" >/dev/null 2>&1
 			sips_exit=$?
 		else
 			echo "🔄 Converting (no resize needed): $file -> $output"
@@ -330,13 +387,13 @@ convert_images_to_jpg() {
 }
 
 download_video() {
-	local url="$1"
+	local url="${1:-}"
 	local output_dir="$HOME/Desktop"
 
 	if ! command -v yt-dlp &>/dev/null; then
-		echo "Error: yt-dlp is not installed. Please install it first."
-		echo "Install with: pip install yt-dlp"
-		echo "Or visit: https://github.com/yt-dlp/yt-dlp#installation"
+		echo 'Error: yt-dlp is not installed. Re-run new-computer.sh, or install it with:'
+		echo '  curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos -o ~/.local/bin/yt-dlp'
+		echo '  chmod a+rx ~/.local/bin/yt-dlp'
 		return 1
 	fi
 
@@ -414,16 +471,24 @@ download_video() {
 
 # Convert all mov video files in a directory into mp4's
 movtomp4() {
-	COUNTER=$(ls -1 *.mov 2>/dev/null | wc -l)
-	if [ $COUNTER != 0 ]; then
-		for filename in *.mov; do
-			ffmpeg -i "$filename" -vcodec h264 -acodec aac -strict -2 "${filename%.mov}.mp4"
-			echo "Converted: $filename to ${filename%.mov}.mp4"
-			# Now delete the mov file
-			rm "$filename"
-		done
-	else
+	shopt -s nullglob
+	local movies=(*.mov)
+	shopt -u nullglob
+
+	if [ ${#movies[@]} -eq 0 ]; then
 		echo 'No mov files were found in this directory.'
 		echo 'movtomp4 Usage: "cd" to the directory where the mov video files are located and run "movtomp4" (then go grab a coffee).'
+		return 1
 	fi
+
+	local filename
+	for filename in "${movies[@]}"; do
+		# Only delete the mov once ffmpeg says the conversion actually worked
+		if ffmpeg -i "$filename" -vcodec h264 -acodec aac -strict -2 "${filename%.mov}.mp4"; then
+			echo "Converted: $filename to ${filename%.mov}.mp4"
+			rm "$filename"
+		else
+			echo "❌ ffmpeg failed on $filename. Keeping the original."
+		fi
+	done
 }

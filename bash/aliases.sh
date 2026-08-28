@@ -1,13 +1,14 @@
 # Python.. _why_ are you so difficult to configure?
-alias python='/opt/homebrew/bin/python3 $@'
+# (No `$@` here: aliases already pass through whatever follows them.)
+alias python='/opt/homebrew/bin/python3'
 
 # Edit the hosts file
 alias hosts='sudo nano /etc/hosts'
 
 # Change directories to handy OS X places
 alias desk='cd ~/Desktop'
-# iCloud directory
-alias d="cd \"$JONATHAN_HOME\""
+# The directory holding all the important stuff (see `JONATHAN_HOME` in env.sh)
+alias d="cd \"${JONATHAN_HOME:-$HOME}\""
 # Change directory to your dotfiles directory
 alias dot='cd ~/.dotfiles'
 
@@ -22,8 +23,9 @@ alias ..='cd ..'
 # Add a WTFP License to a directory/project
 alias addwtfpl='wget -O LICENSE http://www.wtfpl.net/txt/copying/'
 
-# Correct SSH permissions
-alias correctsshpermissions="sudo chmod 700 $HOME/.ssh && sudo chmod -R 600 $HOME/.ssh/*"
+# Correct SSH permissions. `chmod -R 600` would strip the execute bit that
+# directories need to stay traversable, so do files and directories separately.
+alias correctsshpermissions='chmod 700 ~/.ssh && find ~/.ssh -type d -exec chmod 700 {} + && find ~/.ssh -type f -exec chmod 600 {} +'
 
 # Git
 alias gitdangerouslyreset='git checkout . && git branch | grep -v "master\|develop\|$(git rev-parse --abbrev-ref HEAD)" | xargs git branch -D && git branch && echo && echo "So tidy!" && echo'
@@ -37,6 +39,6 @@ alias dockerdangerouslyreset='docker stop $(docker ps -aq) && docker rm $(docker
 alias quote='echo $(gshuf -n 1 "$HOME/.dotfiles/bash/quotes.txt")'
 
 # Claude - using two accounts on one computer
-if [ "$IS_WORK_COMPUTER" = true ]; then
+if [ "${IS_WORK_COMPUTER:-}" = true ]; then
 	alias claude-personal="CLAUDE_CONFIG_DIR=~/.claude-personal claude"
 fi
