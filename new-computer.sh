@@ -101,6 +101,7 @@ BREWPACKAGES=(
 	# This repo is ~all Bash and runs under `set -euo pipefail`; lint it
 	shellcheck
 	go
+	docker
 	wget
 	rsync
 	ffmpeg
