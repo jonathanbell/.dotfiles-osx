@@ -43,6 +43,11 @@ link() {
 	fi
 }
 
+# Make a directory and `cd` into it.
+mkcd() { 
+	mkdir -p -- "$1" && cd -- "$1"; 
+}
+
 # Download a whole site, I think..
 download_website() {
 	if [ $# -eq 0 ]; then
