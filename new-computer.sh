@@ -104,6 +104,8 @@ BREWPACKAGES=(
 	docker
 	wget
 	rsync
+	# It rips! 
+	ripgrep
 	ffmpeg
 	# Updates the Bash version vs the antique one that comes with OS X
 	bash
