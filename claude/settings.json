@@ -53,14 +53,20 @@
   "effortLevel": "xhigh",
   "modelSettings": {
     "claude-opus-5": {
-      "effortLevel": "xhigh"
+      "effortLevel": "high"
     }
   },
   "promptSuggestionEnabled": false,
   "tui": "default",
+  "timeFormat": "24-hour",
   "skipDangerousModePermissionPrompt": true,
   "theme": "dark-daltonized",
+  "editorMode": "normal",
+  "verbose": false,
   "preferredNotifChannel": "notifications_disabled",
+  "switchModelsOnFlag": false,
+  "fileCheckpointingEnabled": false,
+  "remoteControlAtStartup": false,
   "agentPushNotifEnabled": false,
   "skipAutoPermissionPrompt": true,
   "voiceEnabled": true
