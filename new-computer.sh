@@ -98,7 +98,6 @@ BREWPACKAGES=(
 	# their utilities with a `g` prefix. So `shuf` becomes `gshuf`, for example.
 	coreutils
 	shfmt
-	# This repo is ~all Bash and runs under `set -euo pipefail`; lint it
 	shellcheck
 	go
 	docker
