@@ -33,6 +33,10 @@ humans). Just never use emdash (—). Use a hyphen instead (-).
 
 - Strictly adhere to the layered boundary hierarchy: each layer may only communicate with its immediate neighbor directly below it. Never "punch holes" through layers (e.g., controllers or UI components must never directly call database queries, raw hardware drivers, or low-level network clients; always route through the intermediate service/abstraction layer).
 
+### Code comments
+
+Code commenting should be kept to a minimum. Do not put comments in for the sake of explaining the code; write code that explains itself without excessive comments. When you do have to leave a comment, make sure that it is terse and to the point. Use proper punctuation and grammar. Wrap all comments at 80 chars wide.
+
 ## Git and source control
 
 ### Writing commit messages

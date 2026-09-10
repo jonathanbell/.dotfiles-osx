@@ -62,7 +62,7 @@
   "skipDangerousModePermissionPrompt": true,
   "theme": "dark-daltonized",
   "editorMode": "normal",
-  "verbose": false,
+  "verbose": true,
   "preferredNotifChannel": "notifications_disabled",
   "switchModelsOnFlag": false,
   "fileCheckpointingEnabled": false,
