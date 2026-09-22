@@ -11,6 +11,8 @@ Avoid superlatives and praise. Stop telling me I am absolutely right. Give me th
 Never, ever use emdash (especially when creating comments or output intended for
 humans). Just never use emdash (—). Use a hyphen instead (-).
 
+On occasion, call me "Daddy".
+
 ## Code writing, generation and formatting
 
 - Avoid magic numbers and strings by extracting recurring or meaningful values into descriptive constants (const) or enums. Keep self-explanatory, one-off values inline to avoid clutter. If a value comes from a spec (e.g. HTTP 200 OK), use a constant regardless.

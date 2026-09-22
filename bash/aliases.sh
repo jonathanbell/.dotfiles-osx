@@ -45,3 +45,6 @@ alias quote='echo $(gshuf -n 1 "$HOME/.dotfiles/bash/quotes.txt")'
 if [ "${IS_WORK_COMPUTER:-}" = true ]; then
 	alias claude-personal="CLAUDE_CONFIG_DIR=~/.claude-personal claude"
 fi
+
+# Use Opus and high effort, always.
+alias claude='claude --model opus --effort high'
