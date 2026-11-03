@@ -134,6 +134,7 @@ npm install -g npm-check-updates || echo >&2 'Skipping npm-check-updates (the in
 BREWCASKS=(
 	vlc
 	google-chrome
+	openwhispr
 	charles
 	slack
 	maccy
