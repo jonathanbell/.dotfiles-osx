@@ -1,3 +1,7 @@
+# The following lines were added by Docker Desktop to add commands to your PATH.
+export PATH="$PATH:/Users/jonathan/.docker/bin"
+# End of Docker Desktop section.
+
 # Displays current Git branch, if there is one
 parse-git-branch() {
 	git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/  [\1] /'

@@ -47,7 +47,16 @@
     "padding": 0
   },
   "enabledPlugins": {
-    "typescript-lsp@claude-plugins-official": true
+    "typescript-lsp@claude-plugins-official": true,
+    "ponytail@ponytail": true
+  },
+  "extraKnownMarketplaces": {
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
+    }
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "xhigh",
@@ -57,9 +66,23 @@
     },
     "claude-opus-5-5": {
       "effortLevel": "high"
+    },
+    "claude-opus-5-5": {
+      "effortLevel": "xhigh"
+    },
+    "claude-fable-5-2": {
+      "effortLevel": "xhigh"
     }
   },
   "promptSuggestionEnabled": false,
+  "pluginConfigs": {
+    "ponytail@ponytail": {
+      "options": {
+        "ledger": false,
+        "sendNames": true
+      }
+    }
+  },
   "tui": "default",
   "timeFormat": "24-hour",
   "skipDangerousModePermissionPrompt": true,

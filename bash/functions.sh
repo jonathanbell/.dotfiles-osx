@@ -44,8 +44,8 @@ link() {
 }
 
 # Make a directory and `cd` into it.
-mkcd() { 
-	mkdir -p -- "$1" && cd -- "$1"; 
+mkcd() {
+	mkdir -p -- "$1" && cd -- "$1"
 }
 
 # Download a whole site, I think..
@@ -113,6 +113,51 @@ backup() {
 
 		echo "Rsync backed up everything and completed with exit code: $?"
 	fi
+}
+
+keep_awake() (
+	lid=0
+	if [ "$1" = "--lid" ]; then
+		lid=1
+		shift
+	fi
+
+	if [ "$lid" = 1 ]; then
+		sudo pmset -a disablesleep 1 || exit 1
+	fi
+
+	caffeinate -ims & # background, so Ctrl-C inside other programs can't kill it.
+	cpid=$!
+
+	trap 'kill "$cpid" 2>/dev/null
+        if [ "$lid" = 1 ]; then sudo pmset -a disablesleep 0; echo && echo "Sleep re-enabled."; fi' EXIT
+	trap 'exit 130' INT TERM HUP
+
+	if [ $# -gt 0 ]; then
+		"$@"
+	else
+		echo "Keeping awake$([ "$lid" = 1 ] && echo ' (lid closed OK - RIP battery)'). Ctrl-C to stop."
+		wait "$cpid"
+	fi
+)
+
+# Stop any caffeinate and turn lid-close sleep back on.
+restore_sleep() {
+	if pgrep -x caffeinate >/dev/null; then
+		pkill -x caffeinate && echo "Stopped caffeinate."
+	else
+		echo "caffeinate wasn't running."
+	fi
+
+	if pmset -g | grep -q 'SleepDisabled[[:space:]]*1'; then
+		sudo pmset -a disablesleep 0 && echo "Lid-close sleep re-enabled."
+	else
+		echo "disablesleep was already 0."
+	fi
+
+	# Confirm
+	pgrep -x caffeinate >/dev/null && echo "WARNING: caffeinate still running (owned by another user/app?)"
+	pmset -g | grep SleepDisabled
 }
 
 # What is listening on a certain port?
@@ -404,7 +449,7 @@ download_video() {
 
 	if [[ -z "$url" ]]; then
 		echo "Error: YouTube URL is required"
-		echo "Usage: download_video <youtube_url>"
+		echo "Usage: download_video <youtube_url> [yt-dlp options]"
 		echo "Example: download_video 'https://www.youtube.com/watch?v=8MUNWKQ9_9c'"
 		return 1
 	fi
@@ -418,7 +463,7 @@ download_video() {
 
 	# Show available formats (first 15 lines to avoid clutter)
 	echo "Available formats:"
-	yt-dlp -F "$url" 2>/dev/null | head -15
+	yt-dlp -F "$url" "${@:2}" 2>/dev/null | head -15
 	echo ""
 
 	echo "🎬 Starting download..."
@@ -436,6 +481,7 @@ download_video() {
 		--no-overwrites \
 		--continue \
 		--ignore-errors \
+		"${@:2}" \
 		"$url"
 
 	local exit_code=$?
