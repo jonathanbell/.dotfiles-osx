@@ -48,7 +48,8 @@
   },
   "enabledPlugins": {
     "typescript-lsp@claude-plugins-official": true,
-    "ponytail@ponytail": true
+    "ponytail@ponytail": true,
+    "cc-plugin-you-should-know@builtin": true
   },
   "extraKnownMarketplaces": {
     "ponytail": {
@@ -66,16 +67,13 @@
     },
     "claude-opus-5-5": {
       "effortLevel": "xhigh"
-    },
-    "claude-fable-5-2": {
-      "effortLevel": "xhigh"
     }
   },
   "promptSuggestionEnabled": false,
   "pluginConfigs": {
     "ponytail@ponytail": {
       "options": {
-        "ledger": false,
+        "ledger": true,
         "sendNames": true
       }
     }

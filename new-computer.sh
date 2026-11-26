@@ -150,7 +150,7 @@ BREWCASKS=(
 	kitty
 	font-hack-nerd-font
 	font-fantasque-sans-mono-nerd-font
-	corretto
+	zulu@21
 	visual-studio-code
 	spotify
 	figma

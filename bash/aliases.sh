@@ -47,4 +47,4 @@ if [ "${IS_WORK_COMPUTER:-}" = true ]; then
 fi
 
 # Use Opus and high effort, always.
-alias claude='claude --model opus --effort high'
+alias claude='PONYTAIL_DEFAULT_MODE=full claude --model opus --effort high'

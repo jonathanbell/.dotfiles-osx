@@ -15,11 +15,10 @@ export GOPATH=$HOME/go
 export PATH="$GOPATH/bin:$PATH"
 
 # Java
-# Homebrew's `mvn` and `gradle` shims default to their own openjdk unless
-# JAVA_HOME is set, so pin it and keep the CLI on the same runtime as VS Code.
+# Pin JAVA_HOME so the CLI uses the same runtime as VS Code.
 # Bump the -v when the pinned JDK changes; it falls back to the newest one.
 if [ -x '/usr/libexec/java_home' ]; then
-	export JAVA_HOME="$(/usr/libexec/java_home -v 25 2>/dev/null || /usr/libexec/java_home 2>/dev/null)"
+	export JAVA_HOME="$(/usr/libexec/java_home -v 21 2>/dev/null || /usr/libexec/java_home 2>/dev/null)"
 fi
 
 # Add Homebrew to path
@@ -136,3 +135,28 @@ fi
 if [ -f "$HOME/.bashrc" ]; then
 	source "$HOME/.bashrc"
 fi
+
+# >>> opsutils shell helpers >>>
+ops () {
+    case "$1" in
+        (on) source "/Users/jonathan.bell/code/opsutils/.venv/bin/activate" ;;
+        (off) deactivate ;;
+        (*) echo "usage: ops on|off" ;;
+    esac
+}
+
+opsutils () {
+    source "/Users/jonathan.bell/code/opsutils/.venv/bin/activate"
+    command opsutils "$@"
+}
+
+opstf () {
+    source "/Users/jonathan.bell/code/opsutils/.venv/bin/activate"
+    command opstf "$@"
+}
+
+opseu () {
+    source "/Users/jonathan.bell/code/opsutils/.venv/bin/activate"
+    command opseu "$@"
+}
+# <<< opsutils shell helpers <<<
