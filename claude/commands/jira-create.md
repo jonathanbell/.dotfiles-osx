@@ -2,7 +2,7 @@ Create a new Jira ticket using the Jira MCP server. Unless otherwise directed,
 use the UIPLATFORM project. For issue type, use "Story" or "Bug". For scrum
 team, use "Quantum". For component(s), use "Quantum".
 
-Add: acceptance criteria and a problem summary along with any other headings
+Add acceptance criteria and a problem summary along with any other headings
 that may seem relevant. Optionally, add: testing ideas, developer notes,
 suggested implementation, technical design and any other relevant solution
 suggestions or notes, etc.

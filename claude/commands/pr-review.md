@@ -11,3 +11,4 @@ Rules:
 - If there are a lot of comments and suggestions from people and the bot(s), go
   over the important comments with me one-by-one so that we can figure out which
   ones we need to implement and which ones we can ignore.
+- Confirm with me always before posting any comments or replies.

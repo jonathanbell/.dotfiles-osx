@@ -10,7 +10,7 @@ macOS dotfiles repository for development and photography workflow setup. The ma
 
 - `bash/` - Shell configuration: `.bash_profile` (main config, PATH, prompt), `aliases.sh`, `functions.sh`, `env.sh` (gitignored), `env.sh.example` (template), `quotes.txt`
 - `git/` - Git configuration (`gitconfig.sh`) and completion scripts
-- `claude/` - Claude Code config files (`CLAUDE.md`, commands, settings, statusline) symlinked to `~/.claude/`. Skills are deliberately **not** stored here: `new-computer.sh` installs them from their upstream repos with `npx skills add --global`.
+- `claude/` - Claude Code config files (`CLAUDE.md`, commands, statusline) symlinked to `~/.claude/`. `settings.json` is deliberately not versioned: each machine manages its own. Skills are deliberately **not** stored here: `new-computer.sh` installs them from their upstream repos with `npx skills add --global`.
 - `kitty/` - Kitty terminal config, symlinked to `~/.config/kitty/`
 - `node/` - Node version helper (`switch-node.sh`), symlinked onto `PATH` at `~/.local/bin/`
 - `.cspell.json` - Spell-check dictionary for this repo
@@ -18,8 +18,7 @@ macOS dotfiles repository for development and photography workflow setup. The ma
 
 Not everything the installer sets up lives in this repo: `new-computer.sh` also
 downloads the `yt-dlp` release binary into `~/.local/bin` (the `download_video`
-function needs it) and installs the Claude Code plugins that `settings.json`
-enables.
+function needs it) and installs Claude Code plugins.
 
 ## Key Patterns
 

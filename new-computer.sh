@@ -178,7 +178,6 @@ fi
 mkdir -p "$HOME/.claude"
 link "$HOME/.dotfiles/claude/commands" "$HOME/.claude/commands"
 link "$HOME/.dotfiles/claude/statusline.sh" "$HOME/.claude/statusline.sh"
-link "$HOME/.dotfiles/claude/settings.json" "$HOME/.claude/settings.json"
 link "$HOME/.dotfiles/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 
 # Install AI skills. These are fetched from the network, so don't let one
@@ -189,7 +188,7 @@ npx --yes skills add --global JuliusBrussee/caveman --skill caveman --agent=clau
 npx --yes skills add --global https://github.com/anthropics/skills --skill skill-creator --agent=claude-code || true
 npx --yes skills list --global || true
 
-# Install the Claude Code plugins that settings.json enables
+# Install Claude Code plugins
 claude plugin install --yes typescript-lsp@claude-plugins-official || true
 
 # Symlink Kitty config files
