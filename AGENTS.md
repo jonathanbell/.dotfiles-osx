@@ -1,6 +1,6 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to AI agents when working with code in this repository.
 
 ## Repository Overview
 
@@ -10,7 +10,7 @@ macOS dotfiles repository for development and photography workflow setup. The ma
 
 - `bash/` - Shell configuration: `.bash_profile` (main config, PATH, prompt), `aliases.sh`, `functions.sh`, `env.sh` (gitignored), `env.sh.example` (template), `quotes.txt`
 - `git/` - Git configuration (`gitconfig.sh`) and completion scripts
-- `claude/` - Claude Code config files (`CLAUDE.md`, commands, statusline) symlinked to `~/.claude/`. `settings.json` is deliberately not versioned: each machine manages its own. Skills are deliberately **not** stored here: `new-computer.sh` installs them from their upstream repos with `npx skills add --global`.
+- `claude/` - Claude Code config files (`AGENTS.md`, commands, statusline) symlinked to `~/.claude/`. `settings.json` is deliberately not versioned: each machine manages its own. Skills are deliberately **not** stored here: `new-computer.sh` installs them from their upstream repos with `npx skills add --global`.
 - `kitty/` - Kitty terminal config, symlinked to `~/.config/kitty/`
 - `node/` - Node version helper (`switch-node.sh`), symlinked onto `PATH` at `~/.local/bin/`
 - `.cspell.json` - Spell-check dictionary for this repo

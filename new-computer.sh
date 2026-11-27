@@ -178,7 +178,7 @@ fi
 mkdir -p "$HOME/.claude"
 link "$HOME/.dotfiles/claude/commands" "$HOME/.claude/commands"
 link "$HOME/.dotfiles/claude/statusline.sh" "$HOME/.claude/statusline.sh"
-link "$HOME/.dotfiles/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+link "$HOME/.dotfiles/claude/AGENTS.md" "$HOME/.claude/AGENTS.md"
 
 # Install AI skills. These are fetched from the network, so don't let one
 # unreachable repo abort the whole setup.
